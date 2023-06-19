@@ -1,0 +1,466 @@
+
+{
+    "header": {
+        "home": "Home",
+        "company": {
+            "text": "Company",
+            "sub-links": {
+                "about-us": "About Us",
+                "our-team": "Our Team",
+                "services": "Services"
+            }
+        },
+        "work": {
+            "text": "Work",
+            "sub-links": {
+                "project": "Project",
+                "project-details": "Project Details",
+                "hot-projects": "Best Projects"
+            }
+        },
+        "blog": {
+            "text": "Blog",
+            "sub-links": {
+                "blog": "Blog",
+                "latest-articles": "Latest Articles",
+                "recommended-for-you": "Recommended For You",
+                "best-of-day": "Today's Top Articles",
+                "best-of-week": "This Week Top Articles"
+            }
+        },
+        "contact": "Contact Us",
+        "cta-text": "Get a Qoutes"
+    },
+    "home": {
+        "hero": {
+            "title": "Welcome to Deck",
+            "subtitle": "Quality in Every Square",
+            "description": "Nullam laoreet, dui tristique suscipit posuere, est mi commodo dolor, quis porttitor lorem enim non dui. Fusce egestas consequat tellus. Aliquam in arcu quis neque convallis egestas ut id elit.",
+            "cta-text": "Get a Qoute"
+        },
+        "about-us": {
+            "title": "About Us",
+            "subtitle": "Vivamus pharetra quam lorem, eget eleifend massa gravida tempor. Aliquam non pellentesque enim. Quisque et dictum ante. Nam eleifend orci nec nibh condimentum, at tempor libero egestas."
+        },
+        "awards": {
+            "title": "Awards",
+            "items": [
+                {
+                    "name": "Award-1",
+                    "date": "2017",
+                    "description": "description text for our award-1 that we got in 2017"
+                },
+                {
+                    "name": "Award-2",
+                    "date": "2019",
+                    "description": "description text for our award-2 that we got in 2019"
+                },
+                {
+                    "name": "Award-3",
+                    "date": "2020",
+                    "description": "description text for our award-3 that we got in 2020"
+                },
+                {
+                    "name": "Award-4",
+                    "date": "2023",
+                    "description": "description text for our award-4 that we got in 2023"
+                }
+            ]
+        },
+        "services": {
+            "title": "Services",
+            "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt cumque facere obcaecati molestiae vitae quisquam modi deleniti perspiciatis cum. Harum fugit repellat corrupti exercitationem officiis aliquam aut quasi laboriosam sequi?",
+            "items": [
+                {
+                    "img": "/assets/images/service-img-1.png",
+                    "title": "Garage flooring",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+                    "read-more-text": "Read more"
+                },
+                {
+                    "img": "/assets/images/service-img-2.png",
+                    "title": "Floor coating",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+                    "read-more-text": "Read more"
+                },
+                {
+                    "img": "/assets/images/service-img-3.png",
+                    "title": "Basement flooring",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+                    "read-more-text": "Read more"
+                },
+                {
+                    "img": "/assets/images/service-img-4.png",
+                    "title": "Bathroom flooring",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.",
+                    "read-more-text": "Read more"
+                }
+            ]
+        },
+        "stats": [
+            {
+                "title": "Years of Experience",
+                "speed": 100,
+                "start": 1,
+                "end": 19
+            },
+            {
+                "title": "Projects Complete",
+                "speed": 35,
+                "start": 20,
+                "end": 150
+            },
+            {
+                "title": "Professional Team",
+                "speed": 75,
+                "start": 1,
+                "end": 38
+            },
+            {
+                "title": "Satisfied Client",
+                "speed": 35,
+                "start": 420,
+                "end": 689
+            }
+        ],
+        "projects": {
+            "read-more-text": "Read more",
+            "title": "Projects",
+            "items": [
+                {
+                    "id": "0",
+                    "img": "/assets/images/prj-1-img.jpg",
+                    "title": "Garage flooring",
+                    "desc": "120x70 square meter. Expory model High quality",
+                    "link": ""
+                },
+                {
+                    "id": "1",
+                    "img": "/assets/images/prj-2-img.jpg",
+                    "title": "Floor coating",
+                    "desc": "120x70 square meter. Expory model High quality",
+                    "link": ""
+                },
+                {
+                    "id": "2",
+                    "img": "/assets/images/prj-3-img.jpg",
+                    "title": "Floor tilling",
+                    "desc": "120x70 square meter. Expory model High quality",
+                    "link": ""
+                }
+            ]
+        },
+        "why-choose-us": {
+            "title": "Why Choose Us?",
+            "subtitle": "Maecenas eros nisi, faucibus et urna ac, finibus dapibus velit. Aenean posuere mattis maximus. Nullam enim nulla, molestie et hendrerit sed, fringilla quis eros. Duis mi risus, viverra commodo semper finibus, sagittis ut dolor. Integer non leo in sapien finibus scelerisque at eu arcu.",
+            "items": [
+                {
+                    "id": "0",
+                    "title": "Free estimate",
+                    "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias iste accusantium officiis, vel laborum accusamus, incidunt sed culpa magni ad dicta voluptates sunt obcaecati soluta.",
+                    "read-more-text": "Read more"
+                },
+                {
+                    "id": "1",
+                    "title": "Fast installation",
+                    "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias iste accusantium officiis, vel laborum accusamus, incidunt sed culpa magni ad dicta voluptates sunt obcaecati soluta.",
+                    "read-more-text": "Read more"
+                },
+                {
+                    "id": "2",
+                    "title": "Lifetime warranty",
+                    "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias iste accusantium officiis, vel laborum accusamus, incidunt sed culpa magni ad dicta voluptates sunt obcaecati soluta.",
+                    "read-more-text": "Read more"
+                }
+            ]
+        },
+        "our-team": {
+            "title": "Team",
+            "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt cumque facere obcaecati molestiae vitae quisquam modi deleniti perspiciatis cum. Harum fugit repellat corrupti exercitationem officiis aliquam aut quasi laboriosam sequi?",
+            "items": [
+                {
+                    "id": "0",
+                    "visible": true,
+                    "img": "/assets/images/our-team-member-1.jpg",
+                    "name": "Jhony Abraham",
+                    "role": "FrontEnd Developer",
+                    "social-links": [
+                        {
+                            "visible": true,
+                            "id": "0",
+                            "img": "/assets/icons/icons8-facebook-50.png",
+                            "link": "https://facebook.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "1",
+                            "img": "/assets/icons/icons8-youtube-50.png",
+                            "link": "https://youtube.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "2",
+                            "img": "/assets/icons/icons8-telegram-50.png",
+                            "link": "https://instagram.com"
+                        }
+                    ]
+                },
+                {
+                    "id": "1",
+                    "visible": true,
+                    "img": "/assets/images/our-team-member-2.jpg",
+                    "name": "Cadita Zean",
+                    "role": "BackEnd Developer",
+                    "social-links": [
+                        {
+                            "visible": true,
+                            "id": "0",
+                            "img": "/assets/icons/icons8-facebook-50.png",
+                            "link": "https://facebook.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "1",
+                            "img": "/assets/icons/icons8-youtube-50.png",
+                            "link": "https://youtube.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "2",
+                            "img": "/assets/icons/icons8-instagram-50.png",
+                            "link": "https://instagram.com"
+                        }
+                    ]
+                },
+                {
+                    "id": "2",
+                    "visible": true,
+                    "img": "/assets/images/our-team-member-3.jpg",
+                    "name": "Danial Rules",
+                    "role": "UI/UX Designer",
+                    "social-links": [
+                        {
+                            "visible": true,
+                            "id": "0",
+                            "img": "/assets/icons/icons8-facebook-50.png",
+                            "link": "https://facebook.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "1",
+                            "img": "/assets/icons/icons8-youtube-50.png",
+                            "link": "https://youtube.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "2",
+                            "img": "/assets/icons/icons8-instagram-50.png",
+                            "link": "https://instagram.com"
+                        },
+                        {
+                            "visible": true,
+                            "id": "3",
+                            "img": "/assets/icons/icons8-telegram-50.png",
+                            "link": "https://telegram.com"
+                        }
+                    ]
+                }
+            ]
+        },
+        "latest-news": {
+            "title": "Latest News & Updates",
+            "read-more-text": "Read more"
+        },
+        "text-1": "you'll be Floored by ore selection and prices!",
+        "text-2": "Get special offer up to 50% on June",
+        "call-us": "Call us +123-456-789"
+    },
+    "project-details": {
+        "title": "Project Details",
+        "subtitle": "Home - Project Details",
+        "items": [
+            {
+                "id": "0",
+                "title": "Floor Coating In Berlin, Germany",
+                "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas assumenda asperiores explicabo culpa nisi tempore?",
+                "desc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui accusantium vel vero. Et, alias. Amet sapiente sunt assumenda similique! Voluptas nihil enim distinctio possimus voluptate. Facilis at delectus tenetur culpa excepturi voluptates error?",
+                "img": "/assets/images/img-5.jpg",
+                "button-text": "Download Brochure",
+                "workProperties": [
+                    {
+                        "id": "0",
+                        "name": "Location",
+                        "value": "Berlin, Germany"
+                    },
+                    {
+                        "id": "1",
+                        "name": "Size",
+                        "value": "120 x 80 square meter"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Services",
+                        "value": "Epoxy floor, Refloor"
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "title": "Floor Tiling In Houston, USA",
+                "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas assumenda asperiores explicabo culpa nisi tempore?",
+                "desc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui accusantium vel vero. Et, alias. Amet sapiente sunt assumenda similique! Voluptas nihil enim distinctio possimus voluptate. Facilis at delectus tenetur culpa excepturi voluptates error?",
+                "img": "/assets/images/img-6.jpg",
+                "button-text": "Download Brochure",
+                "workProperties": [
+                    {
+                        "id": "0",
+                        "name": "Location",
+                        "value": "Houston, USA"
+                    },
+                    {
+                        "id": "1",
+                        "name": "Size",
+                        "value": "120 x 80 square meter"
+                    },
+                    {
+                        "id": "2",
+                        "name": "Services",
+                        "value": "Tilling Refloor"
+                    }
+                ]
+            }
+        ]
+    },
+    "our-projects": {
+        "title": "Our Projects",
+        "subtitle": "Home - Our Projects"
+    },
+    "about-us": {
+        "title": "About Us",
+        "subtitle": "Home - About Us",
+        "text-1": "Great floor begin with great relationships",
+        "text-2": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ut nemo recusandae quae ipsum nihil repudiandae laborum accusantium possimus neque. Iste omnis veniam laudantium maxime, quos vitae ullam."
+    },
+    "our-team": {
+        "title": "Our Team",
+        "subtitle": "Home - Our Team",
+        "text-1": "985+ Project Complete Over The World",
+        "text-2": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo aut nemo perferendis non, nisi quas.",
+        "text-3": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla ut nemo recusandae quae ipsum nihil repudiandae laborum accusantium possimus neque. Iste omnis veniam laudantium maxime, quos vitae ullam."
+    },
+    "our-services": {
+        "title": "Our Services",
+        "subtitle": "Home - Our Services"
+    },
+    "contact-us": {
+        "title": "Contact",
+        "sub-title": "Home - Contact",
+        "get-in-touch": "Get in Touch",
+        "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae reiciendis sequi error, temporibus earum enim in blanditiis incidunt perspiciatis harum. Voluptatum nesciunt, perferendis necessitatibus nulla minima deserunt odit debitis suscipit consequatur, quasi atque?",
+        "follow-us": "Follow us:",
+        "form": {
+            "name": "Name",
+            "email": "Email *",
+            "message": "Message *",
+            "submit-text": "Send a Message"
+        }
+    },
+    "footer": {
+        "items": [
+            {
+                "id": "0",
+                "title": "Contact Us",
+                "items": [
+                    {
+                        "id": "0",
+                        "title": "99 Roving St., Big City",
+                        "link": "https://our-address-in-google-map.com"
+                    },
+                    {
+                        "id": "1",
+                        "title": "+123-456-789",
+                        "link": ""
+                    },
+                    {
+                        "id": "2",
+                        "title": "orbyx@support.com",
+                        "link": "mailto:orbyx@support.com"
+                    }
+                ]
+            },
+            {
+                "id": "1",
+                "title": "Helpfull Links",
+                "items": [
+                    {
+                        "id": "0",
+                        "title": "About Us",
+                        "link": "/about-us"
+                    },
+                    {
+                        "id": "1",
+                        "title": "Services",
+                        "link": "/services"
+                    },
+                    {
+                        "id": "2",
+                        "title": "Projects",
+                        "link": "/projects"
+                    },
+                    {
+                        "id": "3",
+                        "title": "FAQs",
+                        "link": "/faqs"
+                    }
+                ]
+            },
+            {
+                "id": "2",
+                "title": "Company",
+                "items": [
+                    {
+                        "id": "0",
+                        "title": "Our Team",
+                        "link": "/our-team"
+                    },
+                    {
+                        "id": "1",
+                        "title": "Get Hired",
+                        "link": "/get-hired"
+                    }
+                ]
+            }
+        ]
+    },
+    "mobile-menu": {
+        "title": "Orbyx",
+        "account-text": "Account",
+        "items": [
+            {
+                "id": "0",
+                "text": "Home",
+                "link": "/"
+            },
+            {
+                "id": "1",
+                "text": "Company",
+                "link": "/company"
+            },
+            {
+                "id": "2",
+                "text": "Work",
+                "link": "/work"
+            },
+            {
+                "id": "2",
+                "text": "Blog",
+                "link": "/blog"
+            },
+            {
+                "id": "2",
+                "text": "Contact Us",
+                "link": "/contact-us"
+            }
+        ]
+    }
+}

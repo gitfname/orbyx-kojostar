@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @apply text-[14px] xl:text-[16px] 2xl:text-[18px];
+}
+
+
+@font-face {
+  font-family: iranyekan100;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-thin.ttf);
+}
+@font-face {
+  font-family: iranyekan200;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-light.ttf);
+}
+@font-face {
+  font-family: iranyekan300;
+  src: url(/fonts/iranyekan/Qs_Iranyekan.ttf);
+}
+@font-face {
+  font-family: iranyekan400;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-medium.ttf);
+}
+@font-face {
+  font-family: iranyekan500;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-bold.ttf);
+}
+@font-face {
+  font-family: iranyekan600;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-extrabold.ttf);
+}
+@font-face {
+  font-family: iranyekan700;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-black.ttf);
+}
+@font-face {
+  font-family: iranyekan800;
+  src: url(/fonts/iranyekan/Qs_Iranyekan-extrablack.ttf);
+}
+
+* {
+  font-family: iranyekan500;
+}
+
+
+
+
+.fadein-x-anim {
+  opacity: 0;
+  display: inline-block;
+  transform: translateX(var(--trx));
+  animation-name: fadein-right-anim-1;
+  animation-duration: var(--duration);
+  animation-delay: var(--delay);
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadein-right-anim-1{
+  to {
+      transform: translateX(0rem);
+      opacity: 1;
+  }
+}
+
+.loading-container span span {
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0);
+  color: rgba(255, 255, 255, 0.8);
+  animation-name: anim-1;
+  animation-duration: 1.4s;
+  animation-delay: 4s;
+  animation-iteration-count: 10;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+@keyframes anim-1 {
+  to {
+    text-shadow: 0 0 80px rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 1);
+  }
+}
