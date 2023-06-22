@@ -1,0 +1,9 @@
+
+
+POST http://dev.kojostar.ir/api/v1/auth/check_otp
+Content-Type: application/json
+
+{
+    "code": "794469",
+    "user_id": "5"
+}

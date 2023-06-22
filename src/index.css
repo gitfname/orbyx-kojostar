@@ -1,3 +1,16 @@
+
+.primary-text-input {
+  @apply w-full p-3 py-4 rounded-xl border border-blue-500/80 text-sm text-blue-500 bg-transparent
+  focus:outline-none placeholder-blue-500/70 font-[iranyekan400] tracking-wide focus:border-blue-600
+  transition-colors duration-300;
+}
+
+.primary-btn {
+  @apply w-full rounded-xl focus:outline-none text-white text-sm
+  bg-blue-500 cursor-pointer active:scale-95 duration-300 py-4 px-5;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

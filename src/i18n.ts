@@ -3,6 +3,7 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import BackEnd from "i18next-http-backend"
 import LanguageDetector from "i18next-browser-languagedetector"
+import getBaseUrl from "./utils/base-url"
 
 
 
@@ -17,7 +18,7 @@ i18n
         escapeValue: false
     },
     backend: {
-        loadPath: import.meta.env.BASE_URL+"/assets/locals/{{lng}}/{{ns}}.json"
+        loadPath: getBaseUrl()+"assets/locals/{{lng}}/{{ns}}.json"
     },
     detection: {
         order: ['cookie', 'localStorage'],

@@ -3,7 +3,7 @@ import { AiOutlineMenu } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import ChangeLangButton from "./ChangeLangButton"
-import { menuItems } from "../utils/http"
+import { menuItems } from "../utils/http/api/getPhoneNumber"
 import { menuItemOptions } from "../utils/http/menuItems"
 import {
     Accordion,

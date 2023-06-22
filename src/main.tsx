@@ -15,7 +15,8 @@ import App from './App.tsx'
 // })
 import './index.css'
 
-// import './i18n.ts'
+import './i18n.ts'
+import Loading from './pages/Loading.tsx'
 // import Loading from './pages/Loading.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <BrowserRouter>
         <Suspense>
           <App />
+          <Loading />
         </Suspense>
       </BrowserRouter>
   </React.StrictMode>,
