@@ -7,7 +7,7 @@ function Search() {
 
   return (
     <div className="h-screen overflow-y-auto grid grid-rows-[max-content_1fr]">
-      <div>
+      <div className="pb-3 shadow-lg shadow-black/10">
         <div className="bg-slate-50 shadow-lg shadow-black/5 p-4">
           <input
             onChange={e => {
@@ -57,8 +57,10 @@ function Search() {
         </div>
       </div>
 
-      <div className="w-full h-full overflow-y-auto p-4">
-        <Outlet />
+      <div dir="ltr" className="w-full h-full overflow-y-auto p-4">
+        <div dir="rtl">
+          <Outlet />
+        </div>
       </div>
     </div>
   )

@@ -5,7 +5,7 @@ import DataSection_1 from "./DataSection_1"
 import { search, searchOptions } from "../utils/http/api/search"
 import Card_1 from "./Card_1"
 import getBaseUrl from "../utils/base-url"
-import { useEffect, useState } from "react"
+import React, { ReactNode, useEffect, useState } from "react"
 import { useDebounce } from "ahooks"
 
 interface PopularProps {
@@ -33,7 +33,6 @@ function Popular({ className }: PopularProps) {
 
   useEffect(
     () => {
-      console.log(searchText);
       setLoading(true)
       mutate()
       .then(() => setLoading(false))
@@ -49,9 +48,25 @@ function Popular({ className }: PopularProps) {
           <p>Something went wrong</p>
           :
           <DataSection_1
+            containerClassName="grid grid-cols-2 gap-6"
             title=""
             dataProvider={data?.data}
-            dataRenderer={(item: searchOptions) => <Card_1 key={item.id} title={item.title} category={item.category} />}
+            dataRenderer={(item: searchOptions) => (
+              <Card_1
+                key={item.id}
+                title={item.title}
+                category={item.category}
+                address={item.address}
+                city={item.city}
+                discount={item.discount}
+                id={item.id}
+                image={item.image}
+                lat={item.lat}
+                lng={item.lng}
+                rate={item.rate}
+                rate_count={item.rate_count}
+              />
+            )}
             emptyFallback={
               <div className="w-full p-10 grid place-items-center">
                 <img

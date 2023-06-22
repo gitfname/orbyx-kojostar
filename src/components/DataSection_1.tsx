@@ -1,5 +1,7 @@
 
-import { ReactNode } from "react"
+import { ClassNamesProps } from "@emotion/react";
+import React, { ReactNode } from "react"
+import { DefaultColors } from "tailwindcss/types/generated/colors";
 
 interface Props {
   title: string,
@@ -7,11 +9,11 @@ interface Props {
   emptyFallback: ReactNode,
   isLoading: boolean,
   loading: ReactNode,
-  dataRenderer(item: any): ReactNode
+  dataRenderer(item: any): ReactNode,
+  containerClassName?: string
 }
 
-function DataSection_1({ title, dataProvider, emptyFallback, isLoading, loading, dataRenderer }: Props) {
-
+function DataSection_1({ title, dataProvider, emptyFallback, isLoading, loading, dataRenderer, containerClassName }: Props) {
   return (
     <div className="w-full">
       <p
@@ -25,9 +27,9 @@ function DataSection_1({ title, dataProvider, emptyFallback, isLoading, loading,
           ?
           loading
           :
-          dataProvider.length > 0
+          dataProvider?.length > 0
             ?
-            <div className="space-y-5">
+            <div className={containerClassName}>
               {dataProvider.map(item => dataRenderer(item))}
             </div>
             :
