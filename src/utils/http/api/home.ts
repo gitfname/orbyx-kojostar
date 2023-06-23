@@ -17,6 +17,7 @@ async function getHomeData(): Promise<getHomeDataOutput> {
     }
 
     const data = await (await fetch(getHomeDataApiUrl, fetchOptions)).json()
+    
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(data)

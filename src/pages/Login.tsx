@@ -100,7 +100,7 @@ function GetPhoneNumber() {
     }
 
     return (
-        <div dir="ltr" className="w-full h-full grid grid-cols-[50%_1fr]">
+        <div dir="ltr" className="w-full h-full grid grid-cols-1 lg:grid-cols-[50%_1fr]">
 
             <div className="bg-blue-500 grid place-items-center">
 
@@ -123,7 +123,7 @@ function GetPhoneNumber() {
 
             </div>
 
-            <div dir="rtl" className="grid place-items-center bg-gray-100">
+            <div dir="rtl" className="grid place-items-center bg-gray-100 max-lg:py-16 max-lg:pb-32">
                 <div className="flex flex-col gap-y-3 w-full max-w-sm">
 
                     <p
@@ -239,8 +239,8 @@ function CheckOtp() {
                         placeholder="رمز یکبار مصرف (OTP)"
                     />
 
-                    <div className="flex items-center gap-x-3">
-                        <button onClick={handleSubmit} className="primary-btn mt-5 relative overflow-hidden flex-[3]">
+                    <div className="flex items-center gap-x-3 max-sm:flex-col max-sm:mt-3">
+                        <button onClick={handleSubmit} className="primary-btn mt-5 flex-shrink-0 relative overflow-hidden flex-[3]">
                             {
                                 isLoading
                                 ?
@@ -252,7 +252,7 @@ function CheckOtp() {
                             }
                             بررسی
                         </button>
-                        <button onClick={handleChangePhone} className="primary-btn bg-rose-600 mt-5 relative overflow-hidden flex-1">
+                        <button onClick={handleChangePhone} className="primary-btn flex-shrink-0 bg-rose-500 mt-5 relative overflow-hidden flex-1">
                             تغییر شماره
                         </button>
                     </div>

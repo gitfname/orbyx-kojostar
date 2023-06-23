@@ -34,11 +34,11 @@
 }
 @font-face {
   font-family: iranyekan400;
-  src: url(/fonts/iranyekan/Qs_Iranyekan-medium.ttf);
+  src: url(/fonts/iranyekan/Qs_Iranyekan-bold.ttf);
 }
 @font-face {
   font-family: iranyekan500;
-  src: url(/fonts/iranyekan/Qs_Iranyekan-bold.ttf);
+  src: url(/fonts/iranyekan/Qs_Iranyekan-medium.ttf);
 }
 @font-face {
   font-family: iranyekan600;

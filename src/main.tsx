@@ -14,8 +14,8 @@ import App from './App.tsx'
 //   return import("./App.tsx")
 // })
 import './index.css'
-
 import './i18n.ts'
+import 'react-virtualized/styles.css';
 import Loading from './pages/Loading.tsx'
 // import Loading from './pages/Loading.tsx'
 
