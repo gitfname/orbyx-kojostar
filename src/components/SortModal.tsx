@@ -18,7 +18,9 @@ import {
 } from "@chakra-ui/react"
 import useSWR from "swr"
 import { getCategories, getCitiesAndStates } from "../utils/http";
-import { getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
+import { getCitiesAndStatesOptions, getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
+import { useSearchParamsStore } from "../stores/useSearchParams";
+import { getCategoriesOptionsTest } from "../utils/http/api/getCategories";
 
 function rowRenderer({
     key, // Unique key within array of rows
@@ -26,7 +28,9 @@ function rowRenderer({
     isScrolling, // The List is currently being scrolled
     isVisible, // This row is visible within the List (eg it is not an overscanned row)
     style, // Style object to be applied to row (to position it)
-    data
+    data,
+    onChange,
+    checked
 }) {
 
     const _data: getCitiesAndStatesOptionsTest = data;
@@ -47,7 +51,7 @@ function rowRenderer({
                     </p>
                     :
                     <div className="flex items-center gap-x-2">
-                        <Checkbox />
+                        <Checkbox isChecked={checked} onChange={e => onChange(e.target.checked, _data)} />
                         <p
                             className="text-sm text-slate-700 font-[iranyekan300]"
                         >
@@ -64,6 +68,21 @@ function rowRenderer({
 
 function SortModal({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const [
+        add_city_id,
+        remove_city_id,
+        is_city_id_includes,
+
+        is_category_id_active,
+        set_category_id
+    ] =useSearchParamsStore(selector => [
+        selector.api.add_city_id,
+        selector.api.remove_city_id,
+        selector.api.is_city_id_includes,
+
+        selector.api.is_category_id_active,
+        selector.api.set_category_id
+    ])
 
     // getCitiesAndStates
     const {
@@ -91,6 +110,11 @@ function SortModal({ children }) {
         }
     )
 
+    if(!isCateGoriesLoading) {
+        console.log(categories);
+        
+    }
+
 
     return (
         <>
@@ -98,7 +122,7 @@ function SortModal({ children }) {
                 {children}
             </div>
             {
-                isCitiesAndStatesLoading
+                (isCitiesAndStatesLoading || isCateGoriesLoading)
                     ?
                     false
                     :
@@ -142,7 +166,24 @@ function SortModal({ children }) {
                                                 rowCount={categories.data.length}
                                                 rowHeight={({ index }) => categories.data[index + 1]?.is_parent ? 50 : 30}
                                                 rowRenderer={(item) => {
-                                                    return rowRenderer({ ...item, data: categories.data[item.index] })
+                                                    return rowRenderer({
+                                                        ...item,
+                                                        data: categories.data[item.index],
+                                                        checked: is_category_id_active(categories.data[item.index].id),
+                                                        onChange: (value: boolean, data:getCategoriesOptionsTest) => {
+                                                            console.log(value);
+                                                            console.log(Date.name);
+
+                                                            if(value) {
+                                                                set_category_id(data.id)
+                                                            }
+                                                            else {
+                                                                console.log(data.id);
+                                                                
+                                                                set_category_id(undefined)
+                                                            }
+                                                        }
+                                                    })
                                                 }}
                                             />
                                         </AccordionPanel>
@@ -174,7 +215,21 @@ function SortModal({ children }) {
                                                 rowCount={citiesAndStates.data.length}
                                                 rowHeight={({ index }) => citiesAndStates.data[index + 1]?.is_state ? 50 : 30}
                                                 rowRenderer={(item) => {
-                                                    return rowRenderer({ ...item, data: citiesAndStates.data[item.index] })
+                                                    return rowRenderer({
+                                                        ...item,
+                                                        data: citiesAndStates.data[item.index],
+                                                        checked: is_city_id_includes(citiesAndStates.data[item.index].id),
+                                                        onChange: (value: boolean, data:getCitiesAndStatesOptionsTest) => {
+                                                            if(value) {
+                                                                add_city_id([data.id])
+                                                            }
+                                                            else {
+                                                                console.log(data.id);
+                                                                
+                                                                remove_city_id([data.id])
+                                                            }
+                                                        }
+                                                    })
                                                 }}
                                             />
                                         </AccordionPanel>

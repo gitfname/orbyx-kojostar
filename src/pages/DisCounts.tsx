@@ -1,34 +1,29 @@
 import { useSearchParamsStore } from "../stores/useSearchParams"
 import useSWR from "swr"
-import { getPopulars } from "../utils/http"
-import DataSection_1 from "./DataSection_1"
-import { search, searchOptions } from "../utils/http/api/search"
-import Card_1 from "./Card_1"
+import DataSection_1 from "../components/DataSection_1"
+import { searchOptions } from "../utils/http/api/search"
+import Card_1 from "../components/Card_1"
 import getBaseUrl from "../utils/base-url"
-import React, { ReactNode, useEffect, useState } from "react"
-import { useDebounce } from "ahooks"
+import { useEffect, useState } from "react"
+import { getDisCounts } from "../utils/http"
 
-interface PopularProps {
+interface DisCountsProps {
   className?: string
 }
 
-function Popular({ className }: PopularProps) {
+function DisCounts({ className }: DisCountsProps) {
   const [
     searchText, catId, cityIDs
   ] = useSearchParamsStore(selector => [selector.data.key, selector.data.category_id, selector.data.city_id])
+
   const { data, error, isLoading, mutate } = useSWR(
-    "search/popular",
-    async () => getPopulars({ category_id: catId, city_id: cityIDs, key: searchText }),
+    "search/discounts",
+    async () => getDisCounts({ category_id: catId, city_ids: cityIDs, key: searchText }),
     {
       shouldRetryOnError: false
     }
   )
-  const debouncedSearchText = useDebounce(
-    searchText,
-    {
-      wait: 750
-    }
-  )
+
   const [loading, setLoading] = useState(isLoading)
 
   useEffect(
@@ -37,7 +32,15 @@ function Popular({ className }: PopularProps) {
       mutate()
       .then(() => setLoading(false))
     },
-    [debouncedSearchText]
+    [searchText]
+  )
+  useEffect(
+    () => {
+      setLoading(true)
+      mutate()
+      .then(() => setLoading(false))
+    },
+    [cityIDs, catId]
   )
 
   return (
@@ -93,4 +96,4 @@ function Popular({ className }: PopularProps) {
   )
 }
 
-export default Popular
+export default DisCounts

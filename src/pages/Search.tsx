@@ -4,10 +4,26 @@ import { useSearchParamsStore } from "../stores/useSearchParams"
 import { CiSearch } from "react-icons/ci"
 import { VscFilter } from "react-icons/vsc"
 import SortModal from "../components/SortModal"
+import { useDebounce } from "ahooks"
+import { useEffect, useState } from "react"
 
 
 function Search() {
   const [searchParamsStoreSetKey] = useSearchParamsStore(selector => [selector.api.set_key])
+  const [value, setValue] = useState("")
+  const debouncedValue = useDebounce(
+    value,
+    {
+      wait: 750
+    }
+  )
+  
+  useEffect(
+    () => {
+      searchParamsStoreSetKey(debouncedValue)
+    },
+    [debouncedValue]
+  )
 
   return (
     <div className="h-screen overflow-y-auto grid grid-rows-[max-content_1fr]">
@@ -26,7 +42,7 @@ function Search() {
 
           <input
             onChange={e => {
-              searchParamsStoreSetKey(e.target.value)
+              setValue(e.target.value)
             }}
             maxLength={50}
             placeholder="جستجو کنید..."
@@ -66,7 +82,7 @@ function Search() {
 
           <NavLink
             end
-            to={ApplicationRoutes.pages.search + "/price-offs"}
+            to={ApplicationRoutes.pages.search + "/discounts"}
             className={({ isActive }) => `primary-btn font-[iranyekan300] text-xs w-max py-3 bg-transparent text-blue-600 border
             border-blue-500 hover:bg-blue-500 hover:text-white ${isActive ? "!bg-blue-500 !text-white" : ""}`}
           >

@@ -55,7 +55,7 @@ async function search({ key, type, category_id, city_id, lat, lng }:searchProps)
         "?type="+type+
         (key?"&key="+key:"")+
         (category_id?"&category_id="+category_id:"")+
-        (city_id ? "&city_id[]="+city_id.join("&city_id[]=") : "")+
+        (city_id && city_id?.length>0 ? "&city_id[]="+city_id.join("&city_id[]=") : "")+
         (lat?"&lat="+lat:"")+
         (lng?"&lng="+lng:""),
         fetchOptions

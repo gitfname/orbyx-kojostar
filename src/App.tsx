@@ -12,8 +12,9 @@ import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Search from "./pages/Search"
-import Popular from "./components/Popular"
+import Popular from "./pages/Popular"
 import MostComments from "./pages/MostComments"
+import DisCounts from "./pages/DisCounts"
 
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
@@ -91,6 +92,7 @@ function App() {
             <Route path={ApplicationRoutes.pages.search} element={<Search />}>
               <Route index element={<Popular />} />
               <Route path="most-comment" element={<MostComments />} />
+              <Route path="discounts" element={<DisCounts />} />
               <Route path="*" element={<NotFound />} />
             </Route>
             <Route path="*" element={<NotFound />} />
