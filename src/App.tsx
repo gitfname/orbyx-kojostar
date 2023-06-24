@@ -12,6 +12,7 @@ import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
+import Profile from "./pages/Profile"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -163,6 +164,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <SingleJob />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.profile}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Profile />
                 </Suspense>
               }
             />

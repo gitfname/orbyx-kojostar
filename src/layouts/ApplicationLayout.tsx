@@ -35,7 +35,8 @@ function ApplicationLayout({children}) {
             icon={<AiOutlineHome className="fill-white w-5 h-5" />}
           />
 
-          <DesktopNavlink_1 
+          <DesktopNavlink_1
+            end={false}
             text="سرچ"
             link={ApplicationRoutes.pages.search}
             icon={<BsSearch className="fill-white w-4 h-4" />}

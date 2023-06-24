@@ -3,13 +3,14 @@ import { NavLink } from "react-router-dom"
 interface Props {
     text: string,
     link: string,
-    icon: any
+    icon: any,
+    end?: boolean
 }
 
-function DesktopNavlink_1({text, link, icon}: Props) {
+function DesktopNavlink_1({text, link, icon, end=true}: Props) {
   return (
     <NavLink
-        end
+        end={end}
         to={link}
         className={({isActive}) => `flex p-2 pr-0 rounded-lg items-center w-full
         active:scale-95 transition-all duration-300
