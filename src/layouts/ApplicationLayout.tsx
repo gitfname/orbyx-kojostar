@@ -9,7 +9,6 @@ import { useSearchParamsStore } from "../stores/useSearchParams"
 
 
 function ApplicationLayout({children}) {
-  const [city_id, key] = useSearchParamsStore(selector => [selector.data.city_id, selector.data.key])
   return (
     <div dir="ltr" className="w-screen h-screen grid grid-cols-[calc(100%-13rem)_13rem]">
 
@@ -53,18 +52,6 @@ function ApplicationLayout({children}) {
             link={ApplicationRoutes.pages.profile}
             icon={<AiOutlineUser className="fill-white w-5 h-5" />}
           />
-
-          <div dir="ltr" className="mt-6 flex flex-col gap-y-2 border border-red-200">
-            <div className="flex flex-col gap-1">
-              <p className="text-sm text-slate-800 font-[iranyekan400]">key :</p>
-              {key}
-            </div>
-
-            <div className="flex flex-col gap-1">
-              <p className="text-sm text-slate-800 font-[iranyekan400]">city_ids :</p>
-              {JSON.stringify(city_id)}
-            </div>
-          </div>
         </div>
 
       </div>

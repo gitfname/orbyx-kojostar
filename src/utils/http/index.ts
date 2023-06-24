@@ -7,6 +7,7 @@ import { getCitiesAndStates } from "./api/getCitiesAndStates";
 import { getCategories } from "./api/getCategories";
 import { getMostCommentedJobs } from "./api/getMostCommentedJobs";
 import { getDisCounts } from "./api/getDisCounts";
+import { getAllBookMarks } from "./api/getAllBookMarks";
 
 export {
     get_phone_number,
@@ -17,5 +18,6 @@ export {
     getCitiesAndStates,
     getCategories,
     getMostCommentedJobs,
-    getDisCounts
+    getDisCounts,
+    getAllBookMarks
 }

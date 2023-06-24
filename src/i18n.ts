@@ -18,7 +18,7 @@ i18n
         escapeValue: false
     },
     backend: {
-        loadPath: getBaseUrl()+"assets/locals/{{lng}}/{{ns}}.json"
+        loadPath: getBaseUrl()+"/assets/locals/{{lng}}/{{ns}}.json"
     },
     detection: {
         order: ['cookie', 'localStorage'],

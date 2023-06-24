@@ -1,11 +1,13 @@
+import getBaseUrl from "./utils/base-url";
 
 export const ApplicationRoutes = {
 
     pages: {
         home: import.meta.env.BASE_URL,
-        search: import.meta.env.BASE_URL+"search",
-        bookmarks: import.meta.env.BASE_URL+"bookmarks",
-        profile: import.meta.env.BASE_URL+"profile",
+        search: getBaseUrl()+"/search",
+        bookmarks: getBaseUrl()+"/bookmarks",
+        profile: getBaseUrl()+"/profile",
+        jobPage: getBaseUrl()+"/jobs/:id",
     }
 
 }

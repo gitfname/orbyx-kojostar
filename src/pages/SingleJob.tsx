@@ -77,7 +77,7 @@ function SingleJob() {
             <div className="mt-6 w-full flex items-center justify-center gap-x-3">
                 <Rating_1
                     max={5}
-                    positive={data?.job?.rate}
+                    positive={Math.floor(data?.job?.rate)}
                 />
             </div>
 

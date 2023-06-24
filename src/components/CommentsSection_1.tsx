@@ -57,7 +57,7 @@ function Comment({ data }: CommentProps) {
 
                 <Rating_1
                     max={5}
-                    positive={data?.rate}
+                    positive={Math.floor(data?.rate)}
                 />
 
             </div>

@@ -9,6 +9,7 @@ interface Props {
 function DesktopNavlink_1({text, link, icon}: Props) {
   return (
     <NavLink
+        end
         to={link}
         className={({isActive}) => `flex p-2 pr-0 rounded-lg items-center w-full
         active:scale-95 transition-all duration-300

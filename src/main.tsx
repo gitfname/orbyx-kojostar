@@ -1,7 +1,8 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom"
-import App from './App.tsx'
+const App = lazy(() => import("./App.tsx"))
+// import App from './App.tsx'
 // const sleep = (ms:number) => {
 //   return new Promise(resovle => {
 //     setTimeout(() => {
@@ -17,12 +18,11 @@ import './index.css'
 import './i18n.ts'
 import 'react-virtualized/styles.css';
 import Loading from './pages/Loading.tsx'
-// import Loading from './pages/Loading.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
       <BrowserRouter>
-        <Suspense>
+        <Suspense fallback={<Loading />}>
           <App />
           <Loading />
         </Suspense>

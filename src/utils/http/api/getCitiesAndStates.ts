@@ -20,7 +20,8 @@ interface getCitiesAndStatesOptionsTest {
     id: number,
     is_state: boolean
     state_id: number
-    name: string
+    name: string,
+    is_parent: boolean
 }
 
 interface getCitiesAndStatesOutPutTest {
@@ -53,7 +54,8 @@ async function getCitiesAndStates(): Promise<getCitiesAndStatesOutPutTest> {
             id: state.id,
             is_state: true,
             name: state.name,
-            state_id: undefined
+            state_id: undefined,
+            is_parent: true
         })
 
         state.cities.forEach((city, _) => {
@@ -61,7 +63,8 @@ async function getCitiesAndStates(): Promise<getCitiesAndStatesOutPutTest> {
                 id: city.id,
                 name: city.name,
                 is_state: false,
-                state_id: state.id
+                state_id: state.id,
+                is_parent: false
             })
         })
         

@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react"
 import useSWR from "swr"
 import { getCategories, getCitiesAndStates } from "../utils/http";
-import { getCitiesAndStatesOptions, getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
+import { getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
 import { useSearchParamsStore } from "../stores/useSearchParams";
 import { getCategoriesOptionsTest } from "../utils/http/api/getCategories";
 
@@ -42,7 +42,7 @@ function rowRenderer({
             className="px-2"
         >
             {
-                _data.is_state || _data?.is_parent
+                _data.is_parent
                     ?
                     <p
                         className="text-sm text-slate-900 !h-7 font-[iranyekan400]"

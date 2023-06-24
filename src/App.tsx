@@ -1,5 +1,5 @@
 
-import { Routes, Route, json, useLocation } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import Home from "./pages/Home"
 import ApplicationLayout from "./layouts/ApplicationLayout"
 import { ChakraProvider } from "@chakra-ui/react"
@@ -7,15 +7,24 @@ import NotFound from "./pages/NotFound"
 import { ApplicationRoutes } from "./routes"
 import useUserStore from "./stores/userStore"
 import Login from "./pages/Login"
-import { useEffect } from "react"
+import { useEffect, lazy, Suspense } from "react"
 import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
-import Search from "./pages/Search"
-import Popular from "./pages/Popular"
-import MostComments from "./pages/MostComments"
-import DisCounts from "./pages/DisCounts"
-import SingleJob from "./pages/SingleJob"
+import Loading from "./pages/Loading"
+
+const Search = lazy(() => import("./pages/Search"))
+// import Search from "./pages/Search"
+const Popular = lazy(() => import("./pages/Popular"))
+// import Popular from "./pages/Popular"
+const MostComments = lazy(() => import("./pages/MostComments"))
+// import MostComments from "./pages/MostComments"
+const DisCounts = lazy(() => import("./pages/DisCounts"))
+// import DisCounts from "./pages/DisCounts"
+const SingleJob = lazy(() => import("./pages/SingleJob"))
+// import SingleJob from "./pages/SingleJob"
+const BookMarked = lazy(() => import("./pages/BookMarked"))
+// import BookMarked from "./pages/BookMarked"
 
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
@@ -88,17 +97,80 @@ function App() {
     <>
       <ChakraProvider>
         <ApplicationLayout>
+
           <Routes>
-            <Route path={ApplicationRoutes.pages.home} element={<Home />} />
-            <Route path={ApplicationRoutes.pages.search} element={<Search />}>
-              <Route index element={<Popular />} />
-              <Route path="most-comment" element={<MostComments />} />
-              <Route path="discounts" element={<DisCounts />} />
+
+            <Route
+              path={ApplicationRoutes.pages.home}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Home />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.search}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Search />
+                </Suspense>
+              }
+            >
+
+              <Route
+                index
+                element={
+                  <Suspense>
+                    <Popular />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="most-comment"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <MostComments />
+                  </Suspense>
+                }
+              />
+
+              <Route
+                path="discounts"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <DisCounts />
+                  </Suspense>
+                }
+              />
+              
               <Route path="*" element={<NotFound />} />
+
             </Route>
-            <Route path="jobs/:id" element={<SingleJob />} />
+
+            <Route
+              path={ApplicationRoutes.pages.bookmarks}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <BookMarked />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.jobPage}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <SingleJob />
+                </Suspense>
+              }
+            />
+
             <Route path="*" element={<NotFound />} />
+
           </Routes>
+
         </ApplicationLayout>
       </ChakraProvider>
     </>

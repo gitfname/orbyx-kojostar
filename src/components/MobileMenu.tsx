@@ -3,8 +3,8 @@ import { AiOutlineMenu } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import ChangeLangButton from "./ChangeLangButton"
-import { menuItems } from "../utils/http/api/getPhoneNumber"
-import { menuItemOptions } from "../utils/http/menuItems"
+// import { menuItems } from "../utils/http/api/getPhoneNumber"
+// import { menuItemOptions } from "../utils/http/menuItems"
 import {
     Accordion,
     AccordionButton,
@@ -22,17 +22,17 @@ const getLang = (lng) => {
 function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false)
     const [t, i18n] = useTranslation()
-    const [items, setItems] = useState<menuItemOptions>()
+    // const [items, setItems] = useState<menuItemOptions>()
     const navigate = useNavigate()
     
 
-    useEffect(
-        () => {
-            menuItems({ lng: getLang(i18n.language) })
-                .then(data => setItems(data))
-        },
-        [i18n.language]
-    )
+    // useEffect(
+    //     () => {
+    //         menuItems({ lng: getLang(i18n.language) })
+    //             .then(data => setItems(data))
+    //     },
+    //     [i18n.language]
+    // )
 
 
     return (
@@ -89,7 +89,7 @@ function MobileMenu() {
                         overflowY="auto"
                     >
 
-                        {
+                        {/* {
                             items?.items?.map(item => (
                                 <AccordionItem
                                     key={item.id}
@@ -137,7 +137,7 @@ function MobileMenu() {
                                     </AccordionPanel>
                                 </AccordionItem>
                             ))
-                        }
+                        } */}
 
 
                     </Accordion>

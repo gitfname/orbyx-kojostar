@@ -18,7 +18,7 @@ function Home() {
           <div className="w-full p-10 grid place-items-center">
             <img
               alt="no data"
-              src={getBaseUrl() + "assets/images/no-data.svg"}
+              src={getBaseUrl() + "/assets/images/no-data.svg"}
               className="w-72 h-auto border border-purple-600 inline-block"
             />
           </div>
@@ -43,7 +43,7 @@ function Home() {
           <div className="w-full p-10 grid place-items-center">
             <img
               alt="no data"
-              src={getBaseUrl() + "assets/images/no-data.svg"}
+              src={getBaseUrl() + "/assets/images/no-data.svg"}
               className="w-72 h-auto border border-purple-600 inline-block"
             />
           </div>

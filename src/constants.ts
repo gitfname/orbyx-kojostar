@@ -7,6 +7,7 @@ export const searchApiEndPoint = "/search"
 export const getCitiesAndStatesApiEndPoint = "/city/get_city_state"
 export const getCategoriesApiEndPoint = "/category/all"
 export const getSingleJobApiEndPoint = "/job/view"
+export const getAllBookMarksApiEndPoint = "/bookmark/list"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -16,3 +17,4 @@ export const searchApiUrl = API_BASE_URL+searchApiEndPoint
 export const getCitiesAndStatesApiUrl = API_BASE_URL+getCitiesAndStatesApiEndPoint
 export const getCategoriesApiUrl = API_BASE_URL+getCategoriesApiEndPoint
 export const getSingleJobApiUrl = API_BASE_URL+getSingleJobApiEndPoint
+export const getAllBookMarksApiUrl = API_BASE_URL+getAllBookMarksApiEndPoint
