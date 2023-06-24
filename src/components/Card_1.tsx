@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import getBaseUrl from "../utils/base-url"
 import { searchOptions } from "../utils/http/api/search"
 import Rating_1 from "./Rating_1"
@@ -9,7 +10,7 @@ function Card_1({
     title, category, address, city, discount, id, image, lat, lng, rate, rate_count
 }: searchOptions) {
   return (
-    <div className="bg-gray-100 rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-[45%_1fr] gap-x-3">
+    <Link to={"/jobs/"+id} className="inline-block bg-gray-100 rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-[45%_1fr] gap-x-3">
       <div className="p-3">
         <p className="text-gray-900 text-sm font-[iranyekan500] line-clamp-2">{ title }</p>
         <div className="mt-4 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
@@ -38,7 +39,7 @@ function Card_1({
         className="w-full h-64 rounded-l-xl object-center object-cover"
       />
 
-    </div>
+    </Link>
   )
 }
 

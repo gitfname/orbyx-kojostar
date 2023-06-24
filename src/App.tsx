@@ -15,6 +15,7 @@ import Search from "./pages/Search"
 import Popular from "./pages/Popular"
 import MostComments from "./pages/MostComments"
 import DisCounts from "./pages/DisCounts"
+import SingleJob from "./pages/SingleJob"
 
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
@@ -95,6 +96,7 @@ function App() {
               <Route path="discounts" element={<DisCounts />} />
               <Route path="*" element={<NotFound />} />
             </Route>
+            <Route path="jobs/:id" element={<SingleJob />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </ApplicationLayout>
