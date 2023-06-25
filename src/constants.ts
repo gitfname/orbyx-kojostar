@@ -1,5 +1,5 @@
 
-export const API_BASE_URL = "http://dev.kojostar.ir/api/v1"
+export const API_BASE_URL = "https://dev.kojostar.ir/api/v1"
 export const checkOtpApiEndPoint = "/auth/check_otp"
 export const getUserInfoApiEndPoint = "/profile/user_info"
 export const getHomeDataApiEndPoint = "/home"
@@ -8,6 +8,7 @@ export const getCitiesAndStatesApiEndPoint = "/city/get_city_state"
 export const getCategoriesApiEndPoint = "/category/all"
 export const getSingleJobApiEndPoint = "/job/view"
 export const getAllBookMarksApiEndPoint = "/bookmark/list"
+export const addNewJobApiEndPoint = "/job/add"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -18,3 +19,4 @@ export const getCitiesAndStatesApiUrl = API_BASE_URL+getCitiesAndStatesApiEndPoi
 export const getCategoriesApiUrl = API_BASE_URL+getCategoriesApiEndPoint
 export const getSingleJobApiUrl = API_BASE_URL+getSingleJobApiEndPoint
 export const getAllBookMarksApiUrl = API_BASE_URL+getAllBookMarksApiEndPoint
+export const addNewJobApiUrl = API_BASE_URL+addNewJobApiEndPoint

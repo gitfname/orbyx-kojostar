@@ -11,8 +11,12 @@ import { BsTelephone } from "react-icons/bs"
 import { IoNewspaperOutline } from "react-icons/io5"
 import { HiOutlinePencil } from "react-icons/hi2"
 import { RxExit } from "react-icons/rx"
+import { useNavigate } from "react-router-dom"
+import { ApplicationRoutes } from "../routes"
 
 function Profile() {
+
+    const navigate = useNavigate();
 
     const [
         userData
@@ -72,7 +76,7 @@ function Profile() {
                         title="افزودن مجموعه"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<AiOutlinePlus className="w-5 h-5 fill-slate-800" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.newJob)}
                     />
 
                     <Card_2
@@ -135,7 +139,7 @@ function Profile() {
                         title="خروج"
                         titleIcon={<RxExit className="w-5 h-5 text-rose-500" />}
                         onClick={undefined}
-                        textClassName="text-rose-500"
+                        textClassName="!text-rose-500"
                     />
 
                 </div>

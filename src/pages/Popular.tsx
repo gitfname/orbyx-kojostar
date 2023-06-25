@@ -20,27 +20,20 @@ function Popular({ className }: PopularProps) {
     "search/popular",
     async () => getPopulars({ category_id: catId, city_id: cityIDs, key: searchText }),
     {
-      shouldRetryOnError: false
+      shouldRetryOnError: false,
+      revalidateOnFocus: false
     }
   )
 
-  const [loading, setLoading] = useState(isLoading)
+  // const [loading, setLoading] = useState(isLoading)
 
   useEffect(
     () => {
-      setLoading(true)
+      // setLoading(true)
       mutate()
-      .then(() => setLoading(false))
+      // .then(() => setLoading(false))
     },
-    [searchText]
-  )
-  useEffect(
-    () => {
-      setLoading(true)
-      mutate()
-      .then(() => setLoading(false))
-    },
-    [cityIDs, catId]
+    [searchText, cityIDs, catId]
   )
 
   return (
@@ -88,7 +81,7 @@ function Popular({ className }: PopularProps) {
                 </div>
               </div>
             }
-            isLoading={loading}
+            isLoading={isLoading}
           />
 
       }

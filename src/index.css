@@ -95,3 +95,12 @@
     color: rgba(255, 255, 255, 1);
   }
 }
+
+
+.ant-picker-panel-container {
+  @apply -translate-x-1/2;
+}
+
+.filepond--action-process-item {
+  display: none;
+}

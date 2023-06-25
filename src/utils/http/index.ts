@@ -8,6 +8,7 @@ import { getCategories } from "./api/getCategories";
 import { getMostCommentedJobs } from "./api/getMostCommentedJobs";
 import { getDisCounts } from "./api/getDisCounts";
 import { getAllBookMarks } from "./api/getAllBookMarks";
+import { addJob } from "./api/addJob";
 
 export {
     get_phone_number,
@@ -19,5 +20,6 @@ export {
     getCategories,
     getMostCommentedJobs,
     getDisCounts,
-    getAllBookMarks
+    getAllBookMarks,
+    addJob
 }

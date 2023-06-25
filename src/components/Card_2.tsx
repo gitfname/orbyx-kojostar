@@ -13,7 +13,7 @@ interface Card_2Props {
 
 function Card_2({ title, titleIcon, icon, onClick, containerClassName, textClassName }: Card_2Props) {
     return (
-        <div className={`p-3 transition-colors duration-300 rounded-lg hover:bg-transparent/5
+        <div onClick={() => onClick&&onClick()} className={`p-3 transition-colors duration-300 rounded-lg hover:bg-transparent/5
     flex items-center justify-between cursor-pointer ` + containerClassName}>
 
             <div className="flex items-center">

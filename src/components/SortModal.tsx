@@ -110,11 +110,6 @@ function SortModal({ children }) {
         }
     )
 
-    if(!isCateGoriesLoading) {
-        console.log(categories);
-        
-    }
-
 
     return (
         <>

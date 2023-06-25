@@ -13,6 +13,7 @@ import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
 import Profile from "./pages/Profile"
+import NewJob from "./pages/NewJob"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -173,6 +174,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <Profile />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.newJob}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NewJob />
                 </Suspense>
               }
             />
