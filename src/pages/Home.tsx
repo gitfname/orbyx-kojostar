@@ -1,3 +1,4 @@
+import Card_1 from "../components/Card_1"
 import DataSection_1 from "../components/DataSection_1"
 import getBaseUrl from "../utils/base-url"
 import { getHomeData } from "../utils/http"
@@ -7,6 +8,13 @@ function Home() {
   const { data, error, isLoading } = useSWR("api/home", getHomeData, {
     shouldRetryOnError: false
   })
+
+  if(error) return <p>Error</p>
+
+  if(!isLoading) {
+    console.log(data);
+    
+  }
 
   return (
     <div className="h-screen overflow-y-auto p-4 pt-7">
@@ -33,8 +41,11 @@ function Home() {
           </div>
         }
         isLoading={isLoading}
-        dataRenderer={(item) => <div className="w-10 h-10 bg-red-600" key={item.id}></div>}
+        containerClassName="grid grid-cols-2 pt-8"
+        dataRenderer={(item) => <Card_1 {...item} />}
       />
+
+      <div className="mt-16"></div>
 
       <DataSection_1
         title="پرطرفدار ها"

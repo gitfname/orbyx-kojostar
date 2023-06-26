@@ -9,6 +9,7 @@ export const getCategoriesApiEndPoint = "/category/all"
 export const getSingleJobApiEndPoint = "/job/view"
 export const getAllBookMarksApiEndPoint = "/bookmark/list"
 export const addNewJobApiEndPoint = "/job/add"
+export const updateCityIdApiEndPoint = "/profile/update_city"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -20,3 +21,4 @@ export const getCategoriesApiUrl = API_BASE_URL+getCategoriesApiEndPoint
 export const getSingleJobApiUrl = API_BASE_URL+getSingleJobApiEndPoint
 export const getAllBookMarksApiUrl = API_BASE_URL+getAllBookMarksApiEndPoint
 export const addNewJobApiUrl = API_BASE_URL+addNewJobApiEndPoint
+export const updateCityIdApiUrl = API_BASE_URL+updateCityIdApiEndPoint

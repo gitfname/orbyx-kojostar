@@ -13,6 +13,7 @@ import { HiOutlinePencil } from "react-icons/hi2"
 import { RxExit } from "react-icons/rx"
 import { useNavigate } from "react-router-dom"
 import { ApplicationRoutes } from "../routes"
+import SelectCitiesModal from "../components/SelectCitiesModal"
 
 function Profile() {
 
@@ -79,12 +80,15 @@ function Profile() {
                         onClick={() => navigate(ApplicationRoutes.pages.newJob)}
                     />
 
-                    <Card_2
-                        title="انتخاب شهر"
-                        icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
-                        titleIcon={<TbLocation className="w-5 h-5 fill-transparent stroke-slate-800" />}
-                        onClick={undefined}
-                    />
+                    <SelectCitiesModal>
+                        <Card_2
+                            title="انتخاب شهر"
+                            icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
+                            titleIcon={<TbLocation className="w-5 h-5 fill-transparent stroke-slate-800" />}
+                            onClick={undefined}
+                        />
+                    </SelectCitiesModal>
+
 
                     <Card_2
                         title="آخرین بازدید ها"

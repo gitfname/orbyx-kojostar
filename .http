@@ -1,9 +1,9 @@
 
 
-POST http://dev.kojostar.ir/api/v1/auth/check_otp
+POST http://dev.kojostar.ir/api/v1/profile/update_city
 Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZGV2Lmtvam9zdGFyLmlyL2FwaS92MS9hdXRoL2NoZWNrX290cCIsImlhdCI6MTY4NzcyNTQ1NSwiZXhwIjoxNjg3OTQxNDU1LCJuYmYiOjE2ODc3MjU0NTUsImp0aSI6IklDNVVtVWlMQjNpWGF2dXIiLCJzdWIiOiI1IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.c5rbok-Av0T7ksjKXTqIJAaDVhqeBBDCXssQ1lHfAdI
 
 {
-    "code": "794469",
-    "user_id": "5"
+    "city_id": 4
 }

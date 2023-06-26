@@ -1,5 +1,6 @@
 
 import { create } from "zustand"
+import { produce } from "immer"
 
 interface userOptions {
     userid?: number,
@@ -17,7 +18,9 @@ interface userOptions {
 }
 
 interface userApis {
-    setUser({ userid, username, firstname, lastname }: userOptions): void
+    setUser({ userid, username, firstname, lastname }: userOptions): void,
+    set_city_id?(city_id: number): void,
+    set_city?(city: string): void
 }
 
 interface useUserStoreOutput {
@@ -54,7 +57,17 @@ const useUserStore = create<useUserStoreOutput>(set => ({
             city: props.city,
             city_id: props.city_id,
             isLoggedIn: props.isLoggedIn
-        }})
+        }}),
+        set_city_id: (city_id) => set(
+            produce((state:useUserStoreOutput) => {
+                state.user.city_id = city_id
+            })
+        ),
+        set_city: (city) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.city = city
+            })
+        )
     }
 
 }))

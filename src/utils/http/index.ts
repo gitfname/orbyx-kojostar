@@ -9,6 +9,7 @@ import { getMostCommentedJobs } from "./api/getMostCommentedJobs";
 import { getDisCounts } from "./api/getDisCounts";
 import { getAllBookMarks } from "./api/getAllBookMarks";
 import { addJob } from "./api/addJob";
+import { updateCity } from "./api/updateCity";
 
 export {
     get_phone_number,
@@ -21,5 +22,6 @@ export {
     getMostCommentedJobs,
     getDisCounts,
     getAllBookMarks,
-    addJob
+    addJob,
+    updateCity
 }
