@@ -115,7 +115,7 @@ function Profile() {
                         title="پیشنهاد اضافه کردن مکان"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<MdOutlineAddLocationAlt className="w-5 h-5 fill-slate-800" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.suggestAddNewPlace)}
                     />
 
                     <Card_2

@@ -11,7 +11,8 @@ export const ApplicationRoutes = {
         singleJob: (id: number) => getBaseUrl()+"/jobs/"+id,
         newJob: getBaseUrl()+"/new-job",
         lastSeenJobs: getBaseUrl()+"/last-seen-jobs",
-        myComments: getBaseUrl()+"/my-comments"
+        myComments: getBaseUrl()+"/my-comments",
+        suggestAddNewPlace: getBaseUrl()+"/suggest-add-new-place"
     }
 
 }

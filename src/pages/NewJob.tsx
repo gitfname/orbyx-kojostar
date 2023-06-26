@@ -187,7 +187,7 @@ function GetWeeklyPlan({
 
 
 function NewJob() {
-    const filePondRef = useRef<FilePond>(undefined)
+    const filePondRef = useRef(undefined)
 
     const [morningTime, setMorningTime] = useState<{
         startMorningTime: Dayjs,

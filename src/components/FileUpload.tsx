@@ -23,7 +23,7 @@ interface FileUploadProps {
 }
 
 function FileUpload({ reqHeaders, beforeSend = undefined, name = "filepondfile", filePondRef = undefined }: FileUploadProps) {
-    const [files, setFiles] = useState<File[]>(undefined)
+    const [files, setFiles] = useState<FilePondFile[]>(undefined)
     const filePondInstance = useRef<FilePond>(undefined);
 
     const initFilePond = () => {
@@ -32,7 +32,7 @@ function FileUpload({ reqHeaders, beforeSend = undefined, name = "filepondfile",
 
     const handleAddFiles = (error: FilePondErrorDescription, file: FilePondFile) => {
         if (files && !error) {
-            filePondInstance.current.addFile(file)
+            filePondInstance.current.addFile(file.file)
             console.log("file added " + file.filename);
 
         }
@@ -64,27 +64,13 @@ function FileUpload({ reqHeaders, beforeSend = undefined, name = "filepondfile",
         <FilePond
             oninit={initFilePond}
             ref={filePondInstance}
-            files={files}
-            server={{ process:{
-                method:"POST",
-                headers: {
-                    Authorization: "Bearer "+useUserStore.getState().user.token
-                },
-                withCredentials: true,
-                onload(response) {
-                    console.log(response);
-                    console.log("hello world");
-                    
-                },
-                onerror: e => {
-                    console.log("hello world error");
-                    
-                }
-            }}}
-            onupdatefiles={setFiles}
+            files={files?.map(file => file?.file)}
+            server={{
+                process: ""
+            }}
+            onupdatefiles={(files: FilePondFile[]) => setFiles(files)}
             allowMultiple
             maxFiles={3}
-            server={addNewJobApiUrl}
             name={name}
             instantUpload={false}
             onaddfile={handleAddFiles}

@@ -26,7 +26,7 @@ function Popular({ className }: PopularProps) {
   )
 
   // const [loading, setLoading] = useState(isLoading)
-
+  
   useEffect(
     () => {
       // setLoading(true)

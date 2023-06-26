@@ -13,10 +13,7 @@ import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
-import Profile from "./pages/Profile"
-import NewJob from "./pages/NewJob"
-import LastViewedJobs from "./pages/LastViewedJobs"
-import MyComments from "./pages/MyComents/MyComments"
+import SuggestAddNewPlace from "./pages/SuggestAddNewPlace/SuggestAddNewPlace"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -30,6 +27,16 @@ const SingleJob = lazy(() => import("./pages/SingleJob"))
 // import SingleJob from "./pages/SingleJob"
 const BookMarked = lazy(() => import("./pages/BookMarked"))
 // import BookMarked from "./pages/BookMarked"
+const MyComments = lazy(() => import("./pages/MyComents/MyComments"))
+// import MyComments from "./pages/MyComents/MyComments"
+const LastViewedJobs = lazy(() => import("./pages/LastViewedJobs"))
+// import LastViewedJobs from "./pages/LastViewedJobs"
+const NewJob = lazy(() => import("./pages/NewJob"))
+// import NewJob from "./pages/NewJob
+const Profile = lazy(() => import("./pages/Profile"))
+// import Profile from "./pages/Profile"
+
+
 
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
@@ -76,6 +83,7 @@ function App() {
     },
     []
   )
+
 
   // const [_, i18n] = useTranslation()  
 
@@ -207,6 +215,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <MyComments />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.suggestAddNewPlace}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <SuggestAddNewPlace />
                 </Suspense>
               }
             />
