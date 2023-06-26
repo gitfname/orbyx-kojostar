@@ -14,6 +14,7 @@ import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
 import Profile from "./pages/Profile"
 import NewJob from "./pages/NewJob"
+import LastViewedJobs from "./pages/LastViewedJobs"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -31,7 +32,7 @@ const BookMarked = lazy(() => import("./pages/BookMarked"))
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
   const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading);
-  
+
 
   useEffect(
     () => {
@@ -93,7 +94,7 @@ function App() {
   //   [i18n.language]
   // )
 
-  if(!userData.isLoggedIn) return <Login />
+  if (!userData.isLoggedIn) return <Login />
 
   return (
     <>
@@ -146,7 +147,7 @@ function App() {
                   </Suspense>
                 }
               />
-              
+
               <Route path="*" element={<NotFound />} />
 
             </Route>
@@ -183,6 +184,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <NewJob />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.lastSeenJobs}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <LastViewedJobs />
                 </Suspense>
               }
             />

@@ -10,6 +10,7 @@ import { getDisCounts } from "./api/getDisCounts";
 import { getAllBookMarks } from "./api/getAllBookMarks";
 import { addJob } from "./api/addJob";
 import { updateCity } from "./api/updateCity";
+import { lastViewedJobs} from "./api/lastViewedJobs";
 
 export {
     get_phone_number,
@@ -23,5 +24,6 @@ export {
     getDisCounts,
     getAllBookMarks,
     addJob,
-    updateCity
+    updateCity,
+    lastViewedJobs
 }

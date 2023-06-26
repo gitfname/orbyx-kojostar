@@ -94,7 +94,7 @@ function Profile() {
                         title="آخرین بازدید ها"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<AiOutlineEye className="w-5 h-5 fill-slate-800" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.lastSeenJobs)}
                     />
 
                     <Card_2
