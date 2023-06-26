@@ -122,7 +122,7 @@ function Profile() {
                         title="ارتباط با ما و درج تبلیغات"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<BsTelephone className="w-5 h-5 fill-slate-800" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.contactUsAndAds)}
                     />
 
                     <Card_2

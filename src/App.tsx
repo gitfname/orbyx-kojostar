@@ -14,6 +14,7 @@ import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
 import SuggestAddNewPlace from "./pages/SuggestAddNewPlace/SuggestAddNewPlace"
+import ContactUsAndAds from "./pages/ContactUsAndAds/ContactUsAndAds"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -224,6 +225,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <SuggestAddNewPlace />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.contactUsAndAds}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <ContactUsAndAds />
                 </Suspense>
               }
             />

@@ -28,3 +28,9 @@ export const updateCityIdApiUrl = API_BASE_URL+updateCityIdApiEndPoint
 export const getLastViewedJobsApiUrl = API_BASE_URL+getLastViewedJobsApiEndPoint
 export const getMyCommentsApiUrl = API_BASE_URL+getMyCOmmentsApiEndPoint
 export const checkIsLoggedInApiUrl = API_BASE_URL + checkIsLoggedInApiEndPoint
+
+
+export const name={
+    "en": "Kojo",
+    "fa": "کوجو"
+}
