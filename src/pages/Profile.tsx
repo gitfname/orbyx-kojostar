@@ -101,7 +101,7 @@ function Profile() {
                         title="نظر های من"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<GoCommentDiscussion className="w-5 h-5 fill-slate-800" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.myComments)}
                     />
 
                     <Card_2

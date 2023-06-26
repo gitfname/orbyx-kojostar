@@ -1,5 +1,6 @@
 
-import { Routes, Route } from "react-router-dom"
+import { history } from "./helpers/history"
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import ApplicationLayout from "./layouts/ApplicationLayout"
 import { ChakraProvider } from "@chakra-ui/react"
@@ -15,6 +16,7 @@ import Loading from "./pages/Loading"
 import Profile from "./pages/Profile"
 import NewJob from "./pages/NewJob"
 import LastViewedJobs from "./pages/LastViewedJobs"
+import MyComments from "./pages/MyComents/MyComments"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -32,6 +34,9 @@ const BookMarked = lazy(() => import("./pages/BookMarked"))
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
   const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading);
+
+  history.navigate = useNavigate()
+  history.location = useLocation()
 
 
   useEffect(
@@ -193,6 +198,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <LastViewedJobs />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.myComments}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <MyComments />
                 </Suspense>
               }
             />

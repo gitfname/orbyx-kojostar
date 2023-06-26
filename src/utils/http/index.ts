@@ -11,6 +11,8 @@ import { getAllBookMarks } from "./api/getAllBookMarks";
 import { addJob } from "./api/addJob";
 import { updateCity } from "./api/updateCity";
 import { lastViewedJobs} from "./api/lastViewedJobs";
+import { getMyComments } from "./api/getMyComments";
+import { checkIsLoggedIn } from "./api/checkIsLoggedIn";
 
 export {
     get_phone_number,
@@ -25,5 +27,7 @@ export {
     getAllBookMarks,
     addJob,
     updateCity,
-    lastViewedJobs
+    lastViewedJobs,
+    getMyComments,
+    checkIsLoggedIn
 }

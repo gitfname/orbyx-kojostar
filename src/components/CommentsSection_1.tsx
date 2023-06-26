@@ -85,31 +85,40 @@ function Comment({ data }: CommentProps) {
 
 
 interface CommentsSection_1Props {
-    comments: Array<CommentOptions>
+    comments: Array<CommentOptions>,
+    showTopSection?: boolean,
+    showJob?: boolean
 }
 
-function CommentsSection_1({ comments }: CommentsSection_1Props) {
+function CommentsSection_1({ comments, showJob = false, showTopSection = true }: CommentsSection_1Props) {
 
     return (
         <div className="w-full px-4">
 
-            <div className="flex items-center justify-between">
+            {
+                showTopSection
+                    ?
+                    <div className="flex items-center justify-between mb-12">
 
-                <div className="flex items-center gap-x-3">
-                    <GoCommentDiscussion className="w-5 h-5 fill-blue-500" />
-                    <p
-                        className="text-sm text-slate-800 font-[iranyekan400]"
-                    >
-                        نظرات
-                    </p>
-                </div>
+                        <div className="flex items-center gap-x-3">
+                            <GoCommentDiscussion className="w-5 h-5 fill-blue-500" />
+                            <p
+                                className="text-sm text-slate-800 font-[iranyekan400]"
+                            >
+                                نظرات
+                            </p>
+                        </div>
 
-                <p className="text-xs text-blue-500 font-[iranyekan400]">
-                    همه نظرات
-                </p>
-            </div>
+                        <p className="text-xs text-blue-500 font-[iranyekan400]">
+                            همه نظرات
+                        </p>
+                    </div>
+                    :
+                    false
+            }
 
-            <div className="mt-12 flex flex-col gap-y-6 w-full">
+
+            <div className="flex flex-col gap-y-6 w-full">
                 {
                     comments?.map(comment => (
                         <Comment key={comment?.id} data={comment} />

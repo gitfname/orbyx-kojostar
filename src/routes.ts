@@ -8,8 +8,10 @@ export const ApplicationRoutes = {
         bookmarks: getBaseUrl()+"/bookmarks",
         profile: getBaseUrl()+"/profile",
         jobPage: getBaseUrl()+"/jobs/:id",
+        singleJob: (id: number) => getBaseUrl()+"/jobs/"+id,
         newJob: getBaseUrl()+"/new-job",
-        lastSeenJobs: getBaseUrl()+"/last-seen-jobs"
+        lastSeenJobs: getBaseUrl()+"/last-seen-jobs",
+        myComments: getBaseUrl()+"/my-comments"
     }
 
 }

@@ -11,6 +11,8 @@ export const getAllBookMarksApiEndPoint = "/bookmark/list"
 export const addNewJobApiEndPoint = "/job/add"
 export const updateCityIdApiEndPoint = "/profile/update_city"
 export const getLastViewedJobsApiEndPoint = "/profile/last_job_view"
+export const getMyCOmmentsApiEndPoint = "/profile/user_comments"
+export const checkIsLoggedInApiEndPoint = "/auth/check_is_logged_in"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -24,3 +26,5 @@ export const getAllBookMarksApiUrl = API_BASE_URL+getAllBookMarksApiEndPoint
 export const addNewJobApiUrl = API_BASE_URL+addNewJobApiEndPoint
 export const updateCityIdApiUrl = API_BASE_URL+updateCityIdApiEndPoint
 export const getLastViewedJobsApiUrl = API_BASE_URL+getLastViewedJobsApiEndPoint
+export const getMyCommentsApiUrl = API_BASE_URL+getMyCOmmentsApiEndPoint
+export const checkIsLoggedInApiUrl = API_BASE_URL + checkIsLoggedInApiEndPoint
