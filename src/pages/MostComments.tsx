@@ -51,7 +51,7 @@ function MostComments({ className }: MostCommentsProps) {
           <p>Something went wrong</p>
           :
           <DataSection_1
-            containerClassName="grid grid-cols-2 gap-6"
+            containerClassName="grid grid-cols-1 md:grid-cols-2 gap-6"
             title=""
             dataProvider={data?.data}
             dataRenderer={(item: searchOptions) => (

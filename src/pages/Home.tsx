@@ -41,7 +41,7 @@ function Home() {
           </div>
         }
         isLoading={isLoading}
-        containerClassName="grid grid-cols-2 pt-8"
+        containerClassName="grid grid-cols-1 lg:grid-cols-2 pt-8"
         dataRenderer={(item) => <Card_1 {...item} />}
       />
 
@@ -69,6 +69,7 @@ function Home() {
           </div>
         }
         isLoading={isLoading}
+        containerClassName="grid grid-cols-1 lg:grid-cols-2 pt-8"
         dataRenderer={(item) => <div className="w-10 h-10 bg-red-600" key={item.id}></div>}
       />
 

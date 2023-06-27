@@ -6,29 +6,35 @@ import DesktopNavlink_1 from "../components/DesktopNavlink_1"
 import { AiOutlineHome, AiOutlineUser } from "react-icons/ai"
 import { BsBookmark, BsSearch } from "react-icons/bs"
 import { useSearchParamsStore } from "../stores/useSearchParams"
+import MobileMenu from "../components/MobileMenu"
 
 
 function ApplicationLayout({children}) {
   return (
-    <div dir="ltr" className="w-screen h-screen grid grid-cols-[calc(100%-13rem)_13rem]">
+    <div dir="ltr" className="w-screen h-screen grid grid-cols-1 grid-rows-[max-content_1fr] lg:grid-cols-[calc(100%-13rem)_13rem]">
 
       {/* main section */}
-      <div dir="rtl">
+      <div dir="rtl" className="max-lg:order-2">
         {children}
       </div>
 
       {/* sidebar */}
-      <div dir="rtl" className="overflow-y-auto bg-gradient-to-r from-blue-500 to-blue-500/95 px-2">
+      <div
+        dir="rtl"
+        className="overflow-y-auto bg-gradient-to-r flex max-lg:flex-row-reverse lg:flex-col
+        max-lg:order-1 from-blue-500 to-blue-500/95 px-2 max-lg:items-center max-lg:justify-between
+        max-lg:px-4"
+      >
         
         <Link
           to={ApplicationRoutes.pages.home}
-          className="text-3xl w-max mx-auto block py-6 mb-2 italic"
+          className="text-3xl w-max lg:mx-auto block max-lg:py-3 py-6 lg:mb-2 italic"
         >
           <span className="text-blue-900 font-[iranyekan600]">Kojo</span>
           <span className="text-blue-950/50 font-[iranyekan600]">star</span>
         </Link>
 
-        <div className="h-max flex flex-col gap-y-2">
+        <div className="h-max flex flex-col gap-y-2 max-lg:hidden">
           <DesktopNavlink_1 
             text="خانه"
             link={ApplicationRoutes.pages.home}
@@ -54,6 +60,11 @@ function ApplicationLayout({children}) {
             icon={<AiOutlineUser className="fill-white w-5 h-5" />}
           />
         </div>
+
+        <div className="lg:hidden">
+          <MobileMenu />
+        </div>
+
 
       </div>
 

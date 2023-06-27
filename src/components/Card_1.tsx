@@ -4,15 +4,14 @@ import { searchOptions } from "../utils/http/api/search"
 import Rating_1 from "./Rating_1"
 import { GoComment, GoLocation } from "react-icons/go"
 import { HiOutlineSquares2X2 } from "react-icons/hi2"
-import { ApplicationRoutes } from "../routes"
 
 
 function Card_1({
     title, category, address, city, discount, id, image, lat, lng, rate, rate_count
 }: searchOptions) {
   return (
-    <Link to={getBaseUrl()+"/jobs/"+id} className="bg-gray-100 rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-[45%_1fr] gap-x-3">
-      <div className="p-3">
+    <Link to={getBaseUrl()+"/jobs/"+id} className="bg-gray-100 rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
+      <div className="p-3 max-sm:order-2">
         <p className="text-gray-900 text-sm font-[iranyekan500] line-clamp-2">{ title }</p>
         <div className="mt-4 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">
@@ -37,7 +36,7 @@ function Card_1({
       <img
         alt=""
         src={image ? image : getBaseUrl()+"/assets/images/no-data.svg"}
-        className="w-full h-64 rounded-l-xl object-center object-cover"
+        className="w-full max-sm:order-1 h-64 rounded-l-xl object-center object-cover"
       />
 
     </Link>

@@ -47,7 +47,7 @@ function LastViewedJobs() {
                         </div>
                     }
                     isLoading={isLoading}
-                    containerClassName="grid grid-cols-2 gap-6 pt-8"
+                    containerClassName="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8"
                     dataRenderer={(item) => <Card_1 {...item} />}
                 />
             </div>

@@ -55,12 +55,12 @@ function SingleJob() {
             shouldRetryOnError: false
         }
     )
-    
+
     const onToggleBookMark = (job_id: number) => {
-        toggleBookMark({job_id: job_id})
-        .then(data => {
-            setIsBookMarked(data?.is_bookmarked)
-        })
+        toggleBookMark({ job_id: job_id })
+            .then(data => {
+                setIsBookMarked(data?.is_bookmarked)
+            })
     }
 
     useEffect(
@@ -231,7 +231,7 @@ function SingleJob() {
                 </p>
             </div>
 
-            <div className="mt-4 grid grid-cols-4 gap-3 px-4">
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 px-4">
 
                 {
                     data?.plan?.map(plan => (
@@ -269,9 +269,15 @@ function SingleJob() {
 
             </div>
 
-            <div className="mt-16 w-full">
-                <CommentsSection_1 comments={data?.comments} />
-            </div>
+            {
+                data?.comments?.length > 0
+                    ?
+                    <div className="mt-16 w-full">
+                        <CommentsSection_1 comments={data?.comments} />
+                    </div>
+                    :
+                    false
+            }
 
         </div>
     )

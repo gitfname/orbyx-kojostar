@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { AiOutlineMenu } from "react-icons/ai"
+import { AiOutlineHome, AiOutlineMenu, AiOutlineUser } from "react-icons/ai"
 import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import ChangeLangButton from "./ChangeLangButton"
@@ -13,6 +13,9 @@ import {
     AccordionPanel,
     Box
 } from "@chakra-ui/react"
+import { ApplicationRoutes } from "../routes"
+import DesktopNavlink_1 from "./DesktopNavlink_1"
+import { BsBookmark, BsSearch } from "react-icons/bs"
 
 const getLang = (lng) => {
     const languages = ["en", "fa"]
@@ -24,7 +27,7 @@ function MobileMenu() {
     const [t, i18n] = useTranslation()
     // const [items, setItems] = useState<menuItemOptions>()
     const navigate = useNavigate()
-    
+
 
     // useEffect(
     //     () => {
@@ -53,101 +56,47 @@ function MobileMenu() {
                 ></div>
 
                 <div
-                    className={`w-64 h-full bg-gray-900 absolute top-0 right-0 translate-x-full z-20
+                    className={`w-64 h-full bg-blue-600 absolute top-0 right-0 translate-x-full z-20
                     gap-y-3 pt-6 grid grid-rows-[max-content_1fr_max-content]
                     transition-transform duration-300 ${isOpen ? "!translate-x-0" : ""}`}
                 >
 
                     <Link
-                        to="/ecommerce-webapp_vite_react"
-                        className="text-3xl font-[iranyekan500] text-slate-50 block mx-auto"
+                        to={ApplicationRoutes.pages.home}
+                        className="text-3xl w-max mx-auto block lg:mb-2 italic"
                     >
-                        {t("mobile-menu.title")}
+                        <span className="text-blue-900 font-[iranyekan600]">Kojo</span>
+                        <span className="text-white/70 font-[iranyekan600]">star</span>
                     </Link>
 
-                    {/* <div dir={i18n.dir(i18n.language)} className="flex flex-col gap-y-2 px-3 mt-5">
-                        {
-                            items?.items?.map(item => (
-                                <Link
-                                    key={item.id}
-                                    to={item.link}
-                                    className="text-base text-slate-100 font-[iranyekan500] w-full p-3 rounded-lg
-                                    hover:bg-white/5 transition-colors duration-300"
-                                >
-                                    {item.text}
-                                </Link>
-                            ))
-                        }
-                    </div> */}
+                    <div className="px-2 space-y-3 mt-5">
 
-                    <Accordion
-                        allowMultiple
-                        display="flex"
-                        flexDirection="column"
-                        rowGap="5px"
-                        mx="4px"
-                        overflowY="auto"
-                    >
+                        <DesktopNavlink_1
+                            text="خانه"
+                            link={ApplicationRoutes.pages.home}
+                            icon={<AiOutlineHome className="fill-white w-5 h-5" />}
+                        />
 
-                        {/* {
-                            items?.items?.map(item => (
-                                <AccordionItem
-                                    key={item.id}
-                                    border="none"
-                                    color="whiteAlpha.800"
-                                >
-                                    <AccordionButton
-                                        onClick={() => item?.items?.length === 0 ? navigate(item.link) : null}
-                                        display="flex"
-                                        justifyContent="space-between"
-                                        transition="all"
-                                        transitionDuration="300ms"
-                                        rounded="lg"
-                                        _hover={{
-                                            bgColor: "whiteAlpha.100"
-                                        }}
-                                        _expanded={{
-                                            bgColor: item?.items?.length > 0 ? "whiteAlpha.100" : ""
-                                        }}
-                                    >
-                                        {item.text}
-                                        {
-                                            item?.items?.length > 0
-                                            ?
-                                                <AccordionIcon />
-                                            :
-                                                false
-                                        }
-                                    </AccordionButton>
-                                    <AccordionPanel padding={item?.items?.length > 0 ? "6px" : 0}>
-                                        {
-                                            item?.items?.map(item => (
-                                                <Box
-                                                    onClick={() => navigate(item.link)}
-                                                    key={item.id}
-                                                    borderLeft="1px"
-                                                    borderColor="whiteAlpha.200"
-                                                    px="4px"
-                                                >
-                                                    <p className="p-2 text-base font-[iranyekan300] px-3 rounded-lg hover:bg-white/5 transition-colors duration-300
-                                                    cursor-pointer text-white/90">{item.text}</p>
-                                                </Box>
-                                            ))
-                                        }
-                                    </AccordionPanel>
-                                </AccordionItem>
-                            ))
-                        } */}
+                        <DesktopNavlink_1
+                            end={false}
+                            text="سرچ"
+                            link={ApplicationRoutes.pages.search}
+                            icon={<BsSearch className="fill-white w-4 h-4" />}
+                        />
 
+                        <DesktopNavlink_1
+                            text="نشان شده"
+                            link={ApplicationRoutes.pages.bookmarks}
+                            icon={<BsBookmark className="fill-white w-4 h-4" />}
+                        />
 
-                    </Accordion>
+                        <DesktopNavlink_1
+                            text="پروفایل"
+                            link={ApplicationRoutes.pages.profile}
+                            icon={<AiOutlineUser className="fill-white w-5 h-5" />}
+                        />
 
-
-                    <div className="mt-auto flex items-center gap-x-2 justify-center mb-6 mx-auto w-max rounded-xl
-                    border border-slate-700">
-                        <ChangeLangButton />
                     </div>
-
 
                 </div>
             </div>

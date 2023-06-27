@@ -2,12 +2,17 @@
 import Card_1 from "../components/Card_1"
 import useSWR from "swr"
 import { getAllBookMarks } from "../utils/http"
+import { MdOutlineCancel } from "react-icons/md"
+import { toggleBookMark } from "../utils/http/api/toggleBookMark"
+import useUserStore from "../stores/userStore"
+import getBaseUrl from "../utils/base-url"
 
 function BookMarked() {
     const {
         data,
         error,
-        isLoading
+        isLoading,
+        mutate
     } = useSWR(
         "/get-all-bookmarks",
         async () => getAllBookMarks(),
@@ -16,18 +21,56 @@ function BookMarked() {
         }
     )
 
-    if(isLoading) return <p>Loading</p>
-    if(error) return <p>Error</p>
+    const onToggleBookMark = (jobId: number): void => {
+        toggleBookMark({ job_id: jobId })
+            .then(data => {
+                mutate()
+            })
+    }
+
+    if (isLoading) return <p>Loading</p>
+    if (error) return <p>Error</p>
 
     return (
-        <div className="w-full h-screen p-8 overflow-y-auto">
-            <div className="h-max w-full grid grid-cols-2 gap-6">
+        <div className="w-full h-screen overflow-y-auto">
+            <div className="w-full h-max px-4 py-8">
+
+                <p
+                    className="text-lg text-slate-800 font-[iranyekan400]"
+                >
+                    نشان شده ها
+                </p>
+
                 {
-                    data.data.map(item => (
-                        <Card_1
-                            {...item}
-                        />
-                    ))
+                    data?.data?.length > 0
+                        ?
+                        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                            {
+                                data?.data?.map(item => (
+                                    <div className="relative">
+                                        <Card_1
+                                            {...item}
+                                        />
+                                        <div
+                                            onClick={() => onToggleBookMark(item.id)}
+                                            className="absolute bottom-2 right-2 p-1.5 rounded-lg z-10
+                                            hover:bg-transparent/10 bg-transparent/[0.03] transition-all
+                                            duration-300 cursor-pointer px-2.5 active:scale-95"
+                                        >
+                                            <MdOutlineCancel className="w-6 h-6 fill-red-500" />
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        :
+                        <div className="w-full mt-12 grid place-items-center">
+                            <img
+                                alt="no data"
+                                src={getBaseUrl() + "/assets/images/no-data.svg"}
+                                className="w-72 h-auto border border-purple-600 inline-block"
+                            />
+                        </div>
                 }
             </div>
         </div>
