@@ -20,7 +20,6 @@ function pickImage({ cb }: pickImageProps) {
     const inputFileElem = document.createElement("input");
     inputFileElem.setAttribute("type", "file")
     inputFileElem.click()
-    inputFileElem.files
     inputFileElem.addEventListener("change", (e:Event) => {
         const files = (e.target as HTMLInputElement).files
         cb(files)

@@ -1,8 +1,6 @@
 import { getMyCommentsApiUrl } from "../../../constants"
 import useUserStore from "../../../stores/userStore"
 
-interface getMyCommentsProps {}
-
 interface getMyCommentOptions {
     id: number,
     content: string,
@@ -35,7 +33,7 @@ interface getMyCommentsOutPut {
     data: Array<getMyCommentOptions>
 }
 
-async function getMyComments({}: getMyCommentsProps):Promise<getMyCommentsOutPut> {
+async function getMyComments():Promise<getMyCommentsOutPut> {
     const url = getMyCommentsApiUrl
 
     const fetchOptions = {
