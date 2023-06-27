@@ -29,8 +29,12 @@ function ContactUsAndAds() {
                 >
                 </textarea>
 
+                <button className="primary-btn mt-4 w-max px-10">
+                    ارسال
+                </button>
+
                 <p
-                    className="text-slate-900 text-sm font-[iranyekan600] mt-8"
+                    className="text-slate-900 text-sm font-[iranyekan600] mt-12"
                 >
                     خدمات تیم {name.fa}
                 </p>
@@ -57,7 +61,7 @@ function ContactUsAndAds() {
                     <p
                         className="text-slate-700/90 text-xs font-[iranyekan400]"
                     >
-                       - تبلیغات اینستاگرامی , پیج گردانی , تئلید محتوا
+                       - تبلیغات اینستاگرامی , پیج گردانی , تولید محتوا
                     </p>
 
                     <p

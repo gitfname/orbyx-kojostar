@@ -13,6 +13,7 @@ import { updateCity } from "./api/updateCity";
 import { lastViewedJobs} from "./api/lastViewedJobs";
 import { getMyComments } from "./api/getMyComments";
 import { checkIsLoggedIn } from "./api/checkIsLoggedIn";
+import { updateProfile } from "./api/updateProfile";
 
 export {
     get_phone_number,
@@ -29,5 +30,6 @@ export {
     updateCity,
     lastViewedJobs,
     getMyComments,
-    checkIsLoggedIn
+    checkIsLoggedIn,
+    updateProfile
 }

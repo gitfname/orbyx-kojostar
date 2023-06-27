@@ -20,7 +20,13 @@ interface userOptions {
 interface userApis {
     setUser({ userid, username, firstname, lastname }: userOptions): void,
     set_city_id?(city_id: number): void,
-    set_city?(city: string): void
+    set_city?(city: string): void,
+    set_first_name?(value: string): void,
+    set_last_name?(value: string): void,
+    set_username?(value: string): void,
+    set_phone?(value: string): void,
+    set_avatar?(value: string): void,
+
 }
 
 interface useUserStoreOutput {
@@ -66,6 +72,31 @@ const useUserStore = create<useUserStoreOutput>(set => ({
         set_city: (city) => set(
             produce((state: useUserStoreOutput) => {
                 state.user.city = city
+            })
+        ),
+        set_avatar: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.avatar = value
+            })
+        ),
+        set_first_name: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.firstname = value
+            })
+        ),
+        set_last_name: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.lastname = value
+            })
+        ),
+        set_phone: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.phone = value
+            })
+        ),
+        set_username: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.username = value
             })
         )
     }

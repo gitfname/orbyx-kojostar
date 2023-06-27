@@ -29,7 +29,20 @@ function Profile() {
 
                 <div className="w-full pt-8 flex flex-col items-center justify-center gap-y-5">
 
-                    <div className="w-56 h-56 rounded-full bg-red-300"></div>
+                    {
+                        (userData?.avatar && userData?.avatar?.trim() !== "")
+                            ?
+                            <img
+                                alt="profile picture"
+                                src={userData?.avatar}
+                                className="w-64 h-64 rounded-full shadow-md shadow-black/10
+                                    object-center object-cover"
+                            />
+                            :
+                            <div className="w-64 h-64 rounded-full bg-gray-100 shadow-md shadow-black/5 grid place-items-center">
+                                <p className="text-4xl text-blue-500 font-[iranyekan400]">{userData?.firstname[0]}</p>
+                            </div>
+                    }
                     <p
                         className="text-lg text-slate-800 font-[iranyekan400]"
                     >
@@ -129,14 +142,14 @@ function Profile() {
                         title="نظرات و پیشنهادات"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<IoNewspaperOutline className="w-5 h-5 fill-slate-800" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.commentsAndSuggestions)}
                     />
 
                     <Card_2
                         title="ویرایش اطلاعات"
                         icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
                         titleIcon={<HiOutlinePencil className="w-5 h-5 stroke-slate-800 fill-transparent" />}
-                        onClick={undefined}
+                        onClick={() => navigate(ApplicationRoutes.pages.editProfile)}
                     />
 
                     <Card_2

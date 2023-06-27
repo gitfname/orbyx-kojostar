@@ -15,6 +15,8 @@ import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
 import SuggestAddNewPlace from "./pages/SuggestAddNewPlace/SuggestAddNewPlace"
 import ContactUsAndAds from "./pages/ContactUsAndAds/ContactUsAndAds"
+import CommentsAndSuggestion from "./pages/CommentsAndSuggestions/CommentsAndSuggestions"
+import EditProfile from "./pages/EditProfile/EditProfile"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -234,6 +236,24 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <ContactUsAndAds />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.commentsAndSuggestions}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <CommentsAndSuggestion />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={ApplicationRoutes.pages.editProfile}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <EditProfile />
                 </Suspense>
               }
             />
