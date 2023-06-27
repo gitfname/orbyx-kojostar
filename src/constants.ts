@@ -14,6 +14,7 @@ export const getLastViewedJobsApiEndPoint = "/profile/last_job_view"
 export const getMyCOmmentsApiEndPoint = "/profile/user_comments"
 export const checkIsLoggedInApiEndPoint = "/auth/check_is_logged_in"
 export const updateProfileApiEndPoint = "/profile/update_user"
+export const toggleBookMarkApiEndPoint = "/bookmark/bookmarked"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -30,6 +31,7 @@ export const getLastViewedJobsApiUrl = API_BASE_URL+getLastViewedJobsApiEndPoint
 export const getMyCommentsApiUrl = API_BASE_URL+getMyCOmmentsApiEndPoint
 export const checkIsLoggedInApiUrl = API_BASE_URL + checkIsLoggedInApiEndPoint
 export const updateProfileApiUrl = API_BASE_URL+updateProfileApiEndPoint
+export const toggleBookMarkApiUrl = API_BASE_URL+toggleBookMarkApiEndPoint
 
 
 export const name={

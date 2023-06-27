@@ -8,6 +8,9 @@ import { IoIosInformationCircleOutline } from "react-icons/io"
 import { BsSticky, BsClock } from "react-icons/bs"
 import { HiHashtag } from "react-icons/hi"
 import CommentsSection_1 from "../components/CommentsSection_1"
+import { toggleBookMark } from "../utils/http/api/toggleBookMark"
+import useUserStore from "../stores/userStore"
+import { useEffect, useState } from "react"
 
 function getDayNameByIndex(index) {
     let dayName = 'شنبه'
@@ -39,6 +42,7 @@ function getDayNameByIndex(index) {
 
 function SingleJob() {
     const { id: jobId } = useParams()
+    const [isBookMarked, setIsBookMarked] = useState(false)
 
     const {
         data,
@@ -50,6 +54,20 @@ function SingleJob() {
         {
             shouldRetryOnError: false
         }
+    )
+    
+    const onToggleBookMark = (job_id: number) => {
+        toggleBookMark({job_id: job_id})
+        .then(data => {
+            setIsBookMarked(data?.is_bookmarked)
+        })
+    }
+
+    useEffect(
+        () => {
+            setIsBookMarked(data?.is_bookmarked)
+        },
+        [data?.is_bookmarked]
     )
 
 
@@ -82,13 +100,19 @@ function SingleJob() {
             </div>
 
             <div className="flex items-center gap-x-2 px-4 mt-6">
-                {
-                    data?.is_bookmarked
-                        ?
-                        <AiFillHeart className="w-5 h-5 fill-blue-500" />
-                        :
-                        <AiOutlineHeart className="w-5 h-5 fill-blue-500" />
-                }
+                <div
+                    onClick={() => onToggleBookMark(data?.job.id)}
+                    className="p-1.5 rounded-lg hover:bg-transparent/5 active:scale-95 transition-transform duration-300
+                    cursor-pointer"
+                >
+                    {
+                        isBookMarked
+                            ?
+                            <AiFillHeart className="w-5 h-5 fill-blue-500" />
+                            :
+                            <AiOutlineHeart className="w-5 h-5 fill-blue-500" />
+                    }
+                </div>
 
                 <p
                     className="text-sm text-slate-800 font-[iranyekan400]"
