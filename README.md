@@ -6,4 +6,4 @@ SonarCloud
 
 DeepSource
 
-[![DeepSource](https://app.deepsource.com/gh/gitfname/orbyx-kojostar.svg/?label=active+issues&show_trend=true&token=TsJ-evT5-Pdk1Dqk2puCPxx3)](https://app.deepsource.com/gh/gitfname/orbyx-kojostar/?ref=repository-badge)
+[![DeepSource](https://app.deepsource.com/gh/gitfname/orbyx-kojostar.svg/?label=active+issues&show_trend=true&token=TsJ-evT5-Pdk1Dqk2puCPxx3)](https://app.deepsource.com/gh/gitfname/orbyx-kojostar/?ref=repository-badge) [![DeepSource](https://app.deepsource.com/gh/gitfname/orbyx-kojostar.svg/?label=resolved+issues&show_trend=true&token=TsJ-evT5-Pdk1Dqk2puCPxx3)](https://app.deepsource.com/gh/gitfname/orbyx-kojostar/?ref=repository-badge)
