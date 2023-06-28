@@ -104,3 +104,8 @@
 .filepond--action-process-item {
   display: none;
 }
+
+
+.ant-picker-content {
+  @apply !h-52;
+}

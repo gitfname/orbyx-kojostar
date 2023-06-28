@@ -63,20 +63,40 @@ function App() {
         setIsLoading(true)
         getUserInfo({ token })
           .then(userInfo => {
-            userApi.setUser({
-              firstname: userInfo.data.first_name,
-              lastname: userInfo.data.last_name,
-              phone: userInfo.data.phone_number,
-              role: userInfo.data.role,
-              status: 1,
-              userid: userInfo.data.id,
-              username: userInfo.data.username,
-              avatar: userInfo.data.avatar,
-              city_id: userInfo.data.city_id,
-              city: userInfo.data.city,
-              token,
-              isLoggedIn: true
-            })
+            if(userInfo.is_logged_in) {
+              console.log(userInfo);
+              
+              userApi.setUser({
+                firstname: userInfo.data.first_name,
+                lastname: userInfo.data.last_name,
+                phone: userInfo.data.phone_number,
+                role: userInfo.data.role,
+                status: 1,
+                userid: userInfo.data.id,
+                username: userInfo.data.username,
+                avatar: userInfo.data.avatar,
+                city_id: userInfo.data.city_id,
+                city: userInfo.data.city,
+                token,
+                isLoggedIn: true
+              })
+            }
+            else {
+              userApi.setUser({
+                firstname: undefined,
+                lastname: undefined,
+                phone: undefined,
+                role: undefined,
+                status: undefined,
+                userid: undefined,
+                username: undefined,
+                avatar: undefined,
+                city_id: undefined,
+                city: undefined,
+                token: undefined,
+                isLoggedIn: false
+              })
+            }
             setIsLoading(false)
           })
       }
@@ -198,7 +218,7 @@ function App() {
             <Route
               path={ApplicationRoutes.pages.newJob}
               element={
-                <Suspense fallback={<Loading />}>
+                <Suspense fallback={undefined}>
                   <NewJob />
                 </Suspense>
               }

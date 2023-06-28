@@ -40,7 +40,7 @@ function Profile() {
                             />
                             :
                             <div className="w-64 h-64 rounded-full bg-gray-100 shadow-md shadow-black/5 grid place-items-center">
-                                <p className="text-4xl text-blue-500 font-[iranyekan400]">{userData?.firstname[0]}</p>
+                                <p className="text-4xl text-blue-500 font-[iranyekan400]">{userData?.firstname?.[0]}</p>
                             </div>
                     }
                     <p

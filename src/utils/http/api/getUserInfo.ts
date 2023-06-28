@@ -5,6 +5,7 @@ interface getUserInfoProps {
 }
 
 interface getUserInfoOutPut {
+    is_logged_in: boolean
     data: {
         id: number,
         role: 1 | 2 | 3,
@@ -28,8 +29,20 @@ async function getUserInfo({ token }: getUserInfoProps):Promise<getUserInfoOutPu
         }
     }
 
-    const data = await (await fetch(getUserInfoApiUrl, fetchOptions)).json();
-    return data
+    const data = await fetch(getUserInfoApiUrl, fetchOptions);
+
+    if(data.ok) {
+        return await {
+            is_logged_in: true,
+            data: (await data.json()).data
+        }
+    }
+    else {
+        return {
+            data: undefined,
+            is_logged_in: false
+        }
+    }
 }
 
 export { getUserInfo }
