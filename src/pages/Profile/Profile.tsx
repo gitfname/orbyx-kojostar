@@ -1,7 +1,7 @@
-import useUserStore from "../stores/userStore"
+import useUserStore from "../../stores/userStore"
 import { FaPhoneAlt } from "react-icons/fa"
 import { ImLocation } from "react-icons/im"
-import Card_2 from "../components/Card_2"
+import Card_2 from "../../components/Card_2"
 import { MdKeyboardArrowLeft, MdOutlineAddLocationAlt } from "react-icons/md"
 import { AiOutlineEye, AiOutlinePlus } from "react-icons/ai"
 import { TbLocation } from "react-icons/tb"
@@ -12,19 +12,41 @@ import { IoNewspaperOutline } from "react-icons/io5"
 import { HiOutlinePencil } from "react-icons/hi2"
 import { RxExit } from "react-icons/rx"
 import { useNavigate } from "react-router-dom"
-import { ApplicationRoutes } from "../routes"
-import SelectCitiesModal from "../components/SelectCitiesModal"
+import { ApplicationRoutes } from "../../routes"
+import SelectCitiesModal from "../../components/SelectCitiesModal"
+import { localStorage_token_key } from "../../constants"
+import Modal_2 from "../../components/Modal_2"
+import DeleteAccount from "./components/DeleteAccount"
 
 function Profile() {
 
     const navigate = useNavigate();
 
     const [
-        userData
-    ] = useUserStore(selector => [selector.user])
+        userData,
+        setUser
+    ] = useUserStore(selector => [selector.user, selector.api.setUser])
+
+    const logOut = () => {
+        setUser({
+            avatar: undefined,
+            city: undefined,
+            city_id: undefined,
+            firstname: undefined,
+            isLoggedIn: false,
+            lastname: undefined,
+            phone: undefined,
+            role: undefined,
+            status: undefined,
+            token: undefined,
+            userid: undefined,
+            username: undefined
+        })
+        localStorage.removeItem(localStorage_token_key)
+    }
 
     return (
-        <div className="w-full h-screen overflow-y-auto pb-20">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto pb-20">
             <div className="w-full h-max p-4">
 
                 <div className="w-full pt-8 flex flex-col items-center justify-center gap-y-5">
@@ -40,11 +62,11 @@ function Profile() {
                             />
                             :
                             <div className="w-64 h-64 rounded-full bg-gray-100 shadow-md shadow-black/5 grid place-items-center">
-                                <p className="text-4xl text-blue-500 font-[iranyekan400]">{userData?.firstname?.[0]}</p>
+                                <p className="text-4xl text-blue-500 font-[vax=vazir]">{userData?.firstname?.[0]}</p>
                             </div>
                     }
                     <p
-                        className="text-lg text-slate-800 font-[iranyekan400]"
+                        className="text-lg text-slate-800 font-[vazir]"
                     >
                         {userData.firstname}
                         &nbsp;&nbsp; - &nbsp;&nbsp;
@@ -53,7 +75,7 @@ function Profile() {
 
                     <p
                         dir="ltr"
-                        className="text-base text-slate-600 font-[iranyekan300]"
+                        className="text-base text-slate-600 font-[vazir]"
                     >
                         @{userData.username}
                     </p>
@@ -67,7 +89,7 @@ function Profile() {
                 >
                     <div className="flex flex-col gap-y-3 items-center px-16">
                         <p
-                            className="text-xs text-slate-800 font-[iranyekan400]"
+                            className="text-xs text-slate-800 font-[vazir]"
                         >
                             {userData.city}
                         </p>
@@ -76,7 +98,7 @@ function Profile() {
 
                     <div className="flex flex-col gap-y-3 items-center px-16">
                         <p
-                            className="text-xs text-slate-800 font-[iranyekan400]"
+                            className="text-xs text-slate-800 font-[vazir]"
                         >
                             {userData.phone}
                         </p>
@@ -86,12 +108,19 @@ function Profile() {
 
                 <div className="mt-14 w-full flex flex-col gap-y-2">
 
-                    <Card_2
-                        title="افزودن مجموعه"
-                        icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
-                        titleIcon={<AiOutlinePlus className="w-5 h-5 fill-slate-800" />}
-                        onClick={() => navigate(ApplicationRoutes.pages.newJob)}
-                    />
+                    {
+                        userData.role === 2 || userData.role === 3
+                            ?
+                            <Card_2
+                                title="افزودن مجموعه"
+                                icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
+                                titleIcon={<AiOutlinePlus className="w-5 h-5 fill-slate-800" />}
+                                onClick={() => navigate(ApplicationRoutes.pages.newJob)}
+                            />
+                            :
+                            false
+                    }
+
 
                     <SelectCitiesModal>
                         <Card_2
@@ -152,11 +181,8 @@ function Profile() {
                         onClick={() => navigate(ApplicationRoutes.pages.editProfile)}
                     />
 
-                    <Card_2
-                        title="خروج"
-                        titleIcon={<RxExit className="w-5 h-5 text-rose-500" />}
-                        onClick={undefined}
-                        textClassName="!text-rose-500"
+                    <DeleteAccount
+                        logOut={logOut}
                     />
 
                 </div>

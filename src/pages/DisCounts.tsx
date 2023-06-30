@@ -6,6 +6,7 @@ import Card_1 from "../components/Card_1"
 import getBaseUrl from "../utils/base-url"
 import { useEffect, useState } from "react"
 import { getDisCounts } from "../utils/http"
+import Loading from "../components/Loading"
 
 interface DisCountsProps {
   className?: string
@@ -42,6 +43,8 @@ function DisCounts({ className }: DisCountsProps) {
     },
     [cityIDs, catId]
   )
+
+  if(isLoading) return <Loading />
 
   return (
     <div className="w-full h-max">
@@ -83,7 +86,7 @@ function DisCounts({ className }: DisCountsProps) {
               <div className="w-full h-72 grid place-items-center">
                 <div className="p-4 px-6 rounded-2xl flex flex-col items-center justify-center gap-y-5 bg-blue-500/80
             shadow-lg shadow-black/5">
-                  <p className="text-base text-slate-50 font-[iranyekan300]">درحال لود</p>
+                  <p className="text-base text-slate-50 font-[vazir]">درحال لود</p>
                   <div className="w-10 h-10 border-t border-t-white rounded-full animate-spin"></div>
                 </div>
               </div>

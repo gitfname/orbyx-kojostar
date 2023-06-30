@@ -14,6 +14,7 @@ import { lastViewedJobs} from "./api/lastViewedJobs";
 import { getMyComments } from "./api/getMyComments";
 import { checkIsLoggedIn } from "./api/checkIsLoggedIn";
 import { updateProfile } from "./api/updateProfile";
+import { signUp } from "./api/signUp";
 
 export {
     get_phone_number,
@@ -31,5 +32,6 @@ export {
     lastViewedJobs,
     getMyComments,
     checkIsLoggedIn,
-    updateProfile
+    updateProfile,
+    signUp
 }

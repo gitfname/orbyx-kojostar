@@ -76,7 +76,7 @@ function GetWeeklyPlan({
 
                     <ModalHeader
                         fontSize="medium"
-                        className="font-[iranyekan400]"
+                        className="font-[vazir]"
                     >
                         انتخاب ساعات کاری
                     </ModalHeader>
@@ -92,7 +92,7 @@ function GetWeeklyPlan({
                             rowGap="15px"
                         >
 
-                            <p className="text-right text-slate-800 text-sm font-[iranyekan300]">
+                            <p className="text-right text-slate-800 text-sm font-[vazir]">
                                 ساعت شروع و اتمام در صبح
                             </p>
 
@@ -123,7 +123,7 @@ function GetWeeklyPlan({
                             mt="30px"
                         >
 
-                            <p className="text-right text-slate-800 text-sm font-[iranyekan300]">
+                            <p className="text-right text-slate-800 text-sm font-[vazir]">
                                 ساعت شروع و اتمام در عصر
                             </p>
 

@@ -38,7 +38,7 @@ function Comment({
                 <div className="flex items-center gap-x-3">
 
                     {
-                        (job?.image.trim() !== "")
+                        (job?.image?.length > 20)
                             ?
                             <img
                                 loading="lazy"
@@ -49,13 +49,13 @@ function Comment({
 
                             :
                             <div className="w-11 h-11 rounded-full bg-blue-500/80 grid place-items-center">
-                                <p className="text-slate-800 text-xs font-[iranyekan300]">{job?.title[0]}</p>
+                                <p className="text-slate-800 text-xs font-[vazirMedium]">{job?.title[0]}</p>
                             </div>
                     }
 
 
                     <p
-                        className="text-sm text-slate-800 font-[iranyekan400]"
+                        className="text-sm text-slate-800 font-[vazir]"
                     >
                         {job?.title}
                     </p>
@@ -73,13 +73,13 @@ function Comment({
 
 
                 <p
-                    className="text-xs text-slate-700/95 font-[iranyekan400]"
+                    className="text-xs text-slate-700/95 font-[vazir]"
                 >
                     {content}
                 </p>
 
                 <p
-                    className="text-xs text-blue-700/70 font-[iranyekan400]"
+                    className="text-xs text-blue-700/70 font-[vazir]"
                 >
                     {date}
                 </p>
@@ -92,7 +92,7 @@ function Comment({
                         ?
                         <div className="flex items-center gap-x-1 mt-8">
                             <AiOutlineClockCircle className="w-4 h-4 fill-blue-500" />
-                            <p className="text-xs text-blue-600 font-[iranyekan400]">در انتظار تایید</p>
+                            <p className="text-xs text-blue-600 font-[vazir]">در انتظار تایید</p>
                         </div>
                         :
                         false

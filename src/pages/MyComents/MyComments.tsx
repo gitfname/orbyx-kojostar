@@ -5,6 +5,7 @@ import { getMyComments } from "../../utils/http"
 import middleware from "./middleware"
 import { useEffect } from "react"
 import MyComment from "../../components/MyCommentsSection/MyCommentsSection"
+import Loading from "../../components/Loading"
 
 function MyComments() {
 
@@ -21,21 +22,21 @@ function MyComments() {
         isLoading
     } = useSWR(
         "my-comments",
-        async () => getMyComments({}),
+        async () => getMyComments(),
         {
             shouldRetryOnError: false
         }
     )
 
-    if(isLoading) return <p>Loading</p>
-    if(error) return <p>Error</p>
+    if(isLoading) return <Loading />
+    if(error) return <p>Error</p>    
 
     return (
-        <div className="w-full h-screen overflow-y-auto">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto">
             <div className="w-full h-max px-4 py-8">
 
                 <p
-                    className="text-lg text-slate-800 font-[iranyekan400]"
+                    className="text-lg text-slate-800 font-[vazirMedium]"
                 >
                     نظر های من
                 </p>

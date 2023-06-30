@@ -45,15 +45,15 @@ function rowRenderer({
                 _data.is_parent
                     ?
                     <p
-                        className="text-sm text-slate-900 !h-7 font-[iranyekan400]"
+                        className="text-sm text-slate-900 !h-7 font-[vazir]"
                     >
                         {_data.name}
                     </p>
                     :
-                    <div className="flex items-center gap-x-2">
-                        <Checkbox isChecked={checked} onChange={e => onChange(e.target.checked, _data)} />
+                    <div className="flex items-center gap-x-2 cursor-pointer rounded-lg w-full" onClick={() => onChange(!checked, _data)}>
+                        <Checkbox isChecked={checked} />
                         <p
-                            className="text-sm text-slate-700 font-[iranyekan300]"
+                            className="text-sm text-slate-700 font-[vazir]"
                         >
                             {_data.name}
                         </p>
@@ -126,7 +126,7 @@ function SortModal({ children }) {
                         <ModalContent>
                             <ModalHeader
                                 fontSize="medium"
-                                className="font-[iranyekan400]"
+                                className="font-[vazir]"
                             >
                                 مرتب کردن
                             </ModalHeader>
@@ -156,7 +156,7 @@ function SortModal({ children }) {
                                         <AccordionPanel>
                                             <List
                                                 className="!w-full !gap-y-0"
-                                                width={200}
+                                                width={900}
                                                 height={200}
                                                 rowCount={categories.data.length}
                                                 rowHeight={({ index }) => categories.data[index + 1]?.is_parent ? 50 : 30}

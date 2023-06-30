@@ -3,6 +3,7 @@ import useSWR from "swr"
 import DataSection_1 from "../components/DataSection_1"
 import getBaseUrl from "../utils/base-url"
 import Card_1 from "../components/Card_1"
+import Loading from "../components/Loading"
 
 function LastViewedJobs() {
 
@@ -18,12 +19,12 @@ function LastViewedJobs() {
         }
     )
 
-    if (isLoading) return <p>loading</p>
+    if (isLoading) return <Loading />
     if (error) return <p>Error</p>
 
     return (
 
-        <div className="w-full h-screen overflow-y-auto">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto">
             <div className="w-full h-max py-8 px-4">
                 <DataSection_1
                     title="آخرین بازدید ها"

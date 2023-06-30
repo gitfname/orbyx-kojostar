@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import useUserStore from "../stores/userStore"
-import { get_phone_number, checkOtp, getUserInfo } from "../utils/http";
+import { get_phone_number, checkOtp, getUserInfo, signUp } from "../utils/http";
 import { useTranslation } from "react-i18next";
 import { useApplicationLoadingStore } from "../stores/useApplicationLoadingStore";
 import { localStorage_token_key } from "../constants";
+import SelectCitiesModal from "../components/SelectCitiesModal";
+import { useToast } from "@chakra-ui/react";
+import getBaseUrl from "../utils/base-url";
 
 interface loginSteps {
     getPhoneNumber: "waiting" | "inprogress" | "complete" | "incomplete" | "not-stated",
@@ -33,7 +36,7 @@ const handleStepComplete = ({ data, step }: handleStepCompleteProps) => {
                 phone: data.phone,
                 ...data
             })
-        break;
+            break;
 
         case "checkOtp":
             useUserStore.getState().api.setUser({
@@ -42,7 +45,7 @@ const handleStepComplete = ({ data, step }: handleStepCompleteProps) => {
                 token: data.token,
                 ...data
             })
-        break;
+            break;
 
     }
 }
@@ -50,12 +53,10 @@ const handleStepComplete = ({ data, step }: handleStepCompleteProps) => {
 function Login() {
     const userData = useUserStore(selector => selector.user);
 
-
-    if(!userData.phone) {
+    if (!userData.phone) {
         return <Wrapper><GetPhoneNumber /></Wrapper>
     }
-    else if (!userData.role || !userData.status || !userData.token)
-    {
+    else if (typeof userData.role === "undefined" || typeof userData.status === "undefined" || !userData.token) {
         return <Wrapper><CheckOtp /></Wrapper>
     }
     else if (!userData.firstname || !userData.lastname || !userData.username) {
@@ -65,10 +66,10 @@ function Login() {
 }
 
 
-function Wrapper({children}) {
+function Wrapper({ children }) {
     return (
         <div className="w-full min-h-screen grid grid-cols-1 grid-rows-1 relative">
-            <p className="text-gray-50 text-xs tracking-wide fixed bottom-4 left-4 z-20 font-[iranyekan200]">powerd by <span className="text-white">Orbyx</span></p>
+            <p className="text-gray-50 text-xs tracking-wide fixed bottom-4 left-4 z-20 font-[vazirThin]">powerd by <span className="text-white font-[vazirBold]">Orbyx</span></p>
             {children}
         </div>
     )
@@ -78,44 +79,51 @@ function Wrapper({children}) {
 function GetPhoneNumber() {
     const phoneInputRef = useRef(null)
     const setApplicationLoading = useApplicationLoadingStore(selector => selector.setIsLoading)
+    const toast = useToast()
 
     const handleLogin = () => {
         if (phoneInputRef.current.value.trim() === "") {
-            alert("enter phone number")
+            toast({
+                description: "شماره موبایل را وراد کنید",
+                duration: 4000,
+                isClosable: true,
+                status: "warning",
+                position: "top-right"
+            })
         }
         else {
             setApplicationLoading(true)
             get_phone_number({ phoneNumber: phoneInputRef.current.value })
-            .then(data => {
-                handleStepComplete({
-                    step: "getPhoneNumber",
-                    data: {
-                        phone: data.phone_number,
-                        userid: data.user_id
-                    }
+                .then(data => {
+                    handleStepComplete({
+                        step: "getPhoneNumber",
+                        data: {
+                            phone: data.phone_number,
+                            userid: data.user_id
+                        }
+                    })
+                    setApplicationLoading(false)
                 })
-                setApplicationLoading(false)
-            })
         }
     }
 
     return (
         <div dir="ltr" className="w-full h-full grid grid-cols-1 lg:grid-cols-[50%_1fr]">
 
-            <div className="bg-blue-500 grid place-items-center">
+            <div className="bg-blue-400 grid place-items-center">
 
                 <div dir="rtl" className="flex flex-col items-center justify-center gap-y-8 w-full p-6 overflow-y-auto">
 
                     <div className="relative overflow-hidden">
                         <img
                             alt=""
-                            src={import.meta.env.BASE_URL + "img.png"}
+                            src={getBaseUrl()+"/images/login_vector.png"}
                             className="w-80 h-auto"
                         />
-                        <div className="bg-blue-500 w-40 h-40 rounded-t-full absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 z-10"></div>
+                        {/* <div className="bg-blue-500 w-40 h-40 rounded-t-full absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 z-10"></div> */}
                     </div>
                     <p
-                        className="text-white text-sm font-[iranyekan400] tracking-wide leading-6"
+                        className="text-white text-sm font-[vazir] tracking-wide leading-6"
                     >
                         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصل.
                     </p>
@@ -127,7 +135,7 @@ function GetPhoneNumber() {
                 <div className="flex flex-col gap-y-3 w-full max-w-sm">
 
                     <p
-                        className="text-xs font-[iranyekan400] text-blue-500/80 tracking-wide text-center mb-3"
+                        className="text-xs font-[vazir] text-blue-500/80 tracking-wide text-center mb-3"
                     >موبایل</p>
 
                     <input
@@ -135,6 +143,11 @@ function GetPhoneNumber() {
                         minLength={11}
                         className="primary-text-input"
                         placeholder="شماره تماس"
+                        onKeyDown={e => {
+                            if(e.key === "Enter") {
+                                handleLogin()
+                            }
+                        }}
                         ref={phoneInputRef}
                     />
 
@@ -159,12 +172,19 @@ function CheckOtp() {
     const otpRef = useRef<HTMLInputElement>(null)
     const [userData, userApi] = useUserStore(selector => [selector.user, selector.api]);
     const [isLoading, setIsLoading] = useState(false)
+    const toast = useToast()
 
     const handleSubmit = () => {
-        if(
+        if (
             !otpRef.current.value.trim()
         ) {
-            alert("enter OTP password")
+            toast({
+                description: "رمز OTP را وارد کنید",
+                duration: 4000,
+                isClosable: true,
+                status: "warning",
+                position: "top-right"
+            })
         }
         else {
             setIsLoading(true)
@@ -172,61 +192,76 @@ function CheckOtp() {
                 code: parseInt(otpRef.current.value),
                 user_id: userData.userid
             })
-            .then(data => {
-                setIsLoading(false)
-                if(data.is_correct) {
-                    localStorage.setItem(localStorage_token_key, data.token)
-                    handleStepComplete({
-                        step: "checkOtp",
-                        data: {
-                            userid: userData.userid,
-                            phone: userData.phone,
-                            role: data.role,
-                            status: data.status,
-                            token: data.token
+                .then(data => {
+                    if (data.is_correct) {
+                        localStorage.setItem(localStorage_token_key, data.token)
+                        handleStepComplete({
+                            step: "checkOtp",
+                            data: {
+                                userid: userData.userid,
+                                phone: userData.phone,
+                                role: data.role,
+                                status: data.status,
+                                token: data.token
+                            }
+                        })
+                        if (data.status === 1) {
+                            getUserInfo({ token: data.token })
+                                .then(userInfo => {
+                                    userApi.setUser({
+                                        firstname: userInfo.data.first_name,
+                                        lastname: userInfo.data.last_name,
+                                        phone: userInfo.data.phone_number,
+                                        role: userInfo.data.role,
+                                        status: 1,
+                                        userid: userInfo.data.id,
+                                        username: userInfo.data.username,
+                                        avatar: userInfo.data.avatar,
+                                        city_id: userInfo.data.city_id,
+                                        city: userInfo.data.city,
+                                        token: data.token,
+                                        isLoggedIn: true
+                                    })
+                                    setTimeout(() => {
+                                        setIsLoading(false)
+                                    }, 75);
+                                })
+                                .catch(() => {
+                                    setIsLoading(false)
+                                })
                         }
-                    })
-                    if(data.status === 1) {
-                        getUserInfo({token: data.token})
-                        .then(userInfo => {
-                            userApi.setUser({
-                                firstname: userInfo.data.first_name,
-                                lastname: userInfo.data.last_name,
-                                phone: userInfo.data.phone_number,
-                                role: userInfo.data.role,
-                                status: 1,
-                                userid: userInfo.data.id,
-                                username: userInfo.data.username,
-                                avatar: userInfo.data.avatar,
-                                city_id: userInfo.data.city_id,
-                                city: userInfo.data.city,
-                                token: data.token,
-                                isLoggedIn: true
-                            })
+                        else if (data.status === 0) {
+                            userApi.set_status(data.status)
+                            userApi.set_token(data.token)
+                            userApi.set_role(data.role)
+                            setIsLoading(false)
+                        }
+                    }
+                    else {
+                        setIsLoading(false)
+                        toast({
+                            description: "اشتباه است OTP را وارد کنید",
+                            duration: 4000,
+                            isClosable: true,
+                            status: "warning",
+                            position: "top-right"
                         })
                     }
-                    else if (data.status === 0) {
-                        
-                    }
-                }
-                else {
-                    alert("code is not correct")
-                }
-            })
+                })
         }
     }
 
     const handleChangePhone = () => {
         userApi.setUser({
             phone: ""
-        })   
+        })
     }
 
     return (
         <div className="w-full h-full grid place-items-center p-6 bg-blue-500">
             <div className="w-full max-w-lg rounded-xl bg-gray-100 p-6 py-10 shadow-lg shadow-black/10">
                 <p
-                    className="text-slate-700 text-xl font-[iranyekan500] tracking-wide mb-12"
+                    className="text-slate-700 text-xl font-[vazirMedium] tracking-wide mb-12"
                 >
                     {t("check-otp")}
                 </p>
@@ -234,8 +269,13 @@ function CheckOtp() {
                 <div className="flex flex-col gap-y-5">
                     <input
                         ref={otpRef}
+                        onKeyDown={e => {
+                            if(e.key === "Enter") {
+                                handleSubmit()
+                            }
+                        }}
                         maxLength={10}
-                        className="primary-text-input py-3 font-[iranyekan400]"
+                        className="primary-text-input py-3 font-[vazir]"
                         placeholder="رمز یکبار مصرف (OTP)"
                     />
 
@@ -243,11 +283,11 @@ function CheckOtp() {
                         <button onClick={handleSubmit} className="primary-btn mt-5 flex-shrink-0 relative overflow-hidden flex-[3]">
                             {
                                 isLoading
-                                ?
+                                    ?
                                     <div className="absolute top-0 left-0 w-full h-full z-10 bg-blue-500 grid place-items-center">
                                         <div className="w-6 h-6 aspect-square rounded-full border-t border-t-white animate-spin"></div>
                                     </div>
-                                :
+                                    :
                                     false
                             }
                             بررسی
@@ -268,18 +308,40 @@ function CheckOtp() {
 function GetUserDetails() {
     const [t] = useTranslation()
     const usernameRef = useRef<HTMLInputElement>(null)
-    const emailRef = useRef<HTMLInputElement>(null)
-    const passwordRef = useRef<HTMLInputElement>(null)
-    const repeatPasswordRef = useRef<HTMLInputElement>(null)
+    const fnameRef = useRef<HTMLInputElement>(null)
+    const lnameRef = useRef<HTMLInputElement>(null)
+    const [
+        city, cityId, userApi
+    ] = useUserStore(selector => [selector.user.city, selector.user.city_id, selector.api])
 
     const handleSubmit = () => {
-        if(
-            !usernameRef.current.value.trim() || !emailRef.current.value.trim() || !passwordRef.current.value.trim() ||
-            !repeatPasswordRef.current.value.trim()
+        if (
+            usernameRef.current.value.trim() !== "" || fnameRef.current.value.trim() !== "" || lnameRef.current.value.trim() !== ""
         ) {
-            alert("enter correctly")
+
+            signUp({
+                avatar: undefined,
+                city_id: cityId,
+                first_name: fnameRef.current.value,
+                last_name: lnameRef.current.value,
+                username: usernameRef.current.value
+            })
+                .then(data => {
+                    console.log(data);
+                    userApi.set_city(city)
+                    userApi.set_city_id(cityId)
+                    userApi.set_first_name(fnameRef.current.value)
+                    userApi.set_last_name(lnameRef.current.value)
+                    userApi.set_username(usernameRef.current.value)
+                    userApi.set_is_logged_in(true)
+                })
+                .catch(err => {
+                    alert("something went wrong")
+                    console.log(err);
+                })
         }
         else {
+            alert("fill fields")
         }
     }
 
@@ -287,37 +349,45 @@ function GetUserDetails() {
         <div className="w-full h-full grid place-items-center p-6 bg-blue-500">
             <div className="w-full max-w-lg rounded-xl bg-gray-100 p-6 py-10">
                 <p
-                    className="text-slate-700 text-xl font-[iranyekan500] tracking-wide mb-12"
+                    className="text-slate-700 text-xl font-[vazirMedium] tracking-wide mb-12"
                 >
                     {t("signup")}
                 </p>
 
                 <div className="flex flex-col gap-y-5">
                     <input
+                        maxLength={16}
+                        className="primary-text-input py-3 font-[vazir]"
+                        placeholder="نام *"
+                        ref={fnameRef}
+                    />
+
+                    <input
+                        maxLength={16}
+                        className="primary-text-input py-3 font-[vazir]"
+                        placeholder="نام خانوادگی*"
+                        ref={lnameRef}
+                    />
+
+                    <input
                         maxLength={32}
-                        className="primary-text-input py-3 font-[iranyekan400]"
+                        className="primary-text-input py-3 font-[vazir]"
                         placeholder="نام کاربری *"
+                        ref={usernameRef}
                     />
 
-                    <input
-                        maxLength={50}
-                        className="primary-text-input py-3 font-[iranyekan400]"
-                        placeholder="ایمیل *"
-                    />
-                    
-                    <input
-                        maxLength={16}
-                        className="primary-text-input py-3 font-[iranyekan400]"
-                        placeholder="رمز عبور *"
-                    />
+                    <SelectCitiesModal
 
-                    <input
-                        maxLength={16}
-                        className="primary-text-input py-3 font-[iranyekan400]"
-                        placeholder="تکرار رمز عبور *"
-                    />
+                    >
+                        <input
+                            maxLength={32}
+                            className="primary-text-input py-3 font-[vazir]"
+                            placeholder="شهر *"
+                            value={city}
+                        />
+                    </SelectCitiesModal>
 
-                    <button className="primary-btn mt-5">
+                    <button onClick={handleSubmit} className="primary-btn mt-5">
                         ثبت نام
                     </button>
                 </div>
@@ -329,7 +399,7 @@ function GetUserDetails() {
 
 
 function Loading() {
-    
+
     return (
         <div className="w-full h-full bg-gray-100 grid place-items-center">
             <div className="w-10 h-10 rounded-full border-t border-slate-900 animate-spin"></div>

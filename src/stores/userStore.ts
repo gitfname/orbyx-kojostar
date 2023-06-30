@@ -26,7 +26,10 @@ interface userApis {
     set_username?(value: string): void,
     set_phone?(value: string): void,
     set_avatar?(value: string): void,
-
+    set_status?(value: -1 | 0 | 1): void,
+    set_is_logged_in?(value: boolean): void,
+    set_role?(value: 1 | 2 | 3): void,
+    set_token?(value: string): void
 }
 
 interface useUserStoreOutput {
@@ -97,6 +100,27 @@ const useUserStore = create<useUserStoreOutput>(set => ({
         set_username: (value) => set(
             produce((state: useUserStoreOutput) => {
                 state.user.username = value
+            })
+        ),
+
+        set_is_logged_in: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.isLoggedIn = value
+            })
+        ),
+        set_role: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.role = value
+            })
+        ),
+        set_status: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.status = value
+            })
+        ),
+        set_token: (value) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.token = value
             })
         )
     }

@@ -37,7 +37,7 @@ function SelectCitiesModal({ children }) {
                     id: item.id,
                     is_parent: item.is_parent,
                     title: item.name,
-                    command(data) {
+                    command(checked, data) {
                         setLoading(true)
                         updateCity({city_id: data.id})
                         .then(data => {
@@ -58,6 +58,9 @@ function SelectCitiesModal({ children }) {
 
     return (
         <Modal_1
+            activeItem={[useUserStore.getState().user.city_id]}
+            showCheckBox={false}
+            onActiveItemChange={undefined}
             data={data}
             title="انتخاب شهر"
         >

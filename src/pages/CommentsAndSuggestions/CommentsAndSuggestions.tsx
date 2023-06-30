@@ -12,11 +12,11 @@ function CommentsAndSuggestion() {
     )
 
     return (
-        <div className="w-full h-screen overflow-y-auto">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto">
             <div className="w-full h-min py-8 px-4">
 
                 <p
-                    className="text-lg text-slate-800 font-[iranyekan400]"
+                    className="text-lg text-slate-800 font-[vazirMedium]"
                 >
                     نظرات و پیشنهادات
                 </p>
@@ -28,7 +28,7 @@ function CommentsAndSuggestion() {
                 >
                 </textarea>
 
-                <p className="text-slate-900 text-xs font-[iranyekan400] mt-8">
+                <p className="text-slate-900 text-xs font-[vazirMedium] mt-8">
                     درصور تمایل میتوانید شماره تماس خودرا وارد کنید
                 </p>
                 <input

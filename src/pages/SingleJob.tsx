@@ -9,40 +9,18 @@ import { BsSticky, BsClock } from "react-icons/bs"
 import { HiHashtag } from "react-icons/hi"
 import CommentsSection_1 from "../components/CommentsSection_1"
 import { toggleBookMark } from "../utils/http/api/toggleBookMark"
-import useUserStore from "../stores/userStore"
 import { useEffect, useState } from "react"
-
-function getDayNameByIndex(index) {
-    let dayName = 'شنبه'
-    switch (index) {
-        case 0:
-            dayName = "شنبه"
-            break;
-        case 1:
-            dayName = "یکشنبه"
-            break;
-        case 2:
-            dayName = "دو شنبه"
-            break;
-        case 3:
-            dayName = "سه شنبه"
-            break;
-        case 4:
-            dayName = "چهار شنبه"
-            break;
-        case 5:
-            dayName = "پنج شنبه"
-            break;
-        case 6:
-            dayName = "جمعه"
-            break;
-    }
-    return dayName
-}
+import AddCommentModal from "../components/AddCommentModal"
+import { useToast } from "@chakra-ui/react"
+import Loading from "../components/Loading"
+import JobImageSlider_1 from "../components/JobImageSlider_1"
+import WeeklyPlanCard_1 from "../components/WeeklyPlanCard_1"
+import getDayNameByIndex from "../utils/getDayNameByIndex"
 
 function SingleJob() {
     const { id: jobId } = useParams()
     const [isBookMarked, setIsBookMarked] = useState(false)
+    const toast = useToast()
 
     const {
         data,
@@ -71,13 +49,13 @@ function SingleJob() {
     )
 
 
-    if (isLoading) return <p>loading</p>
+    if (isLoading) return <Loading />
     if (error) return <p>something went wrong</p>
 
     return (
-        <div className="h-screen overflow-y-auto pb-32">
+        <div className="max-lg:h-full h-screen overflow-y-auto pb-8">
 
-            {
+            {/* {
                 (data?.job?.medias && data?.job?.medias?.length > 0)
                     ?
                     <img
@@ -89,7 +67,13 @@ function SingleJob() {
                     <div dir="ltr" className="w-full h-[20rem] bg-slate-200 grid items-center">
                         <p className="text-3xl text-center font-[iranyekan600] text-slate-600">No Image :(</p>
                     </div>
-            }
+            } */}
+
+            <div className="w-full h-[26rem]">
+                <JobImageSlider_1
+                    images={data?.job?.medias.map(item => item.url)}
+                />
+            </div>
 
 
             <div className="mt-6 w-full flex items-center justify-center gap-x-3">
@@ -115,7 +99,7 @@ function SingleJob() {
                 </div>
 
                 <p
-                    className="text-sm text-slate-800 font-[iranyekan400]"
+                    className="text-sm text-slate-800 font-[vazir]"
                 >
                     محبوبیت
                 </p>
@@ -126,7 +110,7 @@ function SingleJob() {
                 <IoIosInformationCircleOutline className="w-5 h-5 fill-blue-500" />
 
                 <p
-                    className="text-sm text-slate-800 font-[iranyekan400]"
+                    className="text-sm text-slate-800 font-[vazir]"
                 >
                     اطلاعات مجموعه
                 </p>
@@ -136,21 +120,21 @@ function SingleJob() {
                 <div className="w-full rounded-xl bg-blue-500/10 p-5 flex flex-col gap-y-4">
 
                     <p
-                        className="text-xs text-slate-500 font-[iranyekan300]"
+                        className="text-xs text-slate-500 font-[vazir]"
                     >
                         نام مجموعه :&nbsp;&nbsp;
-                        <span className="text-slate-800 font-[iranyekan400]">{data?.job?.title}</span>
+                        <span className="text-slate-800 font-[vazir]">{data?.job?.title}</span>
                     </p>
 
                     <p
-                        className="text-xs text-slate-500 font-[iranyekan300]"
+                        className="text-xs text-slate-500 font-[vazir]"
                     >
                         نام گروه :&nbsp;&nbsp;
-                        <span className="text-slate-800 font-[iranyekan400]"></span>
+                        <span className="text-slate-800 font-[vazir]"></span>
                     </p>
 
                     <p
-                        className="text-xs text-slate-500 font-[iranyekan300]"
+                        className="text-xs text-slate-500 font-[vazir]"
                     >
                         شماره تماس :&nbsp;&nbsp;
                         <div
@@ -158,17 +142,17 @@ function SingleJob() {
                         >
                             {
                                 data?.job?.phones?.map(phone => (
-                                    <span key={phone} className="text-blue-500 cursor-pointer font-[iranyekan400]">{phone}</span>
+                                    <span key={phone} className="text-blue-500 cursor-pointer font-[vazir]">{phone}</span>
                                 ))
                             }
                         </div>
                     </p>
 
                     <p
-                        className="text-xs text-slate-500 font-[iranyekan300]"
+                        className="text-xs text-slate-500 font-[vazir]"
                     >
                         آدرس :&nbsp;&nbsp;
-                        <span className="text-slate-800 font-[iranyekan400]">{data?.job?.address}</span>
+                        <span className="text-slate-800 font-[vazir]">{data?.job?.address}</span>
                     </p>
 
                 </div>
@@ -179,7 +163,7 @@ function SingleJob() {
                 <BsSticky className="w-5 h-5 fill-blue-500" />
 
                 <p
-                    className="text-sm text-slate-800 font-[iranyekan400]"
+                    className="text-sm text-slate-800 font-[vazir]"
                 >
                     توضیحات
                 </p>
@@ -189,7 +173,7 @@ function SingleJob() {
                 <div className="w-full rounded-xl bg-blue-500/10 p-5 flex flex-col gap-y-4">
 
                     <p
-                        className="text-xs text-slate-800 font-[iranyekan300]"
+                        className="text-xs text-slate-800 font-[vazir]"
                     >
                         {data?.job?.description}
                     </p>
@@ -202,7 +186,7 @@ function SingleJob() {
                 <HiHashtag className="w-5 h-5 fill-blue-500" />
 
                 <p
-                    className="text-sm text-slate-800 font-[iranyekan400]"
+                    className="text-sm text-slate-800 font-[vazir]"
                 >
                     هشتگ
                 </p>
@@ -212,7 +196,7 @@ function SingleJob() {
 
                 {
                     data?.job?.hashtags?.map(hastag => (
-                        <p className="py-1.5 cursor-default px-3 rounded-3xl text-xs text-slate-800 font-[iranyekan300] bg-blue-500/30">
+                        <p className="py-1.5 cursor-default px-3 rounded-3xl text-xs text-slate-800 font-[vazir] bg-blue-500/30">
                             {hastag}
                         </p>
                     ))
@@ -225,7 +209,7 @@ function SingleJob() {
                 <BsClock className="w-5 h-5 fill-blue-500" />
 
                 <p
-                    className="text-sm text-slate-800 font-[iranyekan400]"
+                    className="text-sm text-slate-800 font-[vazir]"
                 >
                     ساعات کاری مجموعه
                 </p>
@@ -234,36 +218,12 @@ function SingleJob() {
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 px-4">
 
                 {
-                    data?.plan?.map(plan => (
-                        <div className={`flex flex-col gap-y-2 py-4 justify-center border border-blue-500 ${plan?.is_holiday ? "bg-blue-500/20" : "bg-white"} rounded-xl`}>
-                            <p
-                                className="text-center text-slate-800 text-xs font-[iranyekan400]"
-                            >
-                                {getDayNameByIndex(plan?.day)}
-                            </p>
-                            {
-                                plan?.is_holiday
-                                    ?
-                                    <p
-                                        className="text-center text-slate-800 text-xs font-[iranyekan400]"
-                                    >
-                                        تعطیل
-                                    </p>
-                                    :
-                                    <>
-                                        <p
-                                            className="text-center text-slate-800 text-xs font-[iranyekan400]"
-                                        >
-                                            {plan?.start_morning_time} - {plan?.end_morning_time}
-                                        </p>
-                                        <p
-                                            className="text-center text-slate-800 text-xs font-[iranyekan400]"
-                                        >
-                                            {plan?.start_afternoon_time} - {plan?.end_afternoon_time}
-                                        </p>
-                                    </>
-                            }
-                        </div>
+                    data?.plan?.map((plan, i) => (
+                        <WeeklyPlanCard_1
+                            key={plan.day}
+                            {...plan}
+                            day_name={getDayNameByIndex(plan.day)}
+                        />
                     ))
                 }
 
@@ -278,6 +238,28 @@ function SingleJob() {
                     :
                     false
             }
+            <AddCommentModal
+                title="ثبت نظر"
+                job_id={data.job.id}
+                onSuccess={() => {
+                    toast({
+                        title: "عملیات موفق",
+                        description: "نظرتان با موفقیت به ما ارسال شد",
+                        status: "success",
+                        duration: 4000,
+                        isClosable: true,
+                        position: "top-right"
+                    })
+                }}
+            >
+                <button
+                    className="primary-btn mt-20 w-11/12 mx-auto bg-transparent border
+                    border-blue-500 block py-2 text-blue-500"
+                >
+                    ثبت نظر
+                </button>
+            </AddCommentModal>
+
 
         </div>
     )

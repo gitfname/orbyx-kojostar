@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom"
+import { ChakraProvider } from "@chakra-ui/react"
 const App = lazy(() => import("./App.tsx"))
 // import App from './App.tsx'
 // const sleep = (ms:number) => {
@@ -17,15 +18,18 @@ const App = lazy(() => import("./App.tsx"))
 import './index.css'
 import './i18n.ts'
 import 'react-virtualized/styles.css';
+import 'swiper/css';
 import Loading from './pages/Loading.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
+    <ChakraProvider>
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
           <App />
           <Loading />
         </Suspense>
       </BrowserRouter>
-  </React.StrictMode>,
+    </ChakraProvider>
+  </React.StrictMode>
 )

@@ -17,7 +17,7 @@ function DataSection_1({ title, dataProvider, emptyFallback, isLoading, loading,
   return (
     <div className="w-full">
       <p
-        className="text-xl text-slate-800/90 tracking-wide font-[iranyekan500]"
+        className="text-xl text-slate-800/90 tracking-wide font-[vazirMedium]"
       >
         {title}
       </p>

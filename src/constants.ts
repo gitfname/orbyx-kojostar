@@ -15,6 +15,8 @@ export const getMyCOmmentsApiEndPoint = "/profile/user_comments"
 export const checkIsLoggedInApiEndPoint = "/auth/check_is_logged_in"
 export const updateProfileApiEndPoint = "/profile/update_user"
 export const toggleBookMarkApiEndPoint = "/bookmark/bookmarked"
+export const signUpApiEndPoint = "/auth/signup"
+export const addCommentApiEndPoint = "/job/comment/add"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -32,6 +34,11 @@ export const getMyCommentsApiUrl = API_BASE_URL+getMyCOmmentsApiEndPoint
 export const checkIsLoggedInApiUrl = API_BASE_URL + checkIsLoggedInApiEndPoint
 export const updateProfileApiUrl = API_BASE_URL+updateProfileApiEndPoint
 export const toggleBookMarkApiUrl = API_BASE_URL+toggleBookMarkApiEndPoint
+export const signUpApiUrl = API_BASE_URL+signUpApiEndPoint
+export const addCommentApiUrl = API_BASE_URL + addCommentApiEndPoint
+
+
+export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
 
 
 export const name={

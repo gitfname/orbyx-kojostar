@@ -1,5 +1,6 @@
 import Card_1 from "../components/Card_1"
 import DataSection_1 from "../components/DataSection_1"
+import Loading from "../components/Loading"
 import getBaseUrl from "../utils/base-url"
 import { getHomeData } from "../utils/http"
 import useSWR from "swr"
@@ -9,15 +10,14 @@ function Home() {
     shouldRetryOnError: false
   })
 
+  if(isLoading) return <Loading />
   if(error) return <p>Error</p>
-
   if(!isLoading) {
     console.log(data);
-    
   }
 
   return (
-    <div className="h-screen overflow-y-auto p-4 pt-7">
+    <div className="max-lg:h-full h-screen overflow-y-auto p-4 pt-7">
 
       <DataSection_1
         title="پیشنهاد ویژه"

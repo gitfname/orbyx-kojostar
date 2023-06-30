@@ -14,11 +14,12 @@ import {
     AccordionIcon,
     AccordionPanel,
     AccordionButton,
+
     Checkbox
 } from "@chakra-ui/react"
 import { getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
 import { getCategoriesOptionsTest } from "../utils/http/api/getCategories";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 function rowRenderer({
     key, // Unique key within array of rows
@@ -28,7 +29,8 @@ function rowRenderer({
     style, // Style object to be applied to row (to position it)
     data,
     onChange,
-    checked
+    checked,
+    showCheckBox
 }) {
 
     const _data: Modal_1SingleItemOptions = data;
@@ -42,18 +44,18 @@ function rowRenderer({
                 _data.is_parent
                     ?
                     <p
-                        className="text-base text-slate-800 font-[iranyekan600]"
+                        className="text-base text-slate-800 font-[vazir]"
                     >
                         {_data.title}
                     </p>
                     :
                     <div
-                        onClick={() => _data.command&&_data.command(_data)}
-                        className="flex cursor-pointer items-center gap-x-2 p-2 transition-colors duration-200 rounded-lg hover:bg-transparent/5"
+                        onClick={() => _data.command && _data.command(!checked, _data)}
+                        className="flex select-none cursor-pointer items-center gap-x-2 p-2 transition-colors duration-200 rounded-lg hover:bg-transparent/5"
                     >
-                        {/* <Checkbox isChecked={checked} onChange={e => onChange(e.target.checked, _data)} /> */}
+                        <Checkbox isChecked={checked} onChange={e => onChange(e.target.checked, _data)} />
                         <p
-                            className="text-sm text-slate-700 font-[iranyekan300]"
+                            className="text-sm text-slate-700 font-[vazir]"
                         >
                             {_data.title}
                         </p>
@@ -68,7 +70,7 @@ function rowRenderer({
 interface Modal_1SingleItemOptions {
     id: number,
     title: string,
-    command?(data: Modal_1SingleItemOptions): void,
+    command?(checked: boolean, data: Modal_1SingleItemOptions): void,
     className?: string,
     additionalData?: any,
     is_parent: boolean
@@ -86,17 +88,21 @@ interface Modal_1AccordionOptions {
 }
 
 interface Modal_1Props {
-    children: ReactNode,
-    className?: string,
-    data: Modal_1AccordionOptions,
-    title?: string,
-    showCloseIcon?: boolean,
-    closeIcon?: ReactNode
+    children: ReactNode;
+    className?: string;
+    data: Modal_1AccordionOptions;
+    title?: string;
+    showCloseIcon?: boolean;
+    closeIcon?: ReactNode;
+    showCheckBox?: boolean;
+    activeItem: Array<number>,
+    onActiveItemChange(checked: boolean, data: any): void
 }
 
 
 function Modal_1({
-    children, data, className, closeIcon = undefined, showCloseIcon = true, title = "default title"
+    children, data, className, closeIcon = undefined, showCloseIcon = true, title = "default title", showCheckBox = false,
+    activeItem = undefined, onActiveItemChange=undefined
 }: Modal_1Props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -110,7 +116,7 @@ function Modal_1({
                 <ModalContent>
                     <ModalHeader
                         fontSize="medium"
-                        className="font-[iranyekan400]"
+                        className="font-[vazir]"
                     >
                         {title}
                     </ModalHeader>
@@ -149,11 +155,16 @@ function Modal_1({
                                                 width={800}
                                                 height={200}
                                                 rowCount={item.data.length}
-                                                rowHeight={({ index }) => (item.data[index+1]?.is_parent) ? 60 : 40}
+                                                rowHeight={({ index }) => (item.data[index + 1]?.is_parent) ? 60 : 40}
                                                 rowRenderer={(row) => {
                                                     return rowRenderer({
                                                         ...row,
-                                                        data: item.data[row.index]
+                                                        showCheckBox: showCheckBox,
+                                                        data: item.data[row.index],
+                                                        checked: activeItem?.includes(item.data[row.index].id),
+                                                        onChange: (checked, data) => {
+                                                            if(onActiveItemChange) onActiveItemChange(checked, data)
+                                                        }
                                                     })
                                                 }}
                                             />

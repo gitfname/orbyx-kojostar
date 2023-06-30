@@ -56,7 +56,7 @@ function MobileMenu() {
                 ></div>
 
                 <div
-                    className={`w-64 h-full bg-blue-600 absolute top-0 right-0 translate-x-full z-20
+                    className={`w-64 h-full bg-blue-600 absolute top-0 right-0 translate-x-full z-[99999]
                     gap-y-3 pt-6 grid grid-rows-[max-content_1fr_max-content]
                     transition-transform duration-300 ${isOpen ? "!translate-x-0" : ""}`}
                 >
@@ -65,8 +65,8 @@ function MobileMenu() {
                         to={ApplicationRoutes.pages.home}
                         className="text-3xl w-max mx-auto block lg:mb-2 italic"
                     >
-                        <span className="text-blue-900 font-[iranyekan600]">Kojo</span>
-                        <span className="text-white/70 font-[iranyekan600]">star</span>
+                        <span className="text-blue-900 font-[vazirBold]">Kojo</span>
+                        <span className="text-white/70 font-[vazirBold]">star</span>
                     </Link>
 
                     <div className="px-2 space-y-3 mt-5">

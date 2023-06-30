@@ -6,6 +6,7 @@ import Card_1 from "../components/Card_1"
 import getBaseUrl from "../utils/base-url"
 import { useEffect, useState } from "react"
 import { getMostCommentedJobs } from "../utils/http"
+import Loading from "../components/Loading"
 
 interface MostCommentsProps {
   className?: string
@@ -42,6 +43,8 @@ function MostComments({ className }: MostCommentsProps) {
     },
     [cityIDs, catId]
   )
+
+  if(isLoading) return <Loading />
 
   return (
     <div className="w-full h-max">

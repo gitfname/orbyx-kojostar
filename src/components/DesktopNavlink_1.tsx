@@ -26,7 +26,7 @@ function DesktopNavlink_1({text, link, icon, end=true}: Props) {
         </div>
 
         <p
-            className="text-white text-sm  tracking-wide font-[iranyekan300]"
+            className="text-white text-sm  tracking-wide font-[vazir]"
         >
             {text}
         </p>

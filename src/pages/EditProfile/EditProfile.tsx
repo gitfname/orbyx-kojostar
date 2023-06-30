@@ -9,8 +9,11 @@ import {
     Menu,
     MenuList,
     MenuButton,
-    MenuItem
+    MenuItem,
+    useToast
 } from "@chakra-ui/react"
+import { useNavigate } from "react-router-dom"
+import { ApplicationRoutes } from "../../routes"
 
 interface pickImageProps {
     cb(files: FileList): any
@@ -28,6 +31,9 @@ function pickImage({ cb }: pickImageProps) {
 
 
 function EditProfile() {
+
+    const navigate = useNavigate();
+    const toast = useToast();
 
     useEffect(
         () => {
@@ -66,28 +72,36 @@ function EditProfile() {
                 avatar: avatarFile
             })
                 .then(data => {
-                    setIsLoading(false)
                     set_first_name(data.data.first_name)
                     set_last_name(data.data.last_name)
                     set_username(data.data.username)
                     set_avatar(data.data.avatar)
-                    
+                    navigate(ApplicationRoutes.pages.profile)
+                    setTimeout(() => {
+                        setIsLoading(false)
+                    }, 75);
                 })
                 .catch(err => {
                     setIsLoading(false)
                     console.log(err);
                 })
         } else {
-            alert("fill the fields")
+            toast({
+                description: "فیلد هارا پرکنید",
+                position: "top-right",
+                duration: 4000,
+                isClosable: true,
+                status: "warning"
+            })
         }
     }
 
     return (
-        <div className="w-full h-screen overflow-y-auto">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto">
             <div className="w-full h-max py-8 px-4">
 
                 <p
-                    className="text-lg text-slate-800 font-[iranyekan400]"
+                    className="text-lg text-slate-800 font-[vazirMedium]"
                 >
                     ویرایش اطلاعات
                 </p>
@@ -108,7 +122,7 @@ function EditProfile() {
                                     />
                                     :
                                     <div className="w-64 h-64 rounded-full bg-gray-100 shadow-md shadow-black/5 grid place-items-center">
-                                        <p className="text-4xl text-blue-500 font-[iranyekan400]">{firstname[0]}</p>
+                                        <p className="text-4xl text-blue-500 font-[vazir]">{firstname[0]}</p>
                                     </div>
                             }
                             {/* <div className="absolute top-0 -right-10 p-1.5 rounded-lg
@@ -145,7 +159,7 @@ function EditProfile() {
                                                             },
                                                         });
                                                     }}
-                                                    fontFamily="iranyekan300"
+                                                    fontFamily="vazirLight"
                                                     fontSize="0.95rem"
                                                 >
                                                     تغییر عکس
@@ -156,7 +170,7 @@ function EditProfile() {
                                                         setAvatarValue("")
                                                         setAvatarFile(undefined)
                                                     }}
-                                                    fontFamily="iranyekan300"
+                                                    fontFamily="vazirLight"
                                                     fontSize="0.95rem"
                                                     color="red.500"
                                                 >
@@ -173,7 +187,7 @@ function EditProfile() {
                                                         },
                                                     });
                                                 }}
-                                                fontFamily="iranyekan300"
+                                                fontFamily="vazirLight"
                                                 fontSize="0.95rem"
                                             >
                                                 افزودن عکس
@@ -189,7 +203,7 @@ function EditProfile() {
                     </div>
 
                     <div>
-                        <p className="text-sm text-blue-500/80 font-[iranyekan400]">نام کاربری</p>
+                        <p className="text-sm text-blue-500/80 font-[vazir]">نام کاربری</p>
                         <input
                             ref={usernamRef}
                             type="text"
@@ -200,7 +214,7 @@ function EditProfile() {
                     </div>
 
                     <div>
-                        <p className="text-sm text-blue-500/80 font-[iranyekan400]">نام</p>
+                        <p className="text-sm text-blue-500/80 font-[vazir]">نام</p>
                         <input
                             ref={fnameRef}
                             type="text"
@@ -211,7 +225,7 @@ function EditProfile() {
                     </div>
 
                     <div>
-                        <p className="text-sm text-blue-500/80 font-[iranyekan400]">نام خانوادگی</p>
+                        <p className="text-sm text-blue-500/80 font-[vazir]">نام خانوادگی</p>
                         <input
                             ref={lnameRef}
                             type="text"

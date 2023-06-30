@@ -8,18 +8,26 @@ import {
     ModalCloseButton,
     ModalBody
 } from "@chakra-ui/react"
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 
 interface Modal_2Props {
-    children: ReactNode
-    title: string
-    showCloseIcon?: boolean,
-    modalBody?: ReactNode
+    children: ReactNode;
+    title: string;
+    showCloseIcon?: boolean;
+    modalBody?: ReactNode;
+    close?(close: Function): void
 }
 
-function Modal_2({children, showCloseIcon=true, title, modalBody}: Modal_2Props) {
+function Modal_2({children, showCloseIcon=true, title, modalBody, close}: Modal_2Props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+    useEffect(
+        () => {
+            close&&close(onClose)
+        },
+        []
+    )
 
     return (
         <>
@@ -31,7 +39,7 @@ function Modal_2({children, showCloseIcon=true, title, modalBody}: Modal_2Props)
                 <ModalContent>
                     <ModalHeader
                         fontSize="medium"
-                        className="font-[iranyekan400]"
+                        className="font-[vazir]"
                     >
                         {title}
                     </ModalHeader>

@@ -7,3 +7,9 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZ
 {
     "city_id": 4
 }
+
+
+###
+
+GET https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=37.54595228792788&lon=45.072270779064645
+Content-Type: application/json

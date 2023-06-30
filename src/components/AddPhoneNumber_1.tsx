@@ -1,7 +1,6 @@
-import { BsTelephone } from "react-icons/bs"
-import TextInput_1 from "./TextInput_1"
+
 import { AiOutlinePlusCircle } from "react-icons/ai"
-import { useRef, useState } from "react"
+import { useState } from "react"
 
 
 interface PhonesOptions {
@@ -83,19 +82,19 @@ function AddPhoneNumber_1({ setPhoneNumbers, phoneNumbers }: AddPhoneNumber_1Pro
             <div className="w-full flex items-center justify-between">
 
                 <div onClick={onAddNewTextInput} className="flex !mt-5 items-center gap-x-2 py-1.5 px-3 rounded-lg
-                hover:bg-emerald-600/5 transition-colors duration-300 cursor-pointer w-max border
-                border-emerald-500 hover:border-emerald-500/5">
+                hover:bg-emerald-600/5 transition-all duration-300 cursor-pointer w-max border
+                border-emerald-500 hover:border-emerald-500/5 select-none active:scale-95">
 
                     <AiOutlinePlusCircle className="w-4 h-4 fill-emerald-600" />
-                    <p className="text-emerald-600 text-xs font-[iranyekan300]">افزودن شماره جدید</p>
+                    <p className="text-emerald-600 text-xs font-[vazir]">افزودن شماره جدید</p>
 
                 </div>
 
                 <div onClick={onSubmit} className="flex !mt-5 items-center gap-x-2 py-1.5 px-3 rounded-lg
-                hover:bg-emerald-600/10 transition-colors duration-300 cursor-pointer w-max border
-                border-cyan-500 hover:border-cyan-500/10">
+                hover:bg-emerald-600/10 transition-all duration-300 cursor-pointer w-max border
+                border-cyan-500 hover:border-cyan-500/10 active:scale-95 select-none">
 
-                    <p className="text-cyan-600 text-xs font-[iranyekan300]">تایید</p>
+                    <p className="text-cyan-600 text-xs font-[vazir]">تایید</p>
 
                 </div>
 

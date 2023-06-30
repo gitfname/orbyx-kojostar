@@ -1,13 +1,13 @@
 
 .primary-text-input {
   @apply w-full p-3 py-4 rounded-xl border border-blue-500/80 text-sm text-blue-500 bg-transparent
-  focus:outline-none placeholder-blue-500/70 font-[iranyekan400] tracking-wide focus:border-blue-600
+  focus:outline-none placeholder-blue-500/70 font-[vazir] tracking-wide focus:border-blue-600
   transition-colors duration-300;
 }
 
 .primary-btn {
   @apply w-full rounded-xl focus:outline-none text-white text-sm
-  bg-blue-500 cursor-pointer active:scale-95 duration-300 py-4 px-5;
+  bg-blue-500 cursor-pointer active:scale-95 duration-300 py-4 px-5 font-[vazir];
 }
 
 
@@ -53,8 +53,32 @@
   src: url(/fonts/iranyekan/Qs_Iranyekan-extrablack.ttf);
 }
 
+/* vazir */
+@font-face {
+  font-family: vazirThin;
+  src: url(fonts/vazir/Vazir-Thin.ttf);
+}
+@font-face {
+  font-family: vazirLight;
+  src: url(fonts/vazir/Vazir-Light.ttf);
+}
+@font-face {
+  font-family: vazir;
+  src: url(/public/fonts/vazir/Vazir.ttf);
+}
+@font-face {
+  font-family: vazirMedium;
+  src: url(fonts/vazir/Vazir-Medium.ttf);
+}
+@font-face {
+  font-family: vazirBold;
+  src: url(fonts/vazir/Vazir-Bold.ttf);
+}
+
+
+
 * {
-  font-family: iranyekan500, Arial, Helvetica, sans-serif;
+  font-family: vazir, Arial, Helvetica, sans-serif;
 }
 
 
@@ -105,7 +129,11 @@
   display: none;
 }
 
-
 .ant-picker-content {
   @apply !h-52;
+}
+
+
+.leaflet-bottom.leaflet-right {
+  @apply hidden;
 }

@@ -27,7 +27,7 @@ function Card_2({ title, titleIcon, icon, onClick, containerClassName, textClass
                         false
                 }
                 <p
-                    className={`text-xs text-slate-800 font-[iranyekan400] ` + textClassName}
+                    className={`text-xs text-slate-800 font-[vazir] ` + textClassName}
                 >
                     {title}
                 </p>

@@ -12,22 +12,21 @@ function Card_1({
   return (
     <Link to={getBaseUrl()+"/jobs/"+id} className="bg-gray-100 rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
       <div className="p-3 max-sm:order-2">
-        <p className="text-gray-900 text-sm font-[iranyekan500] line-clamp-2">{ title }</p>
+        <p className="text-gray-900 text-sm font-[vazirMedium] line-clamp-2">{ title }</p>
         <div className="mt-4 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">
           <HiOutlineSquares2X2 className="w-[1.15rem] h-[1.15rem] fill-transparent stroke-gray-600" />
-          <span className="text-gray-700 text-xs font-[iranyekan500]">{category}</span>
+          <span className="text-gray-700 text-xs font-[vazir]">{category}</span>
         </div>
-        {/* <p className="text-gray-600 text-xs font-[iranyekan500] line-clamp-1 mt-2">{ category }</p> */}
         <div className="mt-2.5 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">
           <GoLocation className="w-4 h-4 fill-gray-600" />
-          <span className="text-gray-700 text-xs font-[iranyekan500]">{address}</span>
+          <span className="text-gray-700 text-xs font-[vazir]">{address}</span>
         </div>
         <div className="mt-2.5 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">
           <GoComment className="w-4 h-4 fill-gray-600" />
-          <span className="text-gray-700 text-xs font-[iranyekan500]">{rate_count}</span>
+          <span className="text-gray-700 text-xs font-[vazir]">{rate_count}</span>
         </div>
 
         <Rating_1 positive={Math.floor(rate)} max={5} containerClassName="mt-4" />
@@ -36,7 +35,7 @@ function Card_1({
       <img
         alt=""
         src={image ? image : getBaseUrl()+"/assets/images/no-data.svg"}
-        className="w-full max-sm:order-1 h-64 rounded-l-xl object-center object-cover"
+        className="w-full max-sm:order-1 h-64 max-md:rounded-lg md:rounded-l-xl object-center object-cover"
       />
 
     </Link>

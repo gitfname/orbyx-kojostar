@@ -36,7 +36,7 @@ const LastViewedJobs = lazy(() => import("./pages/LastViewedJobs"))
 // import LastViewedJobs from "./pages/LastViewedJobs"
 const NewJob = lazy(() => import("./pages/NewJob"))
 // import NewJob from "./pages/NewJob
-const Profile = lazy(() => import("./pages/Profile"))
+const Profile = lazy(() => import("./pages/Profile/Profile"))
 // import Profile from "./pages/Profile"
 
 
@@ -63,9 +63,9 @@ function App() {
         setIsLoading(true)
         getUserInfo({ token })
           .then(userInfo => {
-            if(userInfo.is_logged_in) {
+            if (userInfo.is_logged_in) {
               console.log(userInfo);
-              
+
               userApi.setUser({
                 firstname: userInfo.data.first_name,
                 lastname: userInfo.data.last_name,
@@ -134,156 +134,153 @@ function App() {
 
   return (
     <>
-      <ChakraProvider>
-        <ApplicationLayout>
+      <ApplicationLayout>
+        <Routes>
 
-          <Routes>
+          <Route
+            path={ApplicationRoutes.pages.home}
+            element={
+              <Suspense fallback={<Loading />}>
+                <Home />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.search}
+            element={
+              <Suspense fallback={<Loading />}>
+                <Search />
+              </Suspense>
+            }
+          >
 
             <Route
-              path={ApplicationRoutes.pages.home}
+              index
               element={
-                <Suspense fallback={<Loading />}>
-                  <Home />
+                <Suspense>
+                  <Popular />
                 </Suspense>
               }
             />
 
             <Route
-              path={ApplicationRoutes.pages.search}
+              path="most-comment"
               element={
                 <Suspense fallback={<Loading />}>
-                  <Search />
-                </Suspense>
-              }
-            >
-
-              <Route
-                index
-                element={
-                  <Suspense>
-                    <Popular />
-                  </Suspense>
-                }
-              />
-
-              <Route
-                path="most-comment"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <MostComments />
-                  </Suspense>
-                }
-              />
-
-              <Route
-                path="discounts"
-                element={
-                  <Suspense fallback={<Loading />}>
-                    <DisCounts />
-                  </Suspense>
-                }
-              />
-
-              <Route path="*" element={<NotFound />} />
-
-            </Route>
-
-            <Route
-              path={ApplicationRoutes.pages.bookmarks}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <BookMarked />
+                  <MostComments />
                 </Suspense>
               }
             />
 
             <Route
-              path={ApplicationRoutes.pages.jobPage}
+              path="discounts"
               element={
                 <Suspense fallback={<Loading />}>
-                  <SingleJob />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.profile}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <Profile />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.newJob}
-              element={
-                <Suspense fallback={undefined}>
-                  <NewJob />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.lastSeenJobs}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <LastViewedJobs />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.myComments}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <MyComments />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.suggestAddNewPlace}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <SuggestAddNewPlace />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.contactUsAndAds}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <ContactUsAndAds />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.commentsAndSuggestions}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <CommentsAndSuggestion />
-                </Suspense>
-              }
-            />
-
-            <Route
-              path={ApplicationRoutes.pages.editProfile}
-              element={
-                <Suspense fallback={<Loading />}>
-                  <EditProfile />
+                  <DisCounts />
                 </Suspense>
               }
             />
 
             <Route path="*" element={<NotFound />} />
 
-          </Routes>
+          </Route>
 
-        </ApplicationLayout>
-      </ChakraProvider>
+          <Route
+            path={ApplicationRoutes.pages.bookmarks}
+            element={
+              <Suspense fallback={<Loading />}>
+                <BookMarked />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.jobPage}
+            element={
+              <Suspense fallback={<Loading />}>
+                <SingleJob />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.profile}
+            element={
+              <Suspense fallback={<Loading />}>
+                <Profile />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.newJob}
+            element={
+              <Suspense fallback={undefined}>
+                <NewJob />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.lastSeenJobs}
+            element={
+              <Suspense fallback={<Loading />}>
+                <LastViewedJobs />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.myComments}
+            element={
+              <Suspense fallback={<Loading />}>
+                <MyComments />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.suggestAddNewPlace}
+            element={
+              <Suspense fallback={<Loading />}>
+                <SuggestAddNewPlace />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.contactUsAndAds}
+            element={
+              <Suspense fallback={<Loading />}>
+                <ContactUsAndAds />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.commentsAndSuggestions}
+            element={
+              <Suspense fallback={<Loading />}>
+                <CommentsAndSuggestion />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.editProfile}
+            element={
+              <Suspense fallback={<Loading />}>
+                <EditProfile />
+              </Suspense>
+            }
+          />
+
+          <Route path="*" element={<NotFound />} />
+
+        </Routes>
+
+      </ApplicationLayout>
     </>
   )
 }

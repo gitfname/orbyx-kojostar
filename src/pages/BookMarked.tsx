@@ -6,6 +6,7 @@ import { MdOutlineCancel } from "react-icons/md"
 import { toggleBookMark } from "../utils/http/api/toggleBookMark"
 import useUserStore from "../stores/userStore"
 import getBaseUrl from "../utils/base-url"
+import Loading from "../components/Loading"
 
 function BookMarked() {
     const {
@@ -28,15 +29,15 @@ function BookMarked() {
             })
     }
 
-    if (isLoading) return <p>Loading</p>
+    if (isLoading) return <Loading />
     if (error) return <p>Error</p>
 
     return (
-        <div className="w-full h-screen overflow-y-auto">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto">
             <div className="w-full h-max px-4 py-8">
 
                 <p
-                    className="text-lg text-slate-800 font-[iranyekan400]"
+                    className="text-lg text-slate-800 font-[vazirMedium]"
                 >
                     نشان شده ها
                 </p>
@@ -53,9 +54,9 @@ function BookMarked() {
                                         />
                                         <div
                                             onClick={() => onToggleBookMark(item.id)}
-                                            className="absolute bottom-2 right-2 p-1.5 rounded-lg z-10
+                                            className="absolute bottom-2 left-2 p-1.5 rounded-lg z-10
                                             hover:bg-transparent/10 bg-transparent/[0.03] transition-all
-                                            duration-300 cursor-pointer px-2.5 active:scale-95"
+                                            duration-300 backdrop-blur-sm cursor-pointer px-2.5 active:scale-95"
                                         >
                                             <MdOutlineCancel className="w-6 h-6 fill-red-500" />
                                         </div>

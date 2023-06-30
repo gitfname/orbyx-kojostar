@@ -42,13 +42,13 @@ function Comment({ data }: CommentProps) {
 
                             :
                             <div className="w-11 h-11 rounded-full bg-blue-500/80 grid place-items-center">
-                                <p className="text-slate-800 text-xs font-[iranyekan300]">{data?.user?.first_name?.[0]}</p>
+                                <p className="text-slate-800 text-xs font-[vazir]">{data?.user?.first_name?.[0]}</p>
                             </div>
                     }
 
 
                     <p
-                        className="text-sm text-slate-800 font-[iranyekan400]"
+                        className="text-sm text-slate-800 font-[vazir]"
                     >
                         {data?.user?.first_name}
                     </p>
@@ -66,13 +66,13 @@ function Comment({ data }: CommentProps) {
 
 
                 <p
-                    className="text-xs text-slate-700/95 font-[iranyekan400]"
+                    className="text-xs text-slate-700/95 font-[vazir]"
                 >
                     {data?.content}
                 </p>
 
                 <p
-                    className="text-xs text-blue-700/70 font-[iranyekan400]"
+                    className="text-xs text-blue-700/70 font-[vazir]"
                 >
                     {data?.date}
                 </p>
@@ -103,13 +103,13 @@ function CommentsSection_1({ comments, showJob = false, showTopSection = true }:
                         <div className="flex items-center gap-x-3">
                             <GoCommentDiscussion className="w-5 h-5 fill-blue-500" />
                             <p
-                                className="text-sm text-slate-800 font-[iranyekan400]"
+                                className="text-sm text-slate-800 font-[vazir]"
                             >
                                 نظرات
                             </p>
                         </div>
 
-                        <p className="text-xs text-blue-500 font-[iranyekan400]">
+                        <p className="text-xs hidden text-blue-500 font-[vazir]">
                             همه نظرات
                         </p>
                     </div>

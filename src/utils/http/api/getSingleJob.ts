@@ -36,7 +36,7 @@ interface getSingleJobOutPut {
         end_morning_time: string,
         start_afternoon_time: string,
         end_afternoon_time: string,
-        is_holiday: string
+        is_holiday: boolean
     }>,
     comments: Array<{
         id: number,
