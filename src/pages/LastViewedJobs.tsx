@@ -33,16 +33,19 @@ function LastViewedJobs() {
                         <div className="w-full p-10 grid place-items-center">
                             <img
                                 alt="no data"
-                                src={getBaseUrl() + "/assets/images/no-data.svg"}
-                                className="w-72 h-auto border border-purple-600 inline-block"
+                                src={getBaseUrl() + "/images/noItem.png"}
+                                className="w-28 h-auto border border-purple-600 inline-block"
                             />
+                            <p className="text-sm text-slate-800 font-[vazirMedium] mt-3.5">
+                                موردی وجود ندارد
+                            </p>
                         </div>
                     }
                     loading={
                         <div className="w-full h-72 grid place-items-center">
                             <div className="p-4 px-6 rounded-2xl flex flex-col items-center justify-center gap-y-5 bg-blue-500/80
                             shadow-lg shadow-black/5">
-                                <p className="text-base text-slate-50 font-[iranyekan300]">درحال لود</p>
+                                <p className="text-base text-slate-50 font-[vazir]">درحال لود</p>
                                 <div className="w-10 h-10 border-t border-t-white rounded-full animate-spin"></div>
                             </div>
                         </div>

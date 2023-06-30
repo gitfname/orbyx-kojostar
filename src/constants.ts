@@ -17,6 +17,8 @@ export const updateProfileApiEndPoint = "/profile/update_user"
 export const toggleBookMarkApiEndPoint = "/bookmark/bookmarked"
 export const signUpApiEndPoint = "/auth/signup"
 export const addCommentApiEndPoint = "/job/comment/add"
+export const getReportOptionsApiEdnPoint = "/report/get_option"
+export const reportJobApiEndPoint = "/report/add"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -36,6 +38,8 @@ export const updateProfileApiUrl = API_BASE_URL+updateProfileApiEndPoint
 export const toggleBookMarkApiUrl = API_BASE_URL+toggleBookMarkApiEndPoint
 export const signUpApiUrl = API_BASE_URL+signUpApiEndPoint
 export const addCommentApiUrl = API_BASE_URL + addCommentApiEndPoint
+export const getReportOptionsApiUrl = API_BASE_URL+getReportOptionsApiEdnPoint
+export const reportJobApiUrl = API_BASE_URL+reportJobApiEndPoint
 
 
 export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"

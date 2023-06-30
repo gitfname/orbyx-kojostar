@@ -31,7 +31,7 @@ function DisCounts({ className }: DisCountsProps) {
     () => {
       setLoading(true)
       mutate()
-      .then(() => setLoading(false))
+        .then(() => setLoading(false))
     },
     [searchText]
   )
@@ -39,12 +39,12 @@ function DisCounts({ className }: DisCountsProps) {
     () => {
       setLoading(true)
       mutate()
-      .then(() => setLoading(false))
+        .then(() => setLoading(false))
     },
     [cityIDs, catId]
   )
 
-  if(isLoading) return <Loading />
+  if (isLoading) return <Loading />
 
   return (
     <div className="w-full h-max">
@@ -77,9 +77,12 @@ function DisCounts({ className }: DisCountsProps) {
               <div className="w-full p-10 grid place-items-center">
                 <img
                   alt="no data"
-                  src={getBaseUrl() + "/assets/images/no-data.svg"}
-                  className="w-72 h-auto border border-purple-600 inline-block"
+                  src={getBaseUrl() + "/images/noItem.png"}
+                  className="w-28 h-auto border border-purple-600 inline-block"
                 />
+                <p className="text-sm text-slate-800 font-[vazirMedium] mt-3.5">
+                  موردی وجود ندارد
+                </p>
               </div>
             }
             loading={

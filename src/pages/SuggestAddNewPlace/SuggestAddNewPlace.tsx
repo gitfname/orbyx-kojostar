@@ -28,7 +28,7 @@ function SuggestAddNewPlace() {
                 >
                 </textarea>
 
-                <p className="text-slate-900 text-xs font-[vazir] mt-8">
+                <p className="text-slate-900 text-xs font-[vazirMedium] mt-8">
                     درصور تمایل میتوانید شماره تماس خودرا وارد کنید
                 </p>
                 <input

@@ -65,8 +65,8 @@ function MobileMenu() {
                         to={ApplicationRoutes.pages.home}
                         className="text-3xl w-max mx-auto block lg:mb-2 italic"
                     >
-                        <span className="text-blue-900 font-[vazirBold]">Kojo</span>
-                        <span className="text-white/70 font-[vazirBold]">star</span>
+                        <span className="text-blue-900 font-[forte]">Kojo</span>
+                        <span className="text-white/70 font-[forte]">star</span>
                     </Link>
 
                     <div className="px-2 space-y-3 mt-5">
@@ -79,7 +79,7 @@ function MobileMenu() {
 
                         <DesktopNavlink_1
                             end={false}
-                            text="سرچ"
+                            text="جستجو"
                             link={ApplicationRoutes.pages.search}
                             icon={<BsSearch className="fill-white w-4 h-4" />}
                         />

@@ -56,23 +56,29 @@
 /* vazir */
 @font-face {
   font-family: vazirThin;
-  src: url(fonts/vazir/Vazir-Thin.ttf);
+  src: url(/fonts/vazir/Vazir-Thin.ttf);
 }
 @font-face {
   font-family: vazirLight;
-  src: url(fonts/vazir/Vazir-Light.ttf);
+  src: url(/fonts/vazir/Vazir-Light.ttf);
 }
 @font-face {
   font-family: vazir;
-  src: url(/public/fonts/vazir/Vazir.ttf);
+  src: url(/fonts/vazir/Vazir.ttf);
 }
 @font-face {
   font-family: vazirMedium;
-  src: url(fonts/vazir/Vazir-Medium.ttf);
+  src: url(/fonts/vazir/Vazir-Medium.ttf);
 }
 @font-face {
   font-family: vazirBold;
-  src: url(fonts/vazir/Vazir-Bold.ttf);
+  src: url(/fonts/vazir/Vazir-Bold.ttf);
+}
+
+/* forte */
+@font-face {
+  font-family: forte;
+  src: url(/fonts/forte.ttf);
 }
 
 

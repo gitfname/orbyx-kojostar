@@ -28,10 +28,10 @@ function ApplicationLayout({children}) {
         
         <Link
           to={ApplicationRoutes.pages.home}
-          className="text-3xl w-max lg:mx-auto block max-lg:py-3 py-6 lg:mb-2 italic"
+          className="text-3xl lg:text-4xl w-max lg:mx-auto block max-lg:py-3 py-6 lg:mb-2 italic"
         >
-          <span className="text-blue-900 font-[vazirBold]">Kojo</span>
-          <span className="text-blue-950/50 font-[vazirBold]">star</span>
+          <span className="text-blue-900 font-[forte]">Kojo</span>
+          <span className="text-blue-950/50 font-[forte]">star</span>
         </Link>
 
         <div className="h-max flex flex-col gap-y-2 max-lg:hidden">

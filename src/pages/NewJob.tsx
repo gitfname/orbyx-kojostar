@@ -26,12 +26,13 @@ import getDayNameByIndex from "../utils/getDayNameByIndex"
 
 
 interface WeeklyPlans {
-    plans: Array<{
-        start_morning_time?: Dayjs,
-        end_morning_time?: Dayjs,
-        start_afternoon_time?: Dayjs,
-        end_afternoon_time?: Dayjs
-    }>
+    start_morning_time?: Dayjs;
+    end_morning_time?: Dayjs;
+    start_afternoon_time?: Dayjs;
+    end_afternoon_time?: Dayjs;
+    is_holiday: boolean;
+    is_morning_holiday: boolean;
+    is_afternoon_holiday: boolean;
 }
 
 function NewJob() {
@@ -58,34 +59,27 @@ function NewJob() {
         endAfternoonTime: Dayjs
     }>(undefined);
 
-    const [weeklyPlan, setWeeklyPlan] = useState<Array<{
-        start_morning_time?: Dayjs,
-        end_morning_time?: Dayjs,
-        start_afternoon_time?: Dayjs,
-        end_afternoon_time?: Dayjs
-    }>>([])
+    const [weeklyPlan, setWeeklyPlan] = useState<Array<WeeklyPlans>>([])
 
     useEffect(
         () => {
-            const plans: Array<{
-                start_morning_time?: Dayjs,
-                end_morning_time?: Dayjs,
-                start_afternoon_time?: Dayjs,
-                end_afternoon_time?: Dayjs
-            }> = []
+            const plans: Array<WeeklyPlans> = []
             if (morningTime && afternoonTime) {
-                Array.from({ length: 7 }).forEach(v => {
+                Array.from({ length: 7 }).forEach((_, i) => {
                     plans.push({
                         start_morning_time: morningTime.startMorningTime,
                         end_morning_time: morningTime.endMorningTime,
                         start_afternoon_time: afternoonTime.startAfternoonTime,
-                        end_afternoon_time: afternoonTime.endAfternoonTime
+                        end_afternoon_time: afternoonTime.endAfternoonTime,
+                        is_holiday: i === 6,
+                        is_morning_holiday: false,
+                        is_afternoon_holiday: false
                     })
                 })
                 setWeeklyPlan(plans)
             }
             console.log("hi");
-            
+
         },
         [morningTime, afternoonTime]
     )
@@ -191,20 +185,12 @@ function NewJob() {
                 images: filePondRef.current.getFiles().map(file => file),
                 dailyPlans: weeklyPlan.map((plan, i) => ({
                     dayIndex: i,
-                    is_holiday: i === 6,
-                    start_morning_time: `${plan.start_morning_time.format("HH")}:${plan.start_morning_time.format("mm")}`,
-                    end_morning_time: `${plan.end_morning_time.format("HH")}:${plan.end_morning_time.format("mm")}`,
-                    start_afternoon_time: `${plan.start_afternoon_time.format("HH")}:${plan.start_afternoon_time.format("mm")}`,
-                    end_afternoon_time: `${plan.end_afternoon_time.format("HH")}:${plan.end_afternoon_time.format("mm")}`
+                    is_holiday: plan.is_holiday,
+                    start_morning_time: plan.is_morning_holiday ? null : `${plan.start_morning_time.format("HH")}:${plan.start_morning_time.format("mm")}`,
+                    end_morning_time: plan.is_morning_holiday ? null : `${plan.end_morning_time.format("HH")}:${plan.end_morning_time.format("mm")}`,
+                    start_afternoon_time: plan.is_afternoon_holiday ? null : `${plan.start_afternoon_time.format("HH")}:${plan.start_afternoon_time.format("mm")}`,
+                    end_afternoon_time: plan.is_afternoon_holiday ? null : `${plan.end_afternoon_time.format("HH")}:${plan.end_afternoon_time.format("mm")}`
                 })),
-                // dailyPlans: Array.from({ length: 7 }).map((_, index) => ({
-                //     dayIndex: index,
-                //     is_holiday: index === 6,
-                //     start_morning_time: `${morningTime.startMorningTime.format("HH")}:${morningTime.startMorningTime.format("mm")}`,
-                //     end_morning_time: `${morningTime.endMorningTime.format("HH")}:${morningTime.endMorningTime.format("mm")}`,
-                //     start_afternoon_time: `${afternoonTime.startAfternoonTime.format("HH")}:${afternoonTime.startAfternoonTime.format("mm")}`,
-                //     end_afternoon_time: `${afternoonTime.endAfternoonTime.format("HH")}:${afternoonTime.endAfternoonTime.format("mm")}`
-                // })),
                 hashtags: hashtags.map(hashtag => hashtag.value).join("|")
             })
                 .then(d => {
@@ -371,17 +357,47 @@ function NewJob() {
                                     {
                                         weeklyPlan.map((plan, index) => (
                                             <GetWeeklyPlan
+                                                index={index}
+                                                show_is_holiday={true}
+                                                is_holiday={plan.is_holiday}
                                                 startMorningTime={weeklyPlan[index].start_morning_time}
                                                 endMorningTime={weeklyPlan[index].end_morning_time}
                                                 startAfternoonTime={weeklyPlan[index].start_afternoon_time}
                                                 endAfternoonTime={weeklyPlan[index].end_afternoon_time}
+                                                is_afternoon_holiday={weeklyPlan[index].is_afternoon_holiday}
+                                                is_morning_holiday={weeklyPlan[index].is_morning_holiday}
+                                                show_is_afternoon_holiday={true}
+                                                show_is_morning_holiday={true}
+                                                onIsHolidayChange={(index, is_holiday) => {
+                                                    const plans: Array<WeeklyPlans> = []
+                                                    Array.from({ length: 7 }).forEach((v, i) => {
+                                                        if (i === index) {
+                                                            plans.push({
+                                                                start_morning_time: weeklyPlan[i].start_morning_time,
+                                                                end_morning_time: weeklyPlan[i].end_morning_time,
+                                                                start_afternoon_time: weeklyPlan[i].start_afternoon_time,
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
+                                                            })
+                                                        }
+                                                        else {
+                                                            plans.push({
+                                                                start_morning_time: weeklyPlan[i].start_morning_time,
+                                                                end_morning_time: weeklyPlan[i].end_morning_time,
+                                                                start_afternoon_time: weeklyPlan[i].start_afternoon_time,
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
+                                                            })
+                                                        }
+                                                    })
+                                                    setWeeklyPlan(plans)
+                                                }}
                                                 setMorningTime={data => {
-                                                    const plans: Array<{
-                                                        start_morning_time?: Dayjs,
-                                                        end_morning_time?: Dayjs,
-                                                        start_afternoon_time?: Dayjs,
-                                                        end_afternoon_time?: Dayjs
-                                                    }> = []
+                                                    const plans: Array<WeeklyPlans> = []
 
                                                     Array.from({ length: 7 }).forEach((v, i) => {
                                                         if (i === index) {
@@ -389,7 +405,10 @@ function NewJob() {
                                                                 start_morning_time: data.start_morning_time,
                                                                 end_morning_time: data.end_morning_time,
                                                                 start_afternoon_time: weeklyPlan[i].start_afternoon_time,
-                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
                                                             })
                                                         }
                                                         else {
@@ -397,19 +416,17 @@ function NewJob() {
                                                                 start_morning_time: weeklyPlan[i].start_morning_time,
                                                                 end_morning_time: weeklyPlan[i].end_morning_time,
                                                                 start_afternoon_time: weeklyPlan[i].start_afternoon_time,
-                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
                                                             })
                                                         }
                                                     })
                                                     setWeeklyPlan(plans)
                                                 }}
                                                 setAfternoonTime={data => {
-                                                    const plans: Array<{
-                                                        start_morning_time?: Dayjs,
-                                                        end_morning_time?: Dayjs,
-                                                        start_afternoon_time?: Dayjs,
-                                                        end_afternoon_time?: Dayjs
-                                                    }> = []
+                                                    const plans: Array<WeeklyPlans> = []
 
                                                     Array.from({ length: 7 }).forEach((v, i) => {
                                                         if (i === index) {
@@ -417,7 +434,10 @@ function NewJob() {
                                                                 start_morning_time: weeklyPlan[i].start_morning_time,
                                                                 end_morning_time: weeklyPlan[i].end_morning_time,
                                                                 start_afternoon_time: data.start_afternoon_time,
-                                                                end_afternoon_time: data.end_afternoon_time
+                                                                end_afternoon_time: data.end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
                                                             })
                                                         }
                                                         else {
@@ -425,22 +445,81 @@ function NewJob() {
                                                                 start_morning_time: weeklyPlan[i].start_morning_time,
                                                                 end_morning_time: weeklyPlan[i].end_morning_time,
                                                                 start_afternoon_time: weeklyPlan[i].start_afternoon_time,
-                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
+                                                            })
+                                                        }
+                                                    })
+                                                    setWeeklyPlan(plans)
+                                                }}
+                                                onIsMorningHolidayChange={(index, is_holiday) => {
+                                                    const plans: Array<WeeklyPlans> = []
+                                                    Array.from({ length: 7 }).forEach((v, i) => {
+                                                        if (i === index) {
+                                                            plans.push({
+                                                                start_morning_time: weeklyPlan[i].start_morning_time,
+                                                                end_morning_time: weeklyPlan[i].end_morning_time,
+                                                                start_afternoon_time: weeklyPlan[i].start_afternoon_time,
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[index].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: is_holiday
+                                                            })
+                                                        }
+                                                        else {
+                                                            plans.push({
+                                                                start_morning_time: weeklyPlan[i].start_morning_time,
+                                                                end_morning_time: weeklyPlan[i].end_morning_time,
+                                                                start_afternoon_time: weeklyPlan[i].start_afternoon_time,
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
+                                                            })
+                                                        }
+                                                    })
+                                                    setWeeklyPlan(plans)
+                                                }}
+                                                onIsAfternoonHolidayChange={(index, is_holiday) => {
+                                                    const plans: Array<WeeklyPlans> = []
+                                                    Array.from({ length: 7 }).forEach((v, i) => {
+                                                        if (i === index) {
+                                                            plans.push({
+                                                                start_morning_time: weeklyPlan[i].start_morning_time,
+                                                                end_morning_time: weeklyPlan[i].end_morning_time,
+                                                                start_afternoon_time: weeklyPlan[i].start_afternoon_time,
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[index].is_holiday,
+                                                                is_afternoon_holiday: is_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
+                                                            })
+                                                        }
+                                                        else {
+                                                            plans.push({
+                                                                start_morning_time: weeklyPlan[i].start_morning_time,
+                                                                end_morning_time: weeklyPlan[i].end_morning_time,
+                                                                start_afternoon_time: weeklyPlan[i].start_afternoon_time,
+                                                                end_afternoon_time: weeklyPlan[i].end_afternoon_time,
+                                                                is_holiday: weeklyPlan[i].is_holiday,
+                                                                is_afternoon_holiday: weeklyPlan[i].is_afternoon_holiday,
+                                                                is_morning_holiday: weeklyPlan[i].is_morning_holiday
                                                             })
                                                         }
                                                     })
                                                     setWeeklyPlan(plans)
                                                 }}
                                             >
-                                                <div>
+                                                <div className="h-full">
                                                     <WeeklyPlanCard_1
                                                         key={index}
                                                         day_name={getDayNameByIndex(index)}
-                                                        is_holiday={index === 6}
-                                                        start_morning_time={`${plan.start_morning_time.format("HH")}:${plan.start_morning_time.format("mm")}`}
-                                                        end_morning_time={`${plan.end_morning_time.format("HH")}:${plan.end_morning_time.format("mm")}`}
-                                                        start_afternoon_time={`${plan.start_afternoon_time.format("HH")}:${plan.start_afternoon_time.format("mm")}`}
-                                                        end_afternoon_time={`${plan.end_afternoon_time.format("HH")}:${plan.end_afternoon_time.format("mm")}`}
+                                                        is_holiday={(index === 6 && weeklyPlan[6].is_holiday) || plan.is_holiday}
+                                                        start_morning_time={plan.is_morning_holiday ? "--" : `${plan.start_morning_time.format("HH")}:${plan.start_morning_time.format("mm")}`}
+                                                        end_morning_time={plan.is_morning_holiday ? "--" : `${plan.end_morning_time.format("HH")}:${plan.end_morning_time.format("mm")}`}
+                                                        start_afternoon_time={plan.is_afternoon_holiday ? "--" : `${plan.start_afternoon_time.format("HH")}:${plan.start_afternoon_time.format("mm")}`}
+                                                        end_afternoon_time={plan.is_afternoon_holiday ? "--" : `${plan.end_afternoon_time.format("HH")}:${plan.end_afternoon_time.format("mm")}`}
                                                     />
                                                 </div>
                                             </GetWeeklyPlan>
@@ -458,6 +537,7 @@ function NewJob() {
                             endMorningTime={morningTime?.endMorningTime}
                             startAfternoonTime={afternoonTime?.startAfternoonTime}
                             endAfternoonTime={afternoonTime?.endAfternoonTime}
+                            show_is_holiday={false}
                             setMorningTime={data => {
                                 setMorningTime({
                                     startMorningTime: data.start_morning_time,

@@ -109,7 +109,7 @@ function CommentsSection_1({ comments, showJob = false, showTopSection = true }:
                             </p>
                         </div>
 
-                        <p className="text-xs hidden text-blue-500 font-[vazir]">
+                        <p className="text-xs text-blue-500 font-[vazir]">
                             همه نظرات
                         </p>
                     </div>

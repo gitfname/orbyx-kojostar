@@ -1,21 +1,22 @@
 
 import useSWR from "swr"
 import { useParams } from "react-router-dom"
-import { getSingleJob } from "../utils/http/api/getSingleJob"
-import Rating_1 from "../components/Rating_1"
+import { getSingleJob } from "../../utils/http/api/getSingleJob"
+import Rating_1 from "../../components/Rating_1"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { IoIosInformationCircleOutline } from "react-icons/io"
 import { BsSticky, BsClock } from "react-icons/bs"
 import { HiHashtag } from "react-icons/hi"
-import CommentsSection_1 from "../components/CommentsSection_1"
-import { toggleBookMark } from "../utils/http/api/toggleBookMark"
+import CommentsSection_1 from "../../components/CommentsSection_1"
+import { toggleBookMark } from "../../utils/http/api/toggleBookMark"
 import { useEffect, useState } from "react"
-import AddCommentModal from "../components/AddCommentModal"
+import AddCommentModal from "../../components/AddCommentModal"
 import { useToast } from "@chakra-ui/react"
-import Loading from "../components/Loading"
-import JobImageSlider_1 from "../components/JobImageSlider_1"
-import WeeklyPlanCard_1 from "../components/WeeklyPlanCard_1"
-import getDayNameByIndex from "../utils/getDayNameByIndex"
+import Loading from "../../components/Loading"
+import JobImageSlider_1 from "../../components/JobImageSlider_1"
+import WeeklyPlanCard_1 from "../../components/WeeklyPlanCard_1"
+import getDayNameByIndex from "../../utils/getDayNameByIndex"
+import Report from "./components/Report"
 
 function SingleJob() {
     const { id: jobId } = useParams()
@@ -48,39 +49,29 @@ function SingleJob() {
         [data?.is_bookmarked]
     )
 
-
     if (isLoading) return <Loading />
     if (error) return <p>something went wrong</p>
 
     return (
         <div className="max-lg:h-full h-screen overflow-y-auto pb-8">
 
-            {/* {
-                (data?.job?.medias && data?.job?.medias?.length > 0)
-                    ?
-                    <img
-                        alt=""
-                        src={data?.job?.medias[0]?.url}
-                        className="w-full h-[26rem] object-center object-cover shadow-md shadow-black/10"
-                    />
-                    :
-                    <div dir="ltr" className="w-full h-[20rem] bg-slate-200 grid items-center">
-                        <p className="text-3xl text-center font-[iranyekan600] text-slate-600">No Image :(</p>
-                    </div>
-            } */}
-
-            <div className="w-full h-[26rem]">
+            <div className="w-full h-[34rem] md:h-[38rem]">
                 <JobImageSlider_1
                     images={data?.job?.medias.map(item => item.url)}
                 />
             </div>
 
-
-            <div className="mt-6 w-full flex items-center justify-center gap-x-3">
+            <div className="mt-6 w-full flex items-center justify-center gap-x-3 relative">
                 <Rating_1
                     max={5}
                     positive={Math.floor(data?.job?.rate)}
                 />
+
+                <div className="w-max grid place-items-center absolute top-1/2 left-4 -translate-y-1/2">
+                    <Report
+                        job_id={data?.job?.id}
+                    />
+                </div>
             </div>
 
             <div className="flex items-center gap-x-2 px-4 mt-6">

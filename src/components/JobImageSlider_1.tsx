@@ -3,6 +3,7 @@ import { useState } from "react"
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Swiper as SwiperInstanceType } from "swiper/types"
+import getBaseUrl from "../utils/base-url"
 
 interface Props {
     images: Array<string>
@@ -34,8 +35,13 @@ function JobImageSlider_1({ images }: Props) {
                         }
                     </Swiper>
                     :
-                    <div dir="ltr" className="w-full h-full bg-slate-200 grid items-center">
-                        <p className="text-3xl text-center font-[vazirBold] text-slate-600">No Image :(</p>
+                    <div dir="ltr" className="w-full frid place-items-center h-full bg-slate-200 grid items-center">
+                        {/* <p className="text-3xl text-center font-[vazirBold] text-slate-600">No Image :(</p> */}
+                        <img
+                            alt=""
+                            src={getBaseUrl()+"/images/kojo.png"}
+                            className="h-[24rem] object-center object-cover"
+                        />
                     </div>
             }
 

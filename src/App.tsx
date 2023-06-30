@@ -1,9 +1,7 @@
-
 import { history } from "./helpers/history"
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import ApplicationLayout from "./layouts/ApplicationLayout"
-import { ChakraProvider } from "@chakra-ui/react"
 import NotFound from "./pages/NotFound"
 import { ApplicationRoutes } from "./routes"
 import useUserStore from "./stores/userStore"
@@ -13,10 +11,6 @@ import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
-import SuggestAddNewPlace from "./pages/SuggestAddNewPlace/SuggestAddNewPlace"
-import ContactUsAndAds from "./pages/ContactUsAndAds/ContactUsAndAds"
-import CommentsAndSuggestion from "./pages/CommentsAndSuggestions/CommentsAndSuggestions"
-import EditProfile from "./pages/EditProfile/EditProfile"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -26,7 +20,7 @@ const MostComments = lazy(() => import("./pages/MostComments"))
 // import MostComments from "./pages/MostComments"
 const DisCounts = lazy(() => import("./pages/DisCounts"))
 // import DisCounts from "./pages/DisCounts"
-const SingleJob = lazy(() => import("./pages/SingleJob"))
+const SingleJob = lazy(() => import("./pages/SingleJob/SingleJob"))
 // import SingleJob from "./pages/SingleJob"
 const BookMarked = lazy(() => import("./pages/BookMarked"))
 // import BookMarked from "./pages/BookMarked"
@@ -38,6 +32,15 @@ const NewJob = lazy(() => import("./pages/NewJob"))
 // import NewJob from "./pages/NewJob
 const Profile = lazy(() => import("./pages/Profile/Profile"))
 // import Profile from "./pages/Profile"
+const EditProfile = lazy(() => import("./pages/EditProfile/EditProfile"))
+// import EditProfile from "./pages/EditProfile/EditProfile"
+const CommentsAndSuggestion = lazy(() => import("./pages/CommentsAndSuggestions/CommentsAndSuggestions"))
+// import CommentsAndSuggestion from "./pages/CommentsAndSuggestions/CommentsAndSuggestions"
+const ContactUsAndAds = lazy(() => import("./pages/ContactUsAndAds/ContactUsAndAds"))
+// import ContactUsAndAds from "./pages/ContactUsAndAds/ContactUsAndAds"
+const SuggestAddNewPlace = lazy(() => import("./pages/SuggestAddNewPlace/SuggestAddNewPlace"))
+// import SuggestAddNewPlace from "./pages/SuggestAddNewPlace/SuggestAddNewPlace"
+
 
 
 

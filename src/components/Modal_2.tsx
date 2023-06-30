@@ -39,7 +39,7 @@ function Modal_2({children, showCloseIcon=true, title, modalBody, close}: Modal_
                 <ModalContent>
                     <ModalHeader
                         fontSize="medium"
-                        className="font-[vazir]"
+                        className="font-[vazirLight]"
                     >
                         {title}
                     </ModalHeader>

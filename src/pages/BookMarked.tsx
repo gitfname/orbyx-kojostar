@@ -68,9 +68,12 @@ function BookMarked() {
                         <div className="w-full mt-12 grid place-items-center">
                             <img
                                 alt="no data"
-                                src={getBaseUrl() + "/assets/images/no-data.svg"}
-                                className="w-72 h-auto border border-purple-600 inline-block"
+                                src={getBaseUrl() + "/images/noItem.png"}
+                                className="w-28 h-auto border border-purple-600 inline-block"
                             />
+                            <p className="text-sm text-slate-800 font-[vazirMedium] mt-3.5">
+                                موردی وجود ندارد
+                            </p>
                         </div>
                 }
             </div>
