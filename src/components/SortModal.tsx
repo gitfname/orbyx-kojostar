@@ -128,7 +128,7 @@ function SortModal({ children }) {
                                 fontSize="medium"
                                 className="font-[vazir]"
                             >
-                                مرتب کردن
+                                مرتب سازی
                             </ModalHeader>
                             <ModalCloseButton left="8px" right="unset" />
                             <ModalBody pb="12px">

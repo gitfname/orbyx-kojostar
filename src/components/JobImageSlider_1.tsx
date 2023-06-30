@@ -40,7 +40,7 @@ function JobImageSlider_1({ images }: Props) {
                         <img
                             alt=""
                             src={getBaseUrl()+"/images/kojo.png"}
-                            className="h-[24rem] object-center object-cover"
+                            className="h-[19rem] md:h-[24rem] object-center object-cover"
                         />
                     </div>
             }

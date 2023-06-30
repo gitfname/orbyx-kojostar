@@ -15,7 +15,9 @@ export const ApplicationRoutes = {
         suggestAddNewPlace: getBaseUrl()+"/suggest-add-new-place",
         contactUsAndAds: getBaseUrl()+"/contact-us-and-ads",
         commentsAndSuggestions: getBaseUrl()+"/comments-and-suggestios",
-        editProfile: getBaseUrl()+"/edit-profile"
+        editProfile: getBaseUrl()+"/edit-profile",
+        allComments: getBaseUrl()+"/jobs/:jobid/comments",
+        allComments__getPageUrl: (jobId: number) => getBaseUrl()+`/jobs/${jobId}/comments`
     }
 
 }

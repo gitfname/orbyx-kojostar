@@ -224,7 +224,7 @@ function SingleJob() {
                 data?.comments?.length > 0
                     ?
                     <div className="mt-16 w-full">
-                        <CommentsSection_1 comments={data?.comments} />
+                        <CommentsSection_1 jobTitle={data?.job?.title} jobId={data?.job?.id} comments={data?.comments} />
                     </div>
                     :
                     false

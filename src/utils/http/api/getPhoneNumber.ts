@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../../../constants"
 
 interface getPhoneNumberProps {
-    phoneNumber: number
+    phoneNumber: string
 }
 
 interface getPhoneNumberOutput {

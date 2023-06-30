@@ -81,7 +81,7 @@ function MostComments({ className }: MostCommentsProps) {
                   className="w-28 h-auto border border-purple-600 inline-block"
                 />
                 <p className="text-sm text-slate-800 font-[vazirMedium] mt-3.5">
-                  موردی وجود ندارد
+                  هیچ موردی وجود ندارد
                 </p>
               </div>
             }

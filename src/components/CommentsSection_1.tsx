@@ -1,6 +1,8 @@
 
 import { GoCommentDiscussion } from "react-icons/go"
 import Rating_1 from "./Rating_1"
+import { Link, useNavigate } from "react-router-dom"
+import { ApplicationRoutes } from "../routes"
 
 interface CommentOptions {
     id: number,
@@ -87,10 +89,26 @@ function Comment({ data }: CommentProps) {
 interface CommentsSection_1Props {
     comments: Array<CommentOptions>,
     showTopSection?: boolean,
-    showJob?: boolean
+    showJob?: boolean,
+    jobId: number,
+    jobTitle: string;
 }
 
-function CommentsSection_1({ comments, showJob = false, showTopSection = true }: CommentsSection_1Props) {
+function CommentsSection_1({ comments, showJob = false, showTopSection = true, jobId, jobTitle }: CommentsSection_1Props) {
+
+    const navigate = useNavigate();
+
+    const handleOnAllCommentsClick = () => {
+        navigate(
+            ApplicationRoutes.pages.allComments__getPageUrl(jobId),
+            {
+                state: {
+                    job_id: jobId,
+                    title: jobTitle
+                }
+            }
+        )
+    }
 
     return (
         <div className="w-full px-4">
@@ -109,9 +127,12 @@ function CommentsSection_1({ comments, showJob = false, showTopSection = true }:
                             </p>
                         </div>
 
-                        <p className="text-xs text-blue-500 font-[vazir]">
+                        <button
+                            onClick={handleOnAllCommentsClick}
+                            className="text-xs text-blue-500 font-[vazir] p-2 px-3
+                            rounded-lg hover:bg-blue-500/10 transition-all duration-300 cursor-pointer active:scale-95">
                             همه نظرات
-                        </p>
+                        </button>
                     </div>
                     :
                     false

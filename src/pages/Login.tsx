@@ -7,6 +7,7 @@ import { localStorage_token_key } from "../constants";
 import SelectCitiesModal from "../components/SelectCitiesModal";
 import { useToast } from "@chakra-ui/react";
 import getBaseUrl from "../utils/base-url";
+import { BsArrowRepeat } from "react-icons/bs";
 
 interface loginSteps {
     getPhoneNumber: "waiting" | "inprogress" | "complete" | "incomplete" | "not-stated",
@@ -117,7 +118,7 @@ function GetPhoneNumber() {
                     <div className="relative overflow-hidden">
                         <img
                             alt=""
-                            src={getBaseUrl()+"/images/login_vector.png"}
+                            src={getBaseUrl() + "/images/login_vector.png"}
                             className="w-80 h-auto"
                         />
                         {/* <div className="bg-blue-500 w-40 h-40 rounded-t-full absolute bottom-0 translate-y-1/2 left-1/2 -translate-x-1/2 z-10"></div> */}
@@ -144,7 +145,7 @@ function GetPhoneNumber() {
                         className="primary-text-input"
                         placeholder="شماره تماس"
                         onKeyDown={e => {
-                            if(e.key === "Enter") {
+                            if (e.key === "Enter") {
                                 handleLogin()
                             }
                         }}
@@ -168,18 +169,18 @@ function GetPhoneNumber() {
 
 
 function CheckOtp() {
-    const [t] = useTranslation()
     const otpRef = useRef<HTMLInputElement>(null)
     const [userData, userApi] = useUserStore(selector => [selector.user, selector.api]);
     const [isLoading, setIsLoading] = useState(false)
     const toast = useToast()
+    const setApplicationIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading)
 
     const handleSubmit = () => {
         if (
             !otpRef.current.value.trim()
         ) {
             toast({
-                description: "رمز OTP را وارد کنید",
+                description: "کد تایید ارسال شده را وارد کنید",
                 duration: 4000,
                 isClosable: true,
                 status: "warning",
@@ -240,7 +241,7 @@ function CheckOtp() {
                     else {
                         setIsLoading(false)
                         toast({
-                            description: "اشتباه است OTP را وارد کنید",
+                            description: "کد وارد شده اشتباه است",
                             duration: 4000,
                             isClosable: true,
                             status: "warning",
@@ -261,23 +262,48 @@ function CheckOtp() {
         <div className="w-full h-full grid place-items-center p-6 bg-blue-500">
             <div className="w-full max-w-lg rounded-xl bg-gray-100 p-6 py-10 shadow-lg shadow-black/10">
                 <p
-                    className="text-slate-700 text-xl font-[vazirMedium] tracking-wide mb-12"
+                    className="text-slate-700 text-xl font-[vazirMedium] tracking-wide"
                 >
-                    {t("check-otp")}
+                    تایید شماره تماس
                 </p>
 
-                <div className="flex flex-col gap-y-5">
+                <p
+                    className="text-sm text-slate-600 font-[vazir] mt-4"
+                >
+                    کد پیامک شده به شماره ی وارد شده را وارد کنید
+                </p>
+                <p
+                    className="text-sm text-slate-700 font-[vazir] mt-2"
+                >
+                    {userData.phone}
+                </p>
+
+                <div className="flex flex-col gap-y-5 mt-12">
                     <input
                         ref={otpRef}
                         onKeyDown={e => {
-                            if(e.key === "Enter") {
+                            if (e.key === "Enter") {
                                 handleSubmit()
                             }
                         }}
                         maxLength={10}
                         className="primary-text-input py-3 font-[vazir]"
-                        placeholder="رمز یکبار مصرف (OTP)"
+                        placeholder="کد تایید"
                     />
+
+                    <button
+                        onClick={() => {
+                            setApplicationIsLoading(true)
+                            get_phone_number({phoneNumber: userData.phone})
+                            .then(() => {
+                                setApplicationIsLoading(false)
+                            })
+                        }}
+                        className="primary-btn bg-emerald-600 px-6 w-max mx-auto flex items-center gap-x-2"
+                    >
+                        ارسال دوباره
+                        <BsArrowRepeat className="w-5 h-5 fill-gray-50" />
+                    </button>
 
                     <div className="flex items-center gap-x-3 max-sm:flex-col max-sm:mt-3">
                         <button onClick={handleSubmit} className="primary-btn mt-5 flex-shrink-0 relative overflow-hidden flex-[3]">

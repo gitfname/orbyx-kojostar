@@ -43,7 +43,7 @@ function ApplicationLayout({children}) {
 
           <DesktopNavlink_1
             end={false}
-            text="سرچ"
+            text="جستجو"
             link={ApplicationRoutes.pages.search}
             icon={<BsSearch className="fill-white w-4 h-4" />}
           />

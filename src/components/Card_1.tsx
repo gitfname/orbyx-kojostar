@@ -10,7 +10,7 @@ function Card_1({
   title, category, address, city, discount, id, image, lat, lng, rate, rate_count
 }: searchOptions) {
   return (
-    <Link to={getBaseUrl() + "/jobs/" + id} className="bg-gray-100 h-64 rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
+    <Link to={getBaseUrl() + "/jobs/" + id} className="bg-gray-100 h-full rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
       <div className="p-3 max-sm:order-2">
         <p className="text-gray-900 text-sm font-[vazirMedium] line-clamp-2">{title}</p>
         <div className="mt-4 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
@@ -32,11 +32,11 @@ function Card_1({
         <Rating_1 positive={Math.floor(rate)} max={5} containerClassName="mt-4" />
       </div>
 
-      <div className="grid place-items-center">
+      <div className="w-full h-64 grid place-items-center">
         <img
           alt=""
           src={image ? image : getBaseUrl() + "/images/kojo.png"}
-          className={`${image ? "w-full h-64" : "w-60 h-auto"} max-sm:order-1 max-md:rounded-lg md:rounded-l-xl object-center object-cover`}
+          className={`${image ? "w-full h-64" : "w-auto h-52"} max-sm:order-1 max-md:rounded-lg md:rounded-l-xl object-center object-cover block`}
         />
       </div>
 

@@ -27,7 +27,7 @@ function Popular({ className }: PopularProps) {
   )
 
   // const [loading, setLoading] = useState(isLoading)
-  
+
   useEffect(
     () => {
       // setLoading(true)
@@ -37,7 +37,7 @@ function Popular({ className }: PopularProps) {
     [searchText, cityIDs, catId]
   )
 
-  if(isLoading) return <Loading />
+  if (isLoading) return <Loading />
 
   return (
     <div className="w-full h-max">
@@ -70,9 +70,12 @@ function Popular({ className }: PopularProps) {
               <div className="w-full p-10 grid place-items-center">
                 <img
                   alt="no data"
-                  src={getBaseUrl() + "/assets/images/no-data.svg"}
-                  className="w-72 h-auto border border-purple-600 inline-block"
+                  src={getBaseUrl() + "/images/noItem.png"}
+                  className="w-28 h-auto border border-purple-600 inline-block"
                 />
+                <p className="text-sm text-slate-800 font-[vazirMedium] mt-3.5">
+                  هیچ موردی وجود ندارد
+                </p>
               </div>
             }
             loading={

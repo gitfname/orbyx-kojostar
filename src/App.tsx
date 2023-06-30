@@ -11,6 +11,7 @@ import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
+import SingleJobAllComments from "./pages/SingleJobAllComments/SingleJobAllComments"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -275,6 +276,15 @@ function App() {
             element={
               <Suspense fallback={<Loading />}>
                 <EditProfile />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.allComments}
+            element={
+              <Suspense fallback={<Loading />}>
+                <SingleJobAllComments />
               </Suspense>
             }
           />
