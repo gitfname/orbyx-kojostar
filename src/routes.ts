@@ -8,8 +8,10 @@ export const ApplicationRoutes = {
         bookmarks: getBaseUrl()+"/bookmarks",
         profile: getBaseUrl()+"/profile",
         jobPage: getBaseUrl()+"/jobs/:id",
+        adminJobPage: getBaseUrl()+"/admin/jobs/:id",
         guestJobPage: getBaseUrl()+"/jobs/guest/:id",
         singleJob: (id: number) => getBaseUrl()+"/jobs/"+id,
+        adminSingleJob: (id: number) => getBaseUrl()+"/admin/jobs/"+id,
         SingleGuestJob: (id: number) => getBaseUrl()+"/jobs/guest/"+id,
         newJob: getBaseUrl()+"/new-job",
         lastSeenJobs: getBaseUrl()+"/last-seen-jobs",
@@ -19,7 +21,8 @@ export const ApplicationRoutes = {
         commentsAndSuggestions: getBaseUrl()+"/comments-and-suggestios",
         editProfile: getBaseUrl()+"/edit-profile",
         allComments: getBaseUrl()+"/jobs/:jobid/comments",
-        allComments__getPageUrl: (jobId: number) => getBaseUrl()+`/jobs/${jobId}/comments`
+        allComments__getPageUrl: (jobId: number) => getBaseUrl()+`/jobs/${jobId}/comments`,
+        allJobs: getBaseUrl()+"/admin/all-jobs"
     }
 
 }

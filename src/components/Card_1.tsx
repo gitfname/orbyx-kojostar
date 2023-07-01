@@ -5,12 +5,16 @@ import Rating_1 from "./Rating_1"
 import { GoComment, GoLocation } from "react-icons/go"
 import { HiOutlineSquares2X2 } from "react-icons/hi2"
 
+interface Props extends searchOptions {
+  link: string
+}
+
 
 function Card_1({
-  title, category, address, city, discount, id, image, lat, lng, rate, rate_count
-}: searchOptions) {
+  title, category, address, city, discount, id, image, lat, lng, rate, rate_count, link
+}: Props) {
   return (
-    <Link to={getBaseUrl() + "/jobs/" + id} className="bg-gray-100 h-full rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
+    <Link to={link} className="bg-gray-100 h-full rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
       <div className="p-3 max-sm:order-2">
         <p className="text-gray-900 text-sm font-[vazirMedium] line-clamp-2">{title}</p>
         <div className="mt-4 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
@@ -21,7 +25,7 @@ function Card_1({
         <div className="mt-2.5 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">
           <GoLocation className="w-4 h-4 fill-gray-600" />
-          <span className="text-gray-700 text-xs font-[vazir]">{address}</span>
+          <span className="text-gray-700 text-xs font-[vazir] xl:max-w-[33ch] max-w-[25ch] line-clamp-1">{address}</span>
         </div>
         <div className="mt-2.5 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">

@@ -51,6 +51,7 @@ function BookMarked() {
                                     <div className="relative">
                                         <Card_1
                                             {...item}
+                                            link={getBaseUrl() + "/jobs/" + item?.id}
                                         />
                                         <div
                                             onClick={() => onToggleBookMark(item.id)}

@@ -23,6 +23,7 @@ import { LatLng } from "leaflet"
 import Loading from "../components/Loading"
 import WeeklyPlanCard_1 from "../components/WeeklyPlanCard_1"
 import getDayNameByIndex from "../utils/getDayNameByIndex"
+import { useToast } from "@chakra-ui/react"
 
 
 interface WeeklyPlans {
@@ -48,6 +49,8 @@ function NewJob() {
     const [categoryIDs, setCategoryIDs] = useState<Array<number>>(undefined)
     const [cityId, setCityId] = useState<number>(undefined)
     const [latlng, setLatLng] = useState<LatLng>(undefined)
+
+    const toast = useToast()
 
     const [morningTime, setMorningTime] = useState<{
         startMorningTime: Dayjs,
@@ -194,11 +197,24 @@ function NewJob() {
                 hashtags: hashtags.map(hashtag => hashtag.value).join("|")
             })
                 .then(d => {
-                    console.log(d);
                     setIsLoading(false)
+                    toast({
+                        description: d.message,
+                        duration: 4000,
+                        position: "top-right",
+                        isClosable: true,
+                        status: "success"
+                    })
                 })
                 .catch(err => {
                     console.log(err);
+                    toast({
+                        description: "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید",
+                        duration: 4000,
+                        position: "top-right",
+                        isClosable: true,
+                        status: "error"
+                    })
                     setIsLoading(false)
                 })
 
@@ -236,6 +252,28 @@ function NewJob() {
                             onClick={data => {
                                 setLatLng(data)
                             }}
+                            latlng={latlng}
+                        />
+                    </div>
+
+                    <div className="mt-4 mb-8 w-full flex flex-col gap-y-3.5">
+                        <input
+                            type="number"
+                            step={0.01}
+                            value={latlng?.lat}
+                            className="primary-text-input"
+                            placeholder="lat"
+                            onChange={e => setLatLng(new LatLng(parseFloat(e.target.value), latlng.lng))}
+                            dir="ltr"
+                        />
+                        <input
+                            type="number"
+                            step={0.01}
+                            value={latlng?.lng}
+                            className="primary-text-input"
+                            placeholder="lng"
+                            onChange={e => setLatLng(new LatLng(latlng.lat, parseFloat(e.target.value)))}
+                            dir="ltr"
                         />
                     </div>
 

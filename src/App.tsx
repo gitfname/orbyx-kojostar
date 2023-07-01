@@ -13,6 +13,8 @@ import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
 import SingleJobAllComments from "./pages/SingleJobAllComments/SingleJobAllComments"
 import SingleGuestJob from "./pages/SingleGuestJobPage/SingleGuestJob"
+import AllJobs from "./pages/Admin/AllJobs/AllJobs"
+import AdminSingleJob from "./pages/Admin/SingleJob/SingleJob"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -302,6 +304,24 @@ function App() {
             element={
               <Suspense fallback={<Loading />}>
                 <SingleJobAllComments />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.allJobs}
+            element={
+              <Suspense fallback={<Loading />}>
+                <AllJobs />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.adminJobPage}
+            element={
+              <Suspense fallback={<Loading />}>
+                <AdminSingleJob />
               </Suspense>
             }
           />

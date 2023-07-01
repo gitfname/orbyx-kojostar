@@ -7,6 +7,9 @@ import Card_1 from "../components/Card_1"
 import getBaseUrl from "../utils/base-url"
 import { useEffect, useState } from "react"
 import Loading from "../components/Loading"
+import ShowJobsInMap from "./ShowJobsInMap"
+import { BsMap } from "react-icons/bs"
+import { LatLng } from "leaflet"
 
 interface PopularProps {
   className?: string
@@ -41,6 +44,20 @@ function Popular({ className }: PopularProps) {
 
   return (
     <div className="w-full h-max">
+
+      {
+        data?.data?.length > 0
+          ?
+          <ShowJobsInMap latlng={data.data.map(job => ({ title: job.title, latlng: new LatLng(job.lat, job.lng) }))} >
+            <div className="fixed z-30 bottom-4 left-4 p-3 rounded-xl bg-blue-500
+      shadow-md shadow-black/10 grid place-items-center cursor-pointer">
+              <BsMap className="w-4 h-4 fill-gray-50" />
+            </div>
+          </ShowJobsInMap>
+          :
+          null
+      }
+
       {
         error
           ?
@@ -64,6 +81,7 @@ function Popular({ className }: PopularProps) {
                 lng={item.lng}
                 rate={item.rate}
                 rate_count={item.rate_count}
+                link={getBaseUrl() + "/jobs/" + item.id}
               />
             )}
             emptyFallback={

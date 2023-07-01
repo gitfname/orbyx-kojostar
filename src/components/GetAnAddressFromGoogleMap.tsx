@@ -9,14 +9,14 @@ interface getCurrentPositionProps {
     errorCallBack?(err: GeolocationPositionError): void,
 }
 
-function getGeoLocation({errorCallBack=undefined, successCallBack=undefined}:getCurrentPositionProps) {
-    if(navigator.geolocation) {
+function getGeoLocation({ errorCallBack = undefined, successCallBack = undefined }: getCurrentPositionProps) {
+    if (navigator.geolocation) {
         return navigator.geolocation.getCurrentPosition(
             (pos) => {
-                if(successCallBack) successCallBack(pos)
+                if (successCallBack) successCallBack(pos)
             },
-            (err) =>{
-                if(errorCallBack) errorCallBack(err)
+            (err) => {
+                if (errorCallBack) errorCallBack(err)
             }
         )
     }
@@ -40,16 +40,17 @@ function GetCLicickedCordinates({ setPos }: GetCLicickedCordinates) {
 interface Props {
     clickedtAddress?(data: string): void;
     onClick(data: LatLng): void;
+    latlng?: LatLng
 }
 
-function GetAnAddressFromGoogleMap({ clickedtAddress, onClick=undefined }: Props) {
+function GetAnAddressFromGoogleMap({ clickedtAddress, onClick = undefined, latlng = undefined }: Props) {
 
     const [clickedPos, setClickedPos] = useState<LatLng>(undefined)
     const [address, setAddress] = useState<string>("")
 
     useEffect(
         () => {
-            if(address && clickedtAddress) clickedtAddress(address)
+            if (address && clickedtAddress) clickedtAddress(address)
         },
         [address]
     )
@@ -72,15 +73,24 @@ function GetAnAddressFromGoogleMap({ clickedtAddress, onClick=undefined }: Props
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
 
-            <Marker position={[55.5564892, 105.0655156]}>
+
+            {/* <Marker position={latlng ? latlng : [55.5564892, 105.0655156]}>
                 <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
-            </Marker>
+            </Marker> */}
 
             {
-                clickedPos
-                ?
+                latlng
+                    ?
+                    <Marker position={latlng} />
+                    : null
+            }
+
+
+            {
+                clickedPos && !latlng
+                    ?
                     <Marker
                         position={[clickedPos.lat, clickedPos.lng]}
                     >
@@ -88,14 +98,14 @@ function GetAnAddressFromGoogleMap({ clickedtAddress, onClick=undefined }: Props
                             hello  world
                         </Popup>
                     </Marker>
-                :
-                null
+                    :
+                    null
             }
 
             <GetCLicickedCordinates
                 setPos={data => {
                     setClickedPos(data)
-                    if(onClick) onClick(data)
+                    if (onClick) onClick(data)
                     // if(setAddress) {
                     //     getAddress({
                     //         lat: data.lat.toString(),

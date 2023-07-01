@@ -7,6 +7,10 @@ import getBaseUrl from "../utils/base-url"
 import { useEffect, useState } from "react"
 import { getDisCounts } from "../utils/http"
 import Loading from "../components/Loading"
+import { BsMap, BsQuestion } from "react-icons/bs"
+import ShowJobsInMap from "./ShowJobsInMap"
+import { LatLng } from "leaflet"
+import InfoModal_1 from "./InfoModal_1"
 
 interface DisCountsProps {
   className?: string
@@ -45,9 +49,37 @@ function DisCounts({ className }: DisCountsProps) {
   )
 
   if (isLoading) return <Loading />
+  if (error) return <p>somehting went wrong</p>
 
   return (
     <div className="w-full h-max">
+
+      <div className="fixed z-30 bottom-4 left-4  flex items-center gap-x-3">
+        {
+          data?.data?.length > 0
+            ?
+            <ShowJobsInMap latlng={data?.data?.map(job => ({ title: job?.title, latlng: new LatLng(job?.lat, job?.lng) }))} >
+              <div className="p-3 rounded-xl bg-blue-500
+                shadow-md shadow-black/10 grid place-items-center cursor-pointer">
+
+                <BsMap className="w-4 h-4 fill-gray-50" />
+
+              </div>
+            </ShowJobsInMap>
+            :
+            null
+        }
+
+        <div className="p-3 rounded-xl bg-blue-500
+          shadow-md shadow-black/10 grid place-items-center cursor-pointer">
+
+          <InfoModal_1>
+            <BsQuestion className="w-4 scale-150 h-4 fill-gray-50" />
+          </InfoModal_1>
+
+        </div>
+      </div>
+
       {
         error
           ?
@@ -71,6 +103,7 @@ function DisCounts({ className }: DisCountsProps) {
                 lng={item.lng}
                 rate={item.rate}
                 rate_count={item.rate_count}
+                link={getBaseUrl() + "/jobs/" + item.id}
               />
             )}
             emptyFallback={

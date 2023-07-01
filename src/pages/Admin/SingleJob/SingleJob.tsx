@@ -1,30 +1,38 @@
 
 import useSWR from "swr"
-import { useParams } from "react-router-dom"
-import { getSingleJob } from "../../utils/http/api/getSingleJob"
-import Rating_1 from "../../components/Rating_1"
+import { useLocation, useParams } from "react-router-dom"
+import { getSingleJob, getSingleJobOutPut } from "../../../utils/http/api/getSingleJob"
+import Rating_1 from "../../../components/Rating_1"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
+import { LuEdit } from "react-icons/lu"
 import { IoIosInformationCircleOutline } from "react-icons/io"
-import { BsSticky, BsClock } from "react-icons/bs"
+import { BsSticky, BsClock, BsTelephone } from "react-icons/bs"
 import { HiHashtag } from "react-icons/hi"
-import CommentsSection_1 from "../../components/CommentsSection_1"
-import { toggleBookMark } from "../../utils/http/api/toggleBookMark"
+import CommentsSection_1 from "../../../components/CommentsSection_1"
+import { toggleBookMark } from "../../../utils/http/api/toggleBookMark"
 import { useEffect, useState } from "react"
-import AddCommentModal from "../../components/AddCommentModal"
+import AddCommentModal from "../../../components/AddCommentModal"
 import { useToast } from "@chakra-ui/react"
-import Loading from "../../components/Loading"
-import JobImageSlider_1 from "../../components/JobImageSlider_1"
-import WeeklyPlanCard_1 from "../../components/WeeklyPlanCard_1"
-import getDayNameByIndex from "../../utils/getDayNameByIndex"
-import Report from "./components/Report"
-import { MdLocationOn, MdLooksOne } from "react-icons/md"
-import MarkPlaceOnMap from "../../components/MarkPlaceOnMap"
+import Loading from "../../../components/Loading"
+import JobImageSlider_1 from "../../../components/JobImageSlider_1"
+import WeeklyPlanCard_1 from "../../../components/WeeklyPlanCard_1"
+import getDayNameByIndex from "../../../utils/getDayNameByIndex"
+import { MdLocationOn } from "react-icons/md"
+import MarkPlaceOnMap from "../../../components/MarkPlaceOnMap"
+import Modal_2 from "../../../components/Modal_2"
+import EditTextField from "./components/EditTextField"
+import AddPhoneNumber_1, { PhonesOptions } from "../../../components/AddPhoneNumber_1"
+import TextInput_1 from "../../../components/TextInput_1"
+import { updateJob } from "../../../utils/http/api/updateJob"
+import { useApplicationLoadingStore } from "../../../stores/useApplicationLoadingStore"
 import { LatLng, latLng } from "leaflet"
 
-function SingleJob() {
+function AdminSingleJob() {
     const { id: jobId } = useParams()
     const [isBookMarked, setIsBookMarked] = useState(false)
     const toast = useToast()
+    const [phones, setPhones] = useState<Array<PhonesOptions>>(undefined)
+    const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading)
 
 
     const {
@@ -32,28 +40,72 @@ function SingleJob() {
         error,
         isLoading
     } = useSWR(
-        "job/view/" + jobId,
+        "admin/job/view/" + jobId,
         async () => getSingleJob({ jobId: parseInt(jobId) }),
         {
             shouldRetryOnError: false
         }
     )
 
-    const onToggleBookMark = (job_id: number) => {
-        toggleBookMark({ job_id: job_id })
-            .then(data => {
-                setIsBookMarked(data?.is_bookmarked)
-            })
-    }
+    const [jobData, setJobdata] = useState<getSingleJobOutPut>(undefined)
 
     useEffect(
         () => {
-            setIsBookMarked(data?.is_bookmarked)
+            if (data && !isLoading && !jobData) {
+                setJobdata(data)
+                setPhones(data.job.phones.map((phone => ({ id: parseInt(phone), value: phone }))))
+            }
         },
-        [data?.is_bookmarked]
+        [data, isLoading]
     )
 
-    if (isLoading) return <Loading />
+    // const onToggleBookMark = (job_id: number) => {
+    //     toggleBookMark({ job_id: job_id })
+    //         .then(data => {
+    //             setIsBookMarked(jobData?.is_bookmarked)
+    //         })
+    // }
+
+    // useEffect(
+    //     () => {
+    //         setIsBookMarked(jobData?.is_bookmarked)
+    //     },
+    //     [jobData?.is_bookmarked]
+    // )
+
+    const handleSaveChanges = () => {
+        setIsLoading(true)
+        updateJob({
+            id: jobId,
+            address: jobData.job.address,
+            title: jobData.job.title,
+            desc: jobData.job.description,
+            phones: phones.map(phone => phone.value)
+        })
+            .then(data => {
+                toast({
+                    description: data.message,
+                    duration: 3000,
+                    position: "top-right",
+                    isClosable: true,
+                    status: "success"
+                })
+                setIsLoading(false)
+            })
+            .catch(() => {
+                setIsLoading(false)
+                toast({
+                    description: "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید",
+                    duration: 3000,
+                    position: "top-right",
+                    isClosable: true,
+                    status: "error"
+                })
+            })
+    }
+
+
+    if (isLoading || !jobData) return <Loading />
     if (error) return <p>something went wrong</p>
 
     return (
@@ -61,7 +113,7 @@ function SingleJob() {
 
             <div className="w-full h-[34rem] md:h-[38rem]">
                 <JobImageSlider_1
-                    images={data?.job?.medias.map(item => item.url)}
+                    images={jobData?.job?.medias.map(item => item.url)}
                 />
             </div>
 
@@ -70,10 +122,10 @@ function SingleJob() {
                 <div className="flex flex-col gap-y-4 items-center justify-center">
                     <Rating_1
                         max={5}
-                        positive={Math.floor(data?.job?.rate)}
+                        positive={Math.floor(jobData?.job?.rate)}
                     />
 
-                    <button
+                    {/* <button
                         onClick={() => {
                             if (navigator.clipboard) {
                                 navigator.clipboard.writeText(location.origin + "/jobs/guest/" + jobId)
@@ -91,19 +143,13 @@ function SingleJob() {
                         className="primary-btn py-2 font-[vazirLight]"
                     >
                         به اشتراک بگذارید
-                    </button>
-                </div>
-
-                <div className="w-max grid place-items-center absolute top-1/2 left-4 -translate-y-1/2">
-                    <Report
-                        job_id={data?.job?.id}
-                    />
+                    </button> */}
                 </div>
             </div>
 
-            <div className="flex items-center gap-x-2 px-4 mt-6">
+            {/* <div className="flex items-center gap-x-2 px-4 mt-6">
                 <div
-                    onClick={() => onToggleBookMark(data?.job.id)}
+                    onClick={() => onToggleBookMark(jobData?.job.id)}
                     className="p-1.5 rounded-lg hover:bg-transparent/5 active:scale-95 transition-transform duration-300
                     cursor-pointer"
                 >
@@ -121,7 +167,7 @@ function SingleJob() {
                 >
                     محبوبیت
                 </p>
-            </div>
+            </div> */}
 
 
             <div className="flex items-center gap-x-2 px-4 mt-9">
@@ -138,18 +184,30 @@ function SingleJob() {
                 <div className="w-full rounded-xl bg-blue-500/10 p-5 flex flex-col gap-y-4">
 
                     <p
-                        className="text-xs text-slate-500 font-[vazir]"
+                        className="text-xs text-slate-500 font-[vazir] flex items-center"
                     >
                         نام مجموعه :&nbsp;&nbsp;
-                        <span className="text-slate-800 font-[vazir]">{data?.job?.title}</span>
+                        <span className="text-slate-800 font-[vazir]">{jobData?.job?.title}</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <EditTextField
+                            title="تغییر نام"
+                            placeHolder="نام جدید را وارد کنید"
+                            onChange={(newData) => {
+                                setJobdata(prev => {
+                                    const data = prev;
+                                    data.job.title = newData
+                                    return { ...data }
+                                })
+                            }}
+                        />
                     </p>
 
-                    <p
+                    {/* <p
                         className="text-xs text-slate-500 font-[vazir]"
                     >
                         نام گروه :&nbsp;&nbsp;
                         <span className="text-slate-800 font-[vazir]"></span>
-                    </p>
+                    </p> */}
 
                     <p
                         className="text-xs text-slate-500 font-[vazir]"
@@ -159,18 +217,49 @@ function SingleJob() {
                             className="inline-flex items-center gap-x-2.5"
                         >
                             {
-                                data?.job?.phones?.map(phone => (
-                                    <a href={"tel:" + phone} key={phone} className="text-blue-500 font-[vazir]">{phone}</a>
+                                phones?.map(phone => (
+                                    <a href={"tel:" + phone.value} key={phone.id} className="text-blue-500 font-[vazir]">{phone.value}</a>
                                 ))
                             }
                         </div>
+                        <Modal_2
+                            title="افزودن شماره تماس"
+                            modalBody={
+                                <div className="w-full space-y-3 pb-2">
+                                    <AddPhoneNumber_1
+                                        phoneNumbers={phones}
+                                        setPhoneNumbers={(phones) => {
+                                            setPhones(phones)
+                                        }}
+                                    />
+                                </div>
+                            }
+                        >
+                            <TextInput_1
+                                data={phones?.map(phone => phone?.value)?.join(" - ")}
+                                placeHolder="شماره تماس"
+                                icon={<BsTelephone className="w-[1.15rem] h-[1.15rem] fill-blue-500 stroke-blue-500" />}
+                            />
+                        </Modal_2>
                     </p>
 
                     <p
-                        className="text-xs text-slate-500 font-[vazir]"
+                        className="text-xs text-slate-500 font-[vazir] flex items-center"
                     >
                         آدرس :&nbsp;&nbsp;
-                        <span className="text-slate-800 font-[vazir]">{data?.job?.address}</span>
+                        <span className="text-slate-800 font-[vazir]">{jobData?.job?.address}</span>
+                        &nbsp;&nbsp;&nbsp;
+                        <EditTextField
+                            title="تغییر آدرس"
+                            placeHolder="آدرس جدید را وارد کنید"
+                            onChange={(newData) => {
+                                setJobdata(prev => {
+                                    const data = prev;
+                                    data.job.address = newData
+                                    return { ...data }
+                                })
+                            }}
+                        />
                     </p>
 
                 </div>
@@ -181,9 +270,22 @@ function SingleJob() {
                 <BsSticky className="w-5 h-5 fill-blue-500" />
 
                 <p
-                    className="text-sm text-slate-800 font-[vazir]"
+                    className="text-sm text-slate-800 font-[vazir] flex items-center"
                 >
                     توضیحات
+                    <EditTextField
+                        textArea={true}
+                        title="تغییر توضیحات"
+                        placeHolder="توضیحات جدید را وارد کنید"
+                        onChange={(newData) => {
+                            setJobdata(prev => {
+                                const data = prev;
+                                data.job.description = newData
+                                return { ...data }
+                            })
+                        }}
+                    />
+
                 </p>
             </div>
 
@@ -193,7 +295,7 @@ function SingleJob() {
                     <p
                         className="text-xs text-slate-800 font-[vazir]"
                     >
-                        {data?.job?.description}
+                        {jobData?.job?.description}
                     </p>
 
                 </div>
@@ -213,7 +315,7 @@ function SingleJob() {
             <div className="flex items-center gap-x-2 px-4 mt-4">
 
                 {
-                    data?.job?.hashtags?.map(hastag => (
+                    jobData?.job?.hashtags?.map(hastag => (
                         <p className="py-1.5 cursor-default px-3 rounded-3xl text-xs text-slate-800 font-[vazir] bg-blue-500/30">
                             {hastag}
                         </p>
@@ -234,7 +336,7 @@ function SingleJob() {
                     </div>
 
                     <a
-                        href={`https://www.google.com/maps?q=${data?.job?.lat},${data?.job?.lng}`}
+                        href={`https://www.google.com/maps?q=${jobData?.job?.lat},${jobData?.job?.lng}`}
                         target="_blank"
                         className="text-sm text-blue-500 font-[vazir] py-1.5 px-2.5 rounded-xl hover:bg-blue-500/5
                         transition-colors duration-300"
@@ -248,8 +350,8 @@ function SingleJob() {
                         zoom={16}
                         latlng={[
                             {
-                                latlng: new LatLng(data?.job?.lat, data?.job?.lng),
-                                title: data?.job?.title
+                                latlng: new LatLng(jobData?.job?.lat, jobData?.job?.lng),
+                                title: jobData?.job?.title
                             }
                         ]}
                     />
@@ -271,7 +373,7 @@ function SingleJob() {
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 px-4">
 
                 {
-                    data?.plan?.map((plan, i) => (
+                    jobData?.plan?.map((plan, i) => (
                         <WeeklyPlanCard_1
                             key={plan.day}
                             {...plan}
@@ -283,15 +385,15 @@ function SingleJob() {
             </div>
 
             {
-                data?.comments?.length > 0
+                jobData?.comments?.length > 0
                     ?
                     <div className="mt-16 w-full">
-                        <CommentsSection_1 jobTitle={data?.job?.title} jobId={data?.job?.id} comments={data?.comments} />
+                        <CommentsSection_1 jobTitle={jobData?.job?.title} jobId={jobData?.job?.id} comments={jobData?.comments} />
                     </div>
                     :
                     false
             }
-            <AddCommentModal
+            {/* <AddCommentModal
                 title="ثبت نظر"
                 job_id={data.job.id}
                 onSuccess={() => {
@@ -311,11 +413,14 @@ function SingleJob() {
                 >
                     ثبت نظر
                 </button>
-            </AddCommentModal>
+            </AddCommentModal> */}
 
+            <button onClick={handleSaveChanges} className="primary-btn mt-20 w-full max-w-sm block mx-auto">
+                ذخیره تغییرات
+            </button>
 
         </div>
     )
 }
 
-export default SingleJob
+export default AdminSingleJob

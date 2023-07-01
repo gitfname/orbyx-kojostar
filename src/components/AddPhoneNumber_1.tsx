@@ -1,6 +1,7 @@
 
 import { AiOutlinePlusCircle } from "react-icons/ai"
 import { useState } from "react"
+import { MdOutlineCancel } from "react-icons/md"
 
 
 interface PhonesOptions {
@@ -26,7 +27,7 @@ function AddPhoneNumber_1({ setPhoneNumbers, phoneNumbers }: AddPhoneNumber_1Pro
                 return [
                     ...prev,
                     {
-                        id: prev[prev.length - 1].id+1,
+                        id: prev[prev.length - 1].id + 1,
                         value: ""
                     }
                 ]
@@ -67,15 +68,25 @@ function AddPhoneNumber_1({ setPhoneNumbers, phoneNumbers }: AddPhoneNumber_1Pro
         <>
             {
                 phones?.map((phone, i) => (
-                    <input
-                        type="text"
-                        className="primary-text-input py-2.5"
-                        defaultValue={phone.value}
-                        key={phone.id}
-                        placeholder="شماره تماس"
-                        onChange={e => onPhoneNumberChange(e.target.value, phone.id)}
+                    <div className="w-full flex items-stretch gap-x-2">
+                        <div
+                            onClick={() => setPhones(phones => phones.filter(item => item.id !== phone.id))}
+                            className="p-1 rounded-lg z-10 grid place-items-center
+                                            hover:bg-transparent/10 bg-transparent/[0.03] transition-all
+                                            duration-300 backdrop-blur-sm cursor-pointer px-2.5 active:scale-95"
+                        >
+                            <MdOutlineCancel className="w-5 h-5 fill-red-500" />
+                        </div>
+                        <input
+                            type="text"
+                            className="primary-text-input py-2"
+                            defaultValue={phone.value}
+                            key={phone.id}
+                            placeholder="شماره تماس"
+                            onChange={e => onPhoneNumberChange(e.target.value, phone.id)}
 
-                    />
+                        />
+                    </div>
                 ))
             }
 

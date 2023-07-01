@@ -45,7 +45,7 @@ function Home() {
         }
         isLoading={isLoading}
         containerClassName="grid grid-cols-1 lg:grid-cols-2 pt-8"
-        dataRenderer={(item) => <Card_1 {...item} />}
+        dataRenderer={(item) => <Card_1 {...item} link={getBaseUrl() + "/jobs/" + item.id} />}
       />
 
       <div className="mt-16"></div>
@@ -76,7 +76,7 @@ function Home() {
         }
         isLoading={isLoading}
         containerClassName="grid grid-cols-1 lg:grid-cols-2 pt-8"
-        dataRenderer={(item) => <div className="w-10 h-10 bg-red-600" key={item.id}></div>}
+        dataRenderer={(item) => <Card_1 {...item} link={getBaseUrl() + "/jobs/" + item.id} />}
       />
 
     </div>

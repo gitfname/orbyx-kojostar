@@ -1,6 +1,7 @@
 import useUserStore from "../../stores/userStore"
 import { FaPhoneAlt } from "react-icons/fa"
 import { ImLocation } from "react-icons/im"
+import { RiAdminLine } from "react-icons/ri"
 import Card_2 from "../../components/Card_2"
 import { MdKeyboardArrowLeft, MdOutlineAddLocationAlt } from "react-icons/md"
 import { AiOutlineEye, AiOutlinePlus } from "react-icons/ai"
@@ -107,6 +108,19 @@ function Profile() {
                 <div className="mt-14 w-full flex flex-col gap-y-2">
 
                     {
+                        userData.role === 3
+                            ?
+                            <Card_2
+                                title="آپدیت مجموعه"
+                                icon={<MdKeyboardArrowLeft className="w-5 h-5 fill-slate-800" />}
+                                titleIcon={<RiAdminLine className="w-5 h-5 fill-slate-600" />}
+                                onClick={() => navigate(ApplicationRoutes.pages.allJobs)}
+                            />
+                            :
+                            false
+                    }
+
+                    {
                         userData.role === 2 || userData.role === 3
                             ?
                             <Card_2
@@ -118,7 +132,6 @@ function Profile() {
                             :
                             false
                     }
-
 
                     <SelectCitiesModal>
                         <Card_2

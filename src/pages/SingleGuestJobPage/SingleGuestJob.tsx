@@ -15,6 +15,8 @@ import WeeklyPlanCard_1 from "../../components/WeeklyPlanCard_1"
 import getDayNameByIndex from "../../utils/getDayNameByIndex"
 import { getSingleGuestJob } from "../../utils/http"
 import getBaseUrl from "../../utils/base-url"
+import MarkPlaceOnMap from "../../components/MarkPlaceOnMap"
+import { MdLocationOn } from "react-icons/md"
 
 function SingleGuestJob() {
     const { id: jobId } = useParams()
@@ -67,17 +69,17 @@ function SingleGuestJob() {
                 <div className="w-max grid place-items-center md:absolute md:top-1/2 md:left-4 md:-translate-y-1/2">
                     <button
                         onClick={() => {
-                            if(navigator.clipboard) {
+                            if (navigator.clipboard) {
                                 navigator.clipboard.writeText(location.href)
-                                .then(() => {
-                                    toast({
-                                        description: "کپی شد",
-                                        duration: 3000,
-                                        position: "top",
-                                        status: "success",
-                                        isClosable: false
+                                    .then(() => {
+                                        toast({
+                                            description: "لینک کپی شد",
+                                            duration: 3000,
+                                            position: "top",
+                                            status: "success",
+                                            isClosable: false
+                                        })
                                     })
-                                })
 
                             }
                         }}
@@ -206,6 +208,37 @@ function SingleGuestJob() {
                         </p>
                     ))
                 }
+
+            </div>
+
+            <div className="mt-9 w-full px-4">
+                <div className="flex items-center w-full justify-between">
+                    <div className="flex items-center gap-x-2">
+                        <MdLocationOn className="w-[1.35rem] h-[1.35rem] fill-blue-500" />
+                        <p
+                            className="text-sm text-slate-800 font-[vazir]"
+                        >
+                            موقعیت مکانی
+                        </p>
+                    </div>
+
+                    <a
+                        href={`https://www.google.com/maps?q=${data?.job?.lat},${data?.job?.lng}`}
+                        target="_blank"
+                        className="text-sm text-blue-500 font-[vazir] py-1.5 px-2.5 rounded-xl hover:bg-blue-500/5
+                        transition-colors duration-300"
+                    >
+                        ورود به مسیریابی
+                    </a>
+                </div>
+
+                <div className="mt-6 w-full max-w-4xl mx-auto">
+                    <MarkPlaceOnMap
+                        lat={data?.job?.lat}
+                        lng={data?.job?.lng}
+                        title={data?.job?.title}
+                    />
+                </div>
 
             </div>
 

@@ -17,6 +17,7 @@ import { updateProfile } from "./api/updateProfile";
 import { signUp } from "./api/signUp";
 import { getReportOptions } from "./api/getReportOption";
 import { getSingleGuestJob } from "./api/getSingleGuestJob";
+import { getAllJobsFromAdminRoute } from "./api/getAllJobs__fromAdminRoute";
 
 export {
     get_phone_number,
@@ -37,5 +38,6 @@ export {
     updateProfile,
     signUp,
     getReportOptions,
-    getSingleGuestJob
+    getSingleGuestJob,
+    getAllJobsFromAdminRoute
 }

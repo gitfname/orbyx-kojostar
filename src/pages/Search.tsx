@@ -27,6 +27,7 @@ function Search() {
 
   return (
     <div className="max-lg:h-full h-screen overflow-y-auto grid grid-rows-[max-content_1fr]">
+
       <div className="pb-1 shadow-lg shadow-black/10 overflow-x-hidden">
 
         <div className="bg-slate-50 shadow-lg shadow-black/5 p-4 relative">
