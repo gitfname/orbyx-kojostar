@@ -12,6 +12,7 @@ import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./pages/Loading"
 import SingleJobAllComments from "./pages/SingleJobAllComments/SingleJobAllComments"
+import SingleGuestJob from "./pages/SingleGuestJobPage/SingleGuestJob"
 
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
@@ -48,9 +49,10 @@ const SuggestAddNewPlace = lazy(() => import("./pages/SuggestAddNewPlace/Suggest
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
   const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading);
+  const location = useLocation()
 
   history.navigate = useNavigate()
-  history.location = useLocation()
+  history.location = location
 
 
   useEffect(
@@ -134,7 +136,13 @@ function App() {
   //   [i18n.language]
   // )
 
-  if (!userData.isLoggedIn) return <Login />
+  if (!location.pathname.startsWith("/jobs/guest/")) {
+    if (!userData.isLoggedIn) return <Login />
+  }
+  else {
+    console.log("starts with that");
+
+  }
 
   return (
     <>
@@ -195,6 +203,15 @@ function App() {
             element={
               <Suspense fallback={<Loading />}>
                 <BookMarked />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path={ApplicationRoutes.pages.guestJobPage}
+            element={
+              <Suspense fallback={<Loading />}>
+                <SingleGuestJob />
               </Suspense>
             }
           />

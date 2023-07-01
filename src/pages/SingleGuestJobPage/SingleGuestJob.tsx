@@ -1,57 +1,53 @@
 
 import useSWR from "swr"
-import { useLocation, useParams } from "react-router-dom"
-import { getSingleJob } from "../../utils/http/api/getSingleJob"
+import { useParams } from "react-router-dom"
 import Rating_1 from "../../components/Rating_1"
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
+// import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { IoIosInformationCircleOutline } from "react-icons/io"
 import { BsSticky, BsClock } from "react-icons/bs"
 import { HiHashtag } from "react-icons/hi"
 import CommentsSection_1 from "../../components/CommentsSection_1"
-import { toggleBookMark } from "../../utils/http/api/toggleBookMark"
-import { useEffect, useState } from "react"
-import AddCommentModal from "../../components/AddCommentModal"
+// import AddCommentModal from "../../components/AddCommentModal"
 import { useToast } from "@chakra-ui/react"
 import Loading from "../../components/Loading"
 import JobImageSlider_1 from "../../components/JobImageSlider_1"
 import WeeklyPlanCard_1 from "../../components/WeeklyPlanCard_1"
 import getDayNameByIndex from "../../utils/getDayNameByIndex"
-import Report from "./components/Report"
+import { getSingleGuestJob } from "../../utils/http"
+import getBaseUrl from "../../utils/base-url"
 
-function SingleJob() {
+function SingleGuestJob() {
     const { id: jobId } = useParams()
-    const [isBookMarked, setIsBookMarked] = useState(false)
-    const toast = useToast()    
-    
+    const toast = useToast()
+
 
     const {
         data,
         error,
         isLoading
     } = useSWR(
-        "job/view/" + jobId,
-        async () => getSingleJob({ jobId: parseInt(jobId) }),
+        "job/guest/view/" + jobId,
+        async () => getSingleGuestJob({ jobId: parseInt(jobId) }),
         {
-            shouldRetryOnError: false
+            shouldRetryOnError: false,
+            revalidateOnFocus: false
         }
     )
 
-    const onToggleBookMark = (job_id: number) => {
-        toggleBookMark({ job_id: job_id })
-            .then(data => {
-                setIsBookMarked(data?.is_bookmarked)
-            })
-    }
-
-    useEffect(
-        () => {
-            setIsBookMarked(data?.is_bookmarked)
-        },
-        [data?.is_bookmarked]
+    if (isLoading) return <Loading />
+    if (error) return (
+        <div className="w-full h-full flex flex-col items-center justify-center">
+            <img
+                alt="no data"
+                src={getBaseUrl() + "/images/noItem.png"}
+                className="w-28 h-auto border border-purple-600 inline-block"
+            />
+            <p className="text-sm text-slate-800 font-[vazirMedium] mt-3.5">
+                هیچ موردی وجود ندارد
+            </p>
+        </div>
     )
 
-    if (isLoading) return <Loading />
-    if (error) return <p>something went wrong</p>
 
     return (
         <div className="max-lg:h-full h-screen overflow-y-auto pb-8">
@@ -62,20 +58,37 @@ function SingleJob() {
                 />
             </div>
 
-            <div className="mt-6 z-10 w-full flex items-center justify-center gap-x-3 relative">
+            <div className="mt-6 z-10 w-full flex flex-col gap-y-6 md:flex-row items-center justify-center gap-x-3 relative">
                 <Rating_1
                     max={5}
                     positive={Math.floor(data?.job?.rate)}
                 />
 
-                <div className="w-max grid place-items-center absolute top-1/2 left-4 -translate-y-1/2">
-                    <Report
-                        job_id={data?.job?.id}
-                    />
+                <div className="w-max grid place-items-center md:absolute md:top-1/2 md:left-4 md:-translate-y-1/2">
+                    <button
+                        onClick={() => {
+                            if(navigator.clipboard) {
+                                navigator.clipboard.writeText(location.href)
+                                .then(() => {
+                                    toast({
+                                        description: "کپی شد",
+                                        duration: 3000,
+                                        position: "top",
+                                        status: "success",
+                                        isClosable: false
+                                    })
+                                })
+
+                            }
+                        }}
+                        className="primary-btn py-2 font-[vazirLight]"
+                    >
+                        به اشتراک بگذارید
+                    </button>
                 </div>
             </div>
 
-            <div className="flex items-center gap-x-2 px-4 mt-6">
+            {/* <div className="flex items-center gap-x-2 px-4 mt-6">
                 <div
                     onClick={() => onToggleBookMark(data?.job.id)}
                     className="p-1.5 rounded-lg hover:bg-transparent/5 active:scale-95 transition-transform duration-300
@@ -95,10 +108,10 @@ function SingleJob() {
                 >
                     محبوبیت
                 </p>
-            </div>
+            </div> */}
 
 
-            <div className="flex items-center gap-x-2 px-4 mt-9">
+            <div className="flex items-center gap-x-2 px-4 mt-11">
                 <IoIosInformationCircleOutline className="w-5 h-5 fill-blue-500" />
 
                 <p
@@ -134,7 +147,7 @@ function SingleJob() {
                         >
                             {
                                 data?.job?.phones?.map(phone => (
-                                    <a href={"tel:"+phone} key={phone} className="text-blue-500 font-[vazir]">{phone}</a>
+                                    <a href={"tel:" + phone} key={phone} className="text-blue-500 font-[vazir]">{phone}</a>
                                 ))
                             }
                         </div>
@@ -230,7 +243,7 @@ function SingleJob() {
                     :
                     false
             }
-            <AddCommentModal
+            {/* <AddCommentModal
                 title="ثبت نظر"
                 job_id={data.job.id}
                 onSuccess={() => {
@@ -250,11 +263,11 @@ function SingleJob() {
                 >
                     ثبت نظر
                 </button>
-            </AddCommentModal>
+            </AddCommentModal> */}
 
 
         </div>
     )
 }
 
-export default SingleJob
+export default SingleGuestJob

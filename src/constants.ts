@@ -20,6 +20,7 @@ export const addCommentApiEndPoint = "/job/comment/add"
 export const getReportOptionsApiEdnPoint = "/report/get_option"
 export const reportJobApiEndPoint = "/report/add"
 export const getAllCommentsApiEndPoint = "/job/comment/all"
+export const getSingleGuestJobApiEndPoint = "/guest/job"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -42,6 +43,7 @@ export const addCommentApiUrl = API_BASE_URL + addCommentApiEndPoint
 export const getReportOptionsApiUrl = API_BASE_URL+getReportOptionsApiEdnPoint
 export const reportJobApiUrl = API_BASE_URL+reportJobApiEndPoint
 export const getAllCommentsApiUrl = API_BASE_URL+getAllCommentsApiEndPoint
+export const getSingleGuestJobApiUrl = API_BASE_URL+getSingleGuestJobApiEndPoint
 
 
 export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"

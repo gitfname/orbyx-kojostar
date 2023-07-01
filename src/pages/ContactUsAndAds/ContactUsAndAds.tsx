@@ -95,9 +95,24 @@ function ContactUsAndAds() {
                     <p className="text-lg text-slate-800 font-[vazirMedium]">ما را در شبکه های اجتماعی دنبال کنید</p>
 
                     <div className="flex items-center gap-x-8">
-                        <BsWhatsapp className="w-6 h-6 fill-blue-500 hover:fill-blue-600 transition-colors duration-300 cursor-pointer" />
-                        <BsInstagram className="w-6 h-6 fill-blue-500 hover:fill-blue-600 transition-colors duration-300 cursor-pointer" />
-                        <FaPaperPlane className="w-6 h-6 fill-blue-500 hover:fill-blue-600 transition-colors duration-300 cursor-pointer" />
+                        <a
+                            href="https://wa.me/message/ER3DLK325ANAP1"
+                            target="_blank"
+                        >
+                            <BsWhatsapp className="w-6 h-6 fill-blue-500 hover:fill-blue-600 transition-colors duration-300 cursor-pointer" />
+                        </a>
+                        <a
+                            href="https://instagram.com/_kojo_official?igshid=ZGUzMzM3NWJiOQ=="
+                            target="_blank"
+                        >
+                            <BsInstagram className="w-6 h-6 fill-blue-500 hover:fill-blue-600 transition-colors duration-300 cursor-pointer" />
+                        </a>
+                        <a
+                            href="https://t.me/+VOrZg6msKbm1QjCY"
+                            target="_blank"
+                        >
+                            <FaPaperPlane className="w-6 h-6 fill-blue-500 hover:fill-blue-600 transition-colors duration-300 cursor-pointer" />
+                        </a>
                     </div>
                 </div>
 
