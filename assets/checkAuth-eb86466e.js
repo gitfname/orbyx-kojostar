@@ -1,0 +1,1 @@
+import{bj as r,H as s}from"./App-1f28e85f.js";async function a({token:e}){const n=r,o={method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+e}},t=await fetch(n,o);if(t.ok)return await t.json();throw new Error("something went wrong")}async function i(){return!!(await a({token:s.getState().user.token})).is_logged_in}export{i as c};
