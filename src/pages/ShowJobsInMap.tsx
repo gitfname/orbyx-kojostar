@@ -1,7 +1,6 @@
 
 import { LatLng } from "leaflet"
 import MarkPlaceOnMap from "../components/MarkPlaceOnMap"
-import { useDisclosure, Modal, ModalCloseButton, ModalBody, ModalOverlay, ModalContent } from "@chakra-ui/react"
 import { ReactNode } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen"
 
@@ -14,8 +13,6 @@ interface Props {
 }
 
 function ShowJobsInMap({ children, latlng }: Props) {
-
-    const { isOpen, onOpen, onClose } = useDisclosure()
     const handle = useFullScreenHandle()
 
     return (
@@ -32,28 +29,6 @@ function ShowJobsInMap({ children, latlng }: Props) {
                     />
                 </div>
             </FullScreen>
-            {/* <Modal isOpen={isOpen} onClose={onClose} size="5xl">
-                <ModalOverlay />
-
-                <ModalContent>
-
-                    <ModalBody>
-
-                        <div className="mt-12 pb-3">
-                            <MarkPlaceOnMap
-                                zoom={10}
-                                latlng={latlng}
-                            />
-                        </div>
-
-
-                    </ModalBody>
-
-                    <ModalCloseButton left="8px" right="unset" />
-
-                </ModalContent>
-
-            </Modal> */}
         </>
     )
 }

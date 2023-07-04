@@ -18,6 +18,7 @@ import { signUp } from "./api/signUp";
 import { getReportOptions } from "./api/getReportOption";
 import { getSingleGuestJob } from "./api/getSingleGuestJob";
 import { getAllJobsFromAdminRoute } from "./api/getAllJobs__fromAdminRoute";
+import { getNearByJobs } from "./api/getNearByJobs";
 
 export {
     get_phone_number,
@@ -39,5 +40,6 @@ export {
     signUp,
     getReportOptions,
     getSingleGuestJob,
-    getAllJobsFromAdminRoute
+    getAllJobsFromAdminRoute,
+    getNearByJobs
 }

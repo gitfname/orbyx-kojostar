@@ -1,7 +1,7 @@
 
 import { Box, Checkbox, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react"
 import { ConfigProvider, TimePicker } from "antd"
-import { Dayjs } from "dayjs"
+import dayjs, { Dayjs } from "dayjs"
 import { ReactNode, useEffect } from "react"
 
 
@@ -90,9 +90,9 @@ function GetWeeklyPlan({
             if(is_morning_holiday && is_afternoon_holiday && onIsHolidayChange) {
                 onIsHolidayChange(index, true)
             }
-            else if(is_morning_holiday || is_afternoon_holiday && is_holiday && onIsHolidayChange) {
-                onIsHolidayChange(index, false)
-            }
+            // else if(is_morning_holiday || is_afternoon_holiday && is_holiday && onIsHolidayChange) {
+            //     onIsHolidayChange(index, false)
+            // }
         },
         [is_morning_holiday, is_afternoon_holiday]
     )
@@ -152,7 +152,8 @@ function GetWeeklyPlan({
                             </ConfigProvider>
 
                             {
-                                show_is_morning_holiday
+                                show_is_morning_holiday &&
+                                !(is_morning_holiday && is_afternoon_holiday && is_holiday)
                                     ?
                                     <ChangeIsHoliday
                                         title="آیا در صبح تعطیل هست ؟"
@@ -204,7 +205,7 @@ function GetWeeklyPlan({
 
                             {
                                 show_is_afternoon_holiday &&
-                                !(is_morning_holiday && is_afternoon_holiday)
+                                !(is_morning_holiday && is_afternoon_holiday && is_holiday)
                                     ?
                                     <ChangeIsHoliday
                                         title="آیا در عصر تعطیل هست ؟"

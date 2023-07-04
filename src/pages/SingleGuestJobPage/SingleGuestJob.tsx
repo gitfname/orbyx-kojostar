@@ -17,6 +17,7 @@ import { getSingleGuestJob } from "../../utils/http"
 import getBaseUrl from "../../utils/base-url"
 import MarkPlaceOnMap from "../../components/MarkPlaceOnMap"
 import { MdLocationOn } from "react-icons/md"
+import { LatLng } from "leaflet"
 
 function SingleGuestJob() {
     const { id: jobId } = useParams()
@@ -234,9 +235,13 @@ function SingleGuestJob() {
 
                 <div className="mt-6 w-full max-w-4xl mx-auto">
                     <MarkPlaceOnMap
-                        lat={data?.job?.lat}
-                        lng={data?.job?.lng}
-                        title={data?.job?.title}
+                        zoom={16}
+                        latlng={[
+                            {
+                                latlng: new LatLng(data?.job?.lat, data?.job?.lng),
+                                title: data?.job?.title
+                            }
+                        ]}
                     />
                 </div>
 

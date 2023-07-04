@@ -17,14 +17,14 @@ interface addJobProps {
     title: string;
     desc: string;
     address: string;
-    // lat: string;
-    // lng: string;
+    lat: string;
+    lng: string;
     // category_IDs:Array<number>;
     // city_id: number;
     phones: Array<string>;
     // images: FilePondFile[];
-    // dailyPlans: Array<dailyPlansOptions>;
-    // hashtags:  string;
+    dailyPlans: Array<dailyPlansOptions>;
+    hashtags:  string;
 }
 
 interface addJobOutPut {
@@ -32,7 +32,7 @@ interface addJobOutPut {
 }
 
 async function updateJob({
-    address, desc, phones, title, id
+    address, desc, phones, title, id, hashtags, dailyPlans, lat, lng
 }: addJobProps): Promise<addJobOutPut> {
 
     const form = new FormData();
@@ -46,25 +46,25 @@ async function updateJob({
     form.append("address", address)
     // form.append("city_id", city_id.toString())
     // Object.keys(catIDs)?. forEach(catId => form.append("categories[]", catId.toString()))
-    // form.append("lat", lat)
-    // form.append("lng", lng)
-    // form.append("hashtags", hashtags)
+    lat && form.append("lat", lat)
+    lng && form.append("lng", lng)
+    form.append("hashtags", hashtags)
     phones.forEach(phone => form.append("phones[]", phone))
     // images?.forEach(image => form.append("images[]", image.file))
-    // dailyPlans.forEach(plan => {
-    //     if(plan.is_holiday) {
-    //         form.append(`plan[${plan.dayIndex}][day]`, plan.dayIndex.toString())
-    //         form.append(`plan[${plan.dayIndex}][is_holiday]`, "1")
-    //     }
-    //     else {
-    //         form.append(`plan[${plan.dayIndex}][day]`, plan.dayIndex.toString())
-    //         form.append(`plan[${plan.dayIndex}][is_holiday]`, "0")
-    //         plan?.start_morning_time&&form.append(`plan[${plan.dayIndex}][start_morning_time]`, plan.start_morning_time)
-    //         plan?.end_morning_time&&form.append(`plan[${plan.dayIndex}][end_morning_time]`, plan.end_morning_time)
-    //         plan?.start_afternoon_time&&form.append(`plan[${plan.dayIndex}][start_afternoon_time]`, plan.start_afternoon_time)
-    //         plan?.end_afternoon_time&&form.append(`plan[${plan.dayIndex}][end_afternoon_time]`, plan.end_afternoon_time)
-    //     }
-    // })
+    dailyPlans.forEach(plan => {
+        if(plan.is_holiday) {
+            form.append(`plan[${plan.dayIndex}][day]`, plan.dayIndex.toString())
+            form.append(`plan[${plan.dayIndex}][is_holiday]`, "1")
+        }
+        else {
+            form.append(`plan[${plan.dayIndex}][day]`, plan.dayIndex.toString())
+            form.append(`plan[${plan.dayIndex}][is_holiday]`, "0")
+            plan?.start_morning_time&&form.append(`plan[${plan.dayIndex}][start_morning_time]`, plan.start_morning_time)
+            plan?.end_morning_time&&form.append(`plan[${plan.dayIndex}][end_morning_time]`, plan.end_morning_time)
+            plan?.start_afternoon_time&&form.append(`plan[${plan.dayIndex}][start_afternoon_time]`, plan.start_afternoon_time)
+            plan?.end_afternoon_time&&form.append(`plan[${plan.dayIndex}][end_afternoon_time]`, plan.end_afternoon_time)
+        }
+    })
 
 
     const fetchOptions = {

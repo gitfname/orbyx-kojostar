@@ -7,6 +7,7 @@ export const ApplicationRoutes = {
         search: getBaseUrl()+"/search",
         bookmarks: getBaseUrl()+"/bookmarks",
         profile: getBaseUrl()+"/profile",
+        nearByJobs: getBaseUrl()+"/near-jobs",
         jobPage: getBaseUrl()+"/jobs/:id",
         adminJobPage: getBaseUrl()+"/admin/jobs/:id",
         guestJobPage: getBaseUrl()+"/jobs/guest/:id",

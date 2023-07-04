@@ -1,6 +1,8 @@
 
+import { Mark } from "@chakra-ui/react";
 import { LatLng } from "leaflet";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet"
+import { useEffect, useState } from "react";
+import { MapContainer, Marker, Popup, TileLayer, useMapEvent, useMapEvents } from "react-leaflet"
 
 interface Props {
     latlng: Array<{
@@ -10,9 +12,56 @@ interface Props {
     zoom: number;
     width?: string;
     height?: string;
+    markable?: boolean;
+    onChange?(latlng: LatLng): void
 }
 
-function MarkPlaceOnMap({ latlng, zoom, height=undefined, width=undefined }: Props) {
+interface ClickedPositionProps {
+    onChange?(latlng: LatLng): void
+} 
+
+function ClickedPosition({ onChange }: ClickedPositionProps) {
+    const [pos, setPos] = useState<LatLng>(undefined)
+
+    useEffect(
+        () => {
+            if(pos) {
+                onChange(pos)
+            }
+        },
+        [pos]
+    )
+
+    useMapEvents({
+        click: (e => {
+            setPos(e.latlng)
+        })
+    })
+
+    return <>
+        {
+            pos
+                ?
+                <Marker title="موقعیت جدید" position={[pos.lat, pos.lng]}></Marker>
+                :
+                null
+        }
+    </>
+}
+
+function MarkPlaceOnMap({ latlng, zoom, height = undefined, width = undefined, markable = false, onChange = undefined }: Props) {
+
+    const [pos, setPos] = useState<LatLng>(undefined)
+
+    useEffect(
+        () => {
+            if(pos && onChange) {
+                onChange(pos)
+            }
+        },
+        [pos]
+    )
+
     return (
         <MapContainer
             center={[latlng[0].latlng.lat, latlng[0].latlng.lng]}
@@ -39,6 +88,13 @@ function MarkPlaceOnMap({ latlng, zoom, height=undefined, width=undefined }: Pro
                         </Popup>
                     </Marker>
                 ))
+            }
+
+            {
+                markable
+                    ?
+                    <ClickedPosition onChange={(pos) => setPos(pos)} />
+                    : null
             }
 
 

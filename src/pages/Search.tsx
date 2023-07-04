@@ -67,7 +67,7 @@ function Search() {
 
             <NavLink
               end
-              to={ApplicationRoutes.pages.search + "/nearby"}
+              to={ApplicationRoutes.pages.search + "/near-jobs"}
               className={({ isActive }) => `primary-btn font-[vazir] text-xs w-max py-3 bg-transparent text-blue-600 border
             border-blue-500 hover:bg-blue-500 hover:text-white flex-shrink-0 ${isActive ? "!bg-blue-500 !text-white" : ""}`}
             >

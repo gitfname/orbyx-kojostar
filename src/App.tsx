@@ -5,17 +5,14 @@ import ApplicationLayout from "./layouts/ApplicationLayout"
 import NotFound from "./pages/NotFound"
 import { ApplicationRoutes } from "./routes"
 import useUserStore from "./stores/userStore"
-import Login from "./pages/Login"
 import { useEffect, lazy, Suspense } from "react"
 import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
-import Loading from "./pages/Loading"
-import SingleJobAllComments from "./pages/SingleJobAllComments/SingleJobAllComments"
-import SingleGuestJob from "./pages/SingleGuestJobPage/SingleGuestJob"
-import AllJobs from "./pages/Admin/AllJobs/AllJobs"
-import AdminSingleJob from "./pages/Admin/SingleJob/SingleJob"
+import Loading from "./components/Loading"
 
+const Login = lazy(() => import("./pages/Login"))
+// import Login from "./pages/Login"
 const Search = lazy(() => import("./pages/Search"))
 // import Search from "./pages/Search"
 const Popular = lazy(() => import("./pages/Popular"))
@@ -44,8 +41,16 @@ const ContactUsAndAds = lazy(() => import("./pages/ContactUsAndAds/ContactUsAndA
 // import ContactUsAndAds from "./pages/ContactUsAndAds/ContactUsAndAds"
 const SuggestAddNewPlace = lazy(() => import("./pages/SuggestAddNewPlace/SuggestAddNewPlace"))
 // import SuggestAddNewPlace from "./pages/SuggestAddNewPlace/SuggestAddNewPlace"
-
-
+const NearByJobs = lazy(() => import("./pages/NearByJobs/NearByJobs"))
+// import NearByJobs from "./pages/NearByJobs/NearByJobs"
+const AdminSingleJob = lazy(() => import("./pages/Admin/SingleJob/SingleJob"))
+// import AdminSingleJob from "./pages/Admin/SingleJob/SingleJob"
+const AllJobs = lazy(() => import("./pages/Admin/AllJobs/AllJobs"))
+// import AllJobs from "./pages/Admin/AllJobs/AllJobs"
+const SingleGuestJob = lazy(() => import("./pages/SingleGuestJobPage/SingleGuestJob"))
+// import SingleGuestJob from "./pages/SingleGuestJobPage/SingleGuestJob"
+const SingleJobAllComments = lazy(() => import("./pages/SingleJobAllComments/SingleJobAllComments"))
+// import SingleJobAllComments from "./pages/SingleJobAllComments/SingleJobAllComments"
 
 
 function App() {
@@ -107,6 +112,10 @@ function App() {
             }
             setIsLoading(false)
           })
+          .catch(err => {
+            if ("onLine" in navigator && navigator.onLine) localStorage.removeItem(localStorage_token_key)
+            window.location.reload()
+          })
       }
       else {
         setIsLoading(false)
@@ -139,7 +148,7 @@ function App() {
   // )
 
   if (!location.pathname.startsWith("/jobs/guest/")) {
-    if (!userData.isLoggedIn) return <Login />
+    if (!userData.isLoggedIn) return <Suspense fallback={<Loading />}><Login /></Suspense>
   }
   else {
     console.log("starts with that");
@@ -192,6 +201,15 @@ function App() {
               element={
                 <Suspense fallback={<Loading />}>
                   <DisCounts />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path={"near-jobs"}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <NearByJobs />
                 </Suspense>
               }
             />

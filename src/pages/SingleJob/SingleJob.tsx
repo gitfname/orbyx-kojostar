@@ -5,7 +5,7 @@ import { getSingleJob } from "../../utils/http/api/getSingleJob"
 import Rating_1 from "../../components/Rating_1"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { IoIosInformationCircleOutline } from "react-icons/io"
-import { BsSticky, BsClock } from "react-icons/bs"
+import { BsSticky, BsClock, BsBookmark, BsBookmarkFill } from "react-icons/bs"
 import { HiHashtag } from "react-icons/hi"
 import CommentsSection_1 from "../../components/CommentsSection_1"
 import { toggleBookMark } from "../../utils/http/api/toggleBookMark"
@@ -17,7 +17,7 @@ import JobImageSlider_1 from "../../components/JobImageSlider_1"
 import WeeklyPlanCard_1 from "../../components/WeeklyPlanCard_1"
 import getDayNameByIndex from "../../utils/getDayNameByIndex"
 import Report from "./components/Report"
-import { MdLocationOn, MdLooksOne } from "react-icons/md"
+import { MdLocationOn, MdLooksOne, MdOutlineBook } from "react-icons/md"
 import MarkPlaceOnMap from "../../components/MarkPlaceOnMap"
 import { LatLng, latLng } from "leaflet"
 
@@ -94,7 +94,19 @@ function SingleJob() {
                     </button>
                 </div>
 
-                <div className="w-max grid place-items-center absolute top-1/2 left-4 -translate-y-1/2">
+                <div className="w-max flex items-center gap-x-3 absolute top-1/2 left-4 -translate-y-1/2">
+
+                    <div onClick={() => onToggleBookMark(data?.job?.id)} className="p-1 rounded-lg hover:bg-transparent/5 self-stretch px-2 grid place-items-center
+                    transition-colors duration-300 cursor-pointer">
+                        {
+                            !isBookMarked
+                                ?
+                                <BsBookmark className="w-5 h-5 fill-slate-800 pointer-events-none" />
+                                :
+                                <BsBookmarkFill className="w-5 h-5 fill-slate-800 pointer-events-none" />
+                        }
+                    </div>
+
                     <Report
                         job_id={data?.job?.id}
                     />
@@ -103,7 +115,6 @@ function SingleJob() {
 
             <div className="flex items-center gap-x-2 px-4 mt-6">
                 <div
-                    onClick={() => onToggleBookMark(data?.job.id)}
                     className="p-1.5 rounded-lg hover:bg-transparent/5 active:scale-95 transition-transform duration-300
                     cursor-pointer"
                 >
