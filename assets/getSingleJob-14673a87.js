@@ -1,0 +1,1 @@
+import{u as r,$ as n}from"./App-8c327c57.js";async function a({jobId:t}){const o={method:"GET",headers:{"Content-Type":"application/json",Authorization:"Bearer "+r.getState().user.token}},e=await fetch(n+"?id="+t,o);if(e.ok)return await e.json();throw e.status===404?new Error("not found"):new Error("unknown error")}export{a as g};

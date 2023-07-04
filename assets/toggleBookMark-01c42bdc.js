@@ -1,0 +1,1 @@
+import{u as n,t as s}from"./App-8c327c57.js";async function i({job_id:o}){const e=s+"?job_id="+o,r={method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+n.getState().user.token}},t=await fetch(e,r);if(t.ok)return await t.json();throw new Error("something went wrong")}export{i as t};
