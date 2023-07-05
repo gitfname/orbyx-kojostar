@@ -175,8 +175,8 @@ function AdminSingleJob() {
                 start_afternoon_time: plan.is_afternoon_holiday ? null : `${plan.start_afternoon_time.format("HH")}:${plan.start_afternoon_time.format("mm")}`,
                 end_afternoon_time: plan.is_afternoon_holiday ? null : `${plan.end_afternoon_time.format("HH")}:${plan.end_afternoon_time.format("mm")}`
             })),
-            lat: geolocatoinPos.lat.toString(),
-            lng: geolocatoinPos.lng.toString()
+            lat: geolocatoinPos?.lat?.toString(),
+            lng: geolocatoinPos?.lng?.toString()
         })
             .then(data => {
                 toast({

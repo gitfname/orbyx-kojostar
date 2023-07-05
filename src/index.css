@@ -143,3 +143,9 @@
 .leaflet-bottom.leaflet-right {
   @apply hidden;
 }
+
+
+.message-mark {
+  -webkit-clip-path: polygon(0 100%, 8% 0, 92% 0);
+  clip-path: polygon(0 100%, 8% 0, 92% 0);
+}

@@ -189,6 +189,7 @@ function CheckOtp() {
         }
         else {
             setIsLoading(true)
+            setApplicationIsLoading(true)
             checkOtp({
                 code: parseInt(otpRef.current.value),
                 user_id: userData.userid
@@ -223,9 +224,10 @@ function CheckOtp() {
                                         token: data.token,
                                         isLoggedIn: true
                                     })
+                                    setIsLoading(false)
                                     setTimeout(() => {
-                                        setIsLoading(false)
-                                    }, 75);
+                                        setApplicationIsLoading(false)
+                                    }, 250);
                                 })
                                 .catch(() => {
                                     setIsLoading(false)
@@ -236,6 +238,9 @@ function CheckOtp() {
                             userApi.set_token(data.token)
                             userApi.set_role(data.role)
                             setIsLoading(false)
+                            setTimeout(() => {
+                                setApplicationIsLoading(false)
+                            }, 250);
                         }
                     }
                     else {
@@ -294,10 +299,10 @@ function CheckOtp() {
                     <button
                         onClick={() => {
                             setApplicationIsLoading(true)
-                            get_phone_number({phoneNumber: userData.phone})
-                            .then(() => {
-                                setApplicationIsLoading(false)
-                            })
+                            get_phone_number({ phoneNumber: userData.phone })
+                                .then(() => {
+                                    setApplicationIsLoading(false)
+                                })
                         }}
                         className="primary-btn bg-emerald-600 px-6 w-max mx-auto flex items-center gap-x-2"
                     >

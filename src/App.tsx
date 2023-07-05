@@ -5,11 +5,12 @@ import ApplicationLayout from "./layouts/ApplicationLayout"
 import NotFound from "./pages/NotFound"
 import { ApplicationRoutes } from "./routes"
 import useUserStore from "./stores/userStore"
-import { useEffect, lazy, Suspense } from "react"
+import { useEffect, lazy, Suspense, useState } from "react"
 import { localStorage_token_key } from "./constants"
 import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./components/Loading"
+import Landing from "./pages/Landing/Landing"
 
 const Login = lazy(() => import("./pages/Login"))
 // import Login from "./pages/Login"
@@ -56,7 +57,10 @@ const SingleJobAllComments = lazy(() => import("./pages/SingleJobAllComments/Sin
 function App() {
   const [userApi, userData] = useUserStore(selectore => [selectore.api, selectore.user])
   const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading);
+  // setIsLoading(true)
   const location = useLocation()
+  const [isLoadingUserData, setIsLoadingUserData] = useState(true)
+  const navigate = useNavigate()
 
   history.navigate = useNavigate()
   history.location = location
@@ -74,6 +78,7 @@ function App() {
       const token = localStorage.getItem(localStorage_token_key)
       if (token) {
         setIsLoading(true)
+        setIsLoadingUserData(true)
         getUserInfo({ token })
           .then(userInfo => {
             if (userInfo.is_logged_in) {
@@ -111,6 +116,7 @@ function App() {
               })
             }
             setIsLoading(false)
+            setIsLoadingUserData(false)
           })
           .catch(err => {
             if ("onLine" in navigator && navigator.onLine) localStorage.removeItem(localStorage_token_key)
@@ -119,6 +125,7 @@ function App() {
       }
       else {
         setIsLoading(false)
+        setIsLoadingUserData(false)
       }
     },
     []
@@ -147,12 +154,22 @@ function App() {
   //   [i18n.language]
   // )
 
+
+  if (location.pathname === "/" && !userData.isLoggedIn) {
+    if(isLoadingUserData) return null
+    return (
+      <Suspense fallback={<Loading />}>
+        <Landing />
+      </Suspense>
+    )
+  }
+
   if (!location.pathname.startsWith("/jobs/guest/")) {
     if (!userData.isLoggedIn) return <Suspense fallback={<Loading />}><Login /></Suspense>
   }
-  else {
-    console.log("starts with that");
 
+  if (location.pathname === "/home" && userData.isLoggedIn) {
+    navigate(ApplicationRoutes.pages.home)
   }
 
   return (
@@ -161,7 +178,7 @@ function App() {
         <Routes>
 
           <Route
-            path={ApplicationRoutes.pages.home}
+            path={!userData.isLoggedIn ? ApplicationRoutes.pages.home + "home" : ApplicationRoutes.pages.home}
             element={
               <Suspense fallback={<Loading />}>
                 <Home />

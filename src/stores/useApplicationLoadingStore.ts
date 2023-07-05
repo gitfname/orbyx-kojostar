@@ -8,7 +8,15 @@ interface useApplicationLoadingStoreProps {
 
 const useApplicationLoadingStore = create<useApplicationLoadingStoreProps>(set => ({
     isLoading: false,
-    setIsLoading: (data) => set({isLoading: data})
+    setIsLoading: (data) => {
+        if(data) {
+            document.body.classList.add("h-screen", "overflow-y-hidden")
+        }
+        else {
+            document.body.classList.remove("h-screen", "overflow-y-hidden")
+        }
+        set({isLoading: data})
+    }
 }))
 
 export {
