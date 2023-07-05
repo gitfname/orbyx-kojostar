@@ -10,6 +10,7 @@ import Loading from "../components/Loading"
 import { BsMap } from "react-icons/bs"
 import ShowJobsInMap from "./ShowJobsInMap"
 import { LatLng } from "leaflet"
+import { ApplicationRoutes } from "../routes"
 
 interface MostCommentsProps {
   className?: string
@@ -88,7 +89,7 @@ function MostComments({ className }: MostCommentsProps) {
                 lng={item.lng}
                 rate={item.rate}
                 rate_count={item.rate_count}
-                link={getBaseUrl() + "/jobs/" + item.id}
+                link={ApplicationRoutes.pages.singleJob(item.id)}
               />
             )}
             emptyFallback={

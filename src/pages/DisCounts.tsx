@@ -11,6 +11,7 @@ import { BsMap, BsQuestion } from "react-icons/bs"
 import ShowJobsInMap from "./ShowJobsInMap"
 import { LatLng } from "leaflet"
 import InfoModal_1 from "./InfoModal_1"
+import { ApplicationRoutes } from "../routes"
 
 interface DisCountsProps {
   className?: string
@@ -103,7 +104,7 @@ function DisCounts({ className }: DisCountsProps) {
                 lng={item.lng}
                 rate={item.rate}
                 rate_count={item.rate_count}
-                link={getBaseUrl() + "/jobs/" + item.id}
+                link={ApplicationRoutes.pages.singleJob(item?.id)}
               />
             )}
             emptyFallback={

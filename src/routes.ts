@@ -3,27 +3,27 @@ import getBaseUrl from "./utils/base-url";
 export const ApplicationRoutes = {
 
     pages: {
-        home: getBaseUrl()+"/home",
-        search: getBaseUrl()+"/search",
-        bookmarks: getBaseUrl()+"/bookmarks",
-        profile: getBaseUrl()+"/profile",
-        nearByJobs: getBaseUrl()+"/near-jobs",
-        jobPage: getBaseUrl()+"/jobs/:id",
-        adminJobPage: getBaseUrl()+"/admin/jobs/:id",
-        guestJobPage: getBaseUrl()+"/jobs/guest/:id",
-        singleJob: (id: number) => getBaseUrl()+"/jobs/"+id,
-        adminSingleJob: (id: number) => getBaseUrl()+"/admin/jobs/"+id,
-        SingleGuestJob: (id: number) => getBaseUrl()+"/jobs/guest/"+id,
-        newJob: getBaseUrl()+"/new-job",
-        lastSeenJobs: getBaseUrl()+"/last-seen-jobs",
-        myComments: getBaseUrl()+"/my-comments",
-        suggestAddNewPlace: getBaseUrl()+"/suggest-add-new-place",
-        contactUsAndAds: getBaseUrl()+"/contact-us-and-ads",
-        commentsAndSuggestions: getBaseUrl()+"/comments-and-suggestios",
-        editProfile: getBaseUrl()+"/edit-profile",
-        allComments: getBaseUrl()+"/jobs/:jobid/comments",
-        allComments__getPageUrl: (jobId: number) => getBaseUrl()+`/jobs/${jobId}/comments`,
-        allJobs: getBaseUrl()+"/admin/all-jobs"
+        home: getBaseUrl()+"/app",
+        search: getBaseUrl()+"/app/search",
+        bookmarks: getBaseUrl()+"/app/bookmarks",
+        profile: getBaseUrl()+"/app/profile",
+        nearByJobs: getBaseUrl()+"/app/near-jobs",
+        jobPage: getBaseUrl()+"/app/jobs/:id",
+        adminJobPage: getBaseUrl()+"/app/admin/jobs/:id",
+        guestJobPage: getBaseUrl()+"/app/jobs/guest/:id",
+        singleJob: (id: number) => getBaseUrl()+"/app/jobs/"+id,
+        adminSingleJob: (id: number) => getBaseUrl()+"/app/admin/jobs/"+id,
+        SingleGuestJob: (id: number) => getBaseUrl()+"/app/jobs/guest/"+id,
+        newJob: getBaseUrl()+"/app/new-job",
+        lastSeenJobs: getBaseUrl()+"/app/last-seen-jobs",
+        myComments: getBaseUrl()+"/app/my-comments",
+        suggestAddNewPlace: getBaseUrl()+"/app/suggest-add-new-place",
+        contactUsAndAds: getBaseUrl()+"/app/contact-us-and-ads",
+        commentsAndSuggestions: getBaseUrl()+"/app/comments-and-suggestios",
+        editProfile: getBaseUrl()+"/app/edit-profile",
+        allComments: getBaseUrl()+"/app/jobs/:jobid/comments",
+        allComments__getPageUrl: (jobId: number) => getBaseUrl()+`/app/jobs/${jobId}/comments`,
+        allJobs: getBaseUrl()+"/app/admin/all-jobs"
     }
 
 }

@@ -9,6 +9,7 @@ import { searchOptions } from "../../utils/http/api/search"
 import Card_1 from "../../components/Card_1"
 import getBaseUrl from "../../utils/base-url"
 import { useToast } from "@chakra-ui/react"
+import { ApplicationRoutes } from "../../routes"
 
 
 function NearByJobs() {
@@ -119,7 +120,7 @@ function NearByJobs() {
                         lng={item.lng}
                         rate={item.rate}
                         rate_count={item.rate_count}
-                        link={getBaseUrl() + "/jobs/" + item.id}
+                        link={ApplicationRoutes.pages.singleJob(item.id)}
                     />
                 )}
                 emptyFallback={

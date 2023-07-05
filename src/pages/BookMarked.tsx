@@ -7,6 +7,7 @@ import { toggleBookMark } from "../utils/http/api/toggleBookMark"
 import useUserStore from "../stores/userStore"
 import getBaseUrl from "../utils/base-url"
 import Loading from "../components/Loading"
+import { ApplicationRoutes } from "../routes"
 
 function BookMarked() {
     const {
@@ -51,7 +52,7 @@ function BookMarked() {
                                     <div className="relative">
                                         <Card_1
                                             {...item}
-                                            link={getBaseUrl() + "/jobs/" + item?.id}
+                                            link={ApplicationRoutes.pages.singleJob(item?.id)}
                                         />
                                         <div
                                             onClick={() => onToggleBookMark(item.id)}
