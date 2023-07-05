@@ -23,6 +23,8 @@ interface addJobProps {
     // city_id: number;
     phones: Array<string>;
     // images: FilePondFile[];
+    oldImages: Array<string>;
+    newImages: Array<File>;
     dailyPlans: Array<dailyPlansOptions>;
     hashtags:  string;
 }
@@ -32,7 +34,7 @@ interface addJobOutPut {
 }
 
 async function updateJob({
-    address, desc, phones, title, id, hashtags, dailyPlans, lat, lng
+    address, desc, phones, title, id, hashtags, dailyPlans, lat, lng, newImages, oldImages
 }: addJobProps): Promise<addJobOutPut> {
 
     const form = new FormData();
@@ -48,6 +50,8 @@ async function updateJob({
     // Object.keys(catIDs)?. forEach(catId => form.append("categories[]", catId.toString()))
     lat && form.append("lat", lat)
     lng && form.append("lng", lng)
+    oldImages?.length > 0 ? oldImages.forEach(image => form.append("old_images[]", image)) : form.append("old_images[]", "")
+    newImages && newImages.forEach(image => form.append("new_images[]", image))
     form.append("hashtags", hashtags)
     phones.forEach(phone => form.append("phones[]", phone))
     // images?.forEach(image => form.append("images[]", image.file))

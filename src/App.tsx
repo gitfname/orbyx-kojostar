@@ -155,8 +155,7 @@ function App() {
   // )
 
 
-  if (location.pathname === "/" && !userData.isLoggedIn) {
-    if(isLoadingUserData) return null
+  if (location.pathname === "/") {
     return (
       <Suspense fallback={<Loading />}>
         <Landing />
@@ -166,10 +165,6 @@ function App() {
 
   if (!location.pathname.startsWith("/jobs/guest/")) {
     if (!userData.isLoggedIn) return <Suspense fallback={<Loading />}><Login /></Suspense>
-  }
-
-  if (location.pathname === "/home" && userData.isLoggedIn) {
-    navigate(ApplicationRoutes.pages.home)
   }
 
   return (

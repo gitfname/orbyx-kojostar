@@ -3,7 +3,7 @@ import getBaseUrl from "./utils/base-url";
 export const ApplicationRoutes = {
 
     pages: {
-        home: import.meta.env.BASE_URL,
+        home: getBaseUrl()+"/home",
         search: getBaseUrl()+"/search",
         bookmarks: getBaseUrl()+"/bookmarks",
         profile: getBaseUrl()+"/profile",

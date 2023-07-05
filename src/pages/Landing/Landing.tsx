@@ -6,11 +6,10 @@ import getBaseUrl from "../../utils/base-url";
 import Question from "./components/Question";
 import Answer from "./components/Answer";
 import CTA_1 from "./components/CTA_1";
-import { color } from "@chakra-ui/react";
-import { colors } from "../../utils/colors";
 import FeatureCard_1 from "./components/FeatureCard_1";
 import { useApplicationLoadingStore } from "../../stores/useApplicationLoadingStore";
 import { useEffect } from "react";
+import { motion } from "framer-motion"
 
 function Landing() {
 
@@ -20,7 +19,7 @@ function Landing() {
   const handleHeroImgLoaded = () => {
     setTimeout(() => {
       setIsLoading(false)
-    }, 1000);
+    }, 500);
   }
 
   useEffect(
@@ -41,16 +40,31 @@ function Landing() {
 
 
       {/* question and answer section */}
-      <div className="flex flex-col max-sm:gap-y-8 gap-y-3 px-4 md:px-6 mt-16 [&>div:nth-child(even)]:mr-auto">
+      <div className="flex overflow-x-hidden flex-col max-sm:gap-y-8 gap-y-3 px-4 md:px-6 mt-16 [&>div:nth-child(even)]:mr-auto">
 
-        <Question text="- تا حالا شده یه جایی دنبال نزدیکترین پمپ بنزین بگردی؟" />
-        <Answer text="حتما از این جور سوال ها برای شما هم پیش اومده. با این برنامه توی کوتاه ترین زمان و با دقیق ترین اطلاعات به جواب همه ی سوالات میرسی" />
+        <motion.div
+          initial={{ x: 30, opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          whileInView={{ x: [0, 10, 0], opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <Question text="- تا حالا شده یه جایی دنبال نزدیکترین پمپ بنزین بگردی؟" />
+        </motion.div>
+
+        <motion.div
+          initial={{ x: -30, opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          whileInView={{ x: [0, 10, 0], opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <Answer text="حتما از این جور سوال ها برای شما هم پیش اومده. با این برنامه توی کوتاه ترین زمان و با دقیق ترین اطلاعات به جواب همه ی سوالات میرسی" />
+        </motion.div>
 
       </div>
 
 
       <div
-        className="w-full mt-36 grid grid-cols-1 md:grid-cols-2 place-items-center px-4 md:px-6 gap-7"
+        className="w-full overflow-x-hidden mt-36 grid grid-cols-1 md:grid-cols-2 place-items-center px-4 md:px-6 gap-7"
       >
 
         <div>
@@ -62,40 +76,72 @@ function Landing() {
 
           <div className="mt-6 flex flex-col gap-y-2 w-full max-w-[15rem] max-md:mx-auto max-md:max-w-xs">
 
-            <CTA_1
-              text="ورود به وب اپ"
-              img={getBaseUrl() + "/images/pwa.png"}
-              onCLick={() => navigate(ApplicationRoutes.pages.home + "home")}
-            />
+            <motion.div
+              initial={{ x: 30, opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              whileInView={{ x: [0, 10, 0], opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <CTA_1
+                text="ورود به وب اپ"
+                img={getBaseUrl() + "/images/pwa.png"}
+                onCLick={() => navigate(ApplicationRoutes.pages.home)}
+              />
+            </motion.div>
 
-            <CTA_1
-              text="نسخه اندروید"
-              bgColor="#98C425"
-              img={getBaseUrl() + "/images/android.png"}
-            />
+            <motion.div
+              initial={{ x: 30, opacity: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              whileInView={{ x: [0, 10, 0], opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <CTA_1
+                text="نسخه اندروید"
+                bgColor="#98C425"
+                img={getBaseUrl() + "/images/android.png"}
+              />
+            </motion.div>
+
+
 
           </div>
 
         </div>
 
-        <img
-          alt=""
-          src={getBaseUrl() + "/images/image-1.png"}
-          className="w-9/12 h-auto block mx-auto object-center object-cover"
-        />
+        <motion.div
+          initial={{ x: -30, opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <img
+            alt=""
+            src={getBaseUrl() + "/images/image-1.png"}
+            className="w-9/12 h-auto block mx-auto object-center object-cover"
+          />
+        </motion.div>
+
 
       </div>
 
 
       <div
-        className="w-full mt-36 grid grid-cols-1 md:grid-cols-2 place-items-center px-4 md:px-6 gap-7"
+        className="w-full overflow-hidden mt-36 grid grid-cols-1 md:grid-cols-2 place-items-center px-4 md:px-6 gap-7"
       >
 
-        <img
-          alt=""
-          src={getBaseUrl() + "/images/image-2.png"}
-          className="w-full h-auto object-center object-cover"
-        />
+        <motion.div
+          initial={{ y: -30, opacity: 0 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <img
+            alt=""
+            src={getBaseUrl() + "/images/image-2.png"}
+            className="w-full h-auto object-center object-cover"
+          />
+        </motion.div>
+
 
         <div dir="ltr" className="flex flex-col items-start justify-center place-self-start w-full h-full">
 
@@ -109,11 +155,18 @@ function Landing() {
             <div className="absolute message-mark bottom-0 translate-y-[99%] left-12 w-8 h-12 bg-blue-500"></div>
           </div>
 
-          <img
-            alt=""
-            src={getBaseUrl() + "/images/bill-gates.png"}
-            className="w-16 h-16 rounded-full object-center object-cover block shadow shadow-black/10"
-          />
+          <motion.div
+            initial={{ x: 30, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <img
+              alt=""
+              src={getBaseUrl() + "/images/bill-gates.png"}
+              className="w-16 h-16 rounded-full object-center object-cover block shadow shadow-black/10"
+            />
+          </motion.div>
 
           <p
             dir="rtl"
@@ -131,7 +184,7 @@ function Landing() {
       </div>
 
       <div
-        className="w-full mt-36 px-4 md:px-6"
+        className="w-full overflow-x-hidden mt-36 px-4 md:px-6"
       >
 
         <p className="text-lg font-[vazir] text-[#187FE2]">
@@ -140,45 +193,101 @@ function Landing() {
 
         <div className="mt-8 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-3.5 gap-y-5">
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="ثبت اماکن و مشاغل"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="ثبت اماکن و مشاغل"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="طراحی سایت و اپلیکیشن"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="طراحی سایت و اپلیکیشن"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="تبلیغات در صفحه اول اپلیکیشن قسمت پیشنهاد ویژه"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="تبلیغات در صفحه اول اپلیکیشن قسمت پیشنهاد ویژه"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="ساخت تیزر، انیمیشن، موشن و لوگو"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="ساخت تیزر، انیمیشن، موشن و لوگو"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="تبلیغات اینستاگرامی، پیج گردانی، تولید محتوا"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="تبلیغات اینستاگرامی، پیج گردانی، تولید محتوا"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="افزودن برچسب تخفیفات برای مشاغل"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="افزودن برچسب تخفیفات برای مشاغل"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="مشاوره رایگان کسب و کار"
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="مشاوره رایگان کسب و کار"
+            />
+          </motion.div>
 
-          <FeatureCard_1
-            img={getBaseUrl() + "/images/tick.png"}
-            text="و چندین خدمت دیگر..."
-          />
+          <motion.div
+            initial={{ x: 20, opacity: 0 }}
+            transition={{ duration: 0.5, delay: 0.65 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <FeatureCard_1
+              img={getBaseUrl() + "/images/tick.png"}
+              text="و چندین خدمت دیگر..."
+            />
+          </motion.div>
 
         </div>
 
@@ -186,7 +295,7 @@ function Landing() {
 
 
       <div
-        className="w-full mt-36 px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-6"
+        className="w-full overflow-x-hidden mt-36 px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-6"
       >
 
         <div className="flex flex-col gap-y-5">
@@ -206,63 +315,84 @@ function Landing() {
 
           <div className="mt-3 flex flex-col gap-y-3.5">
 
-            <div dir="ltr" className="flex items-center justify-end gap-x-2">
+            <motion.div
+              initial={{ x: 25, opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <div dir="ltr" className="flex items-center justify-end gap-x-2">
 
-              <a
-                href="instagram.com/kojo_official_"
-                className="text-sm text-slate-800 font-[vazir]"
-              >
-                instagram.com/kojo_official_
-              </a>
+                <a
+                  href="instagram.com/kojo_official_"
+                  className="text-sm text-slate-800 font-[vazir]"
+                >
+                  instagram.com/kojo_official_
+                </a>
 
-              <img
-                alt=""
-                src={getBaseUrl() + "/assets/icons/instagram1.png"}
-                className="w-7 h-7 object-center object-cover"
-              />
+                <img
+                  alt=""
+                  src={getBaseUrl() + "/assets/icons/instagram1.png"}
+                  className="w-7 h-7 object-center object-cover"
+                />
 
-            </div>
+              </div>
+            </motion.div>
 
-            <div dir="ltr" className="flex items-center justify-end gap-x-2">
+            <motion.div
+              initial={{ x: 25, opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.5 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <div dir="ltr" className="flex items-center justify-end gap-x-2">
 
-              <a
-                href="t.me/kojo_official"
-                className="text-sm text-slate-800 font-[vazir]"
-              >
-                t.me/kojo_official
-              </a>
+                <a
+                  href="t.me/kojo_official"
+                  className="text-sm text-slate-800 font-[vazir]"
+                >
+                  t.me/kojo_official
+                </a>
 
-              <img
-                alt=""
-                src={getBaseUrl() + "/assets/icons/telegram.png"}
-                className="w-8 h-8 object-center object-cover"
-              />
+                <img
+                  alt=""
+                  src={getBaseUrl() + "/assets/icons/telegram.png"}
+                  className="w-8 h-8 object-center object-cover"
+                />
 
-            </div>
+              </div>
+            </motion.div>
 
-            <div dir="ltr" className="flex items-center justify-end gap-x-2">
+            <motion.div
+              initial={{ x: 25, opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.6 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <div dir="ltr" className="flex items-center justify-end gap-x-2">
 
-              <a
-                href="#"
-                className="text-sm text-slate-800 font-[vazir]"
-              >
-                0991 930 9031
-              </a>
+                <a
+                  href="#"
+                  className="text-sm text-slate-800 font-[vazir]"
+                >
+                  0991 930 9031
+                </a>
 
-              <img
-                alt=""
-                src={getBaseUrl() + "/assets/icons/whatsApp.png"}
-                className="w-7 h-7 object-center object-cover"
-              />
+                <img
+                  alt=""
+                  src={getBaseUrl() + "/assets/icons/whatsApp.png"}
+                  className="w-7 h-7 object-center object-cover"
+                />
 
-            </div>
+              </div>
+            </motion.div>
+
 
           </div>
 
         </div>
 
         <div className="w-11/12 md:w-10/12 rounded-3xl aspect-video bg-gray-400 max-md:mx-auto">
-
         </div>
 
       </div>

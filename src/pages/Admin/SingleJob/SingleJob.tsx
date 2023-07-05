@@ -30,6 +30,7 @@ import { BiBarChart } from "react-icons/bi"
 import { v4 as uuidv4 } from "uuid"
 import dayjs, { Dayjs } from "dayjs"
 import { GetWeeklyPlan } from "../../../components/GetWeeklyPlansModal_1"
+import GetPickImages from "../../../components/GetPickImages/GetPickImages"
 
 
 interface WeeklyPlans {
@@ -92,6 +93,8 @@ function AdminSingleJob() {
     const [hashtags, setHashtags] = useState<Array<{ value: string, id: string }>>(undefined)
     const hashtagRef = useRef<HTMLInputElement>(undefined)
     const [geolocatoinPos, setGeolocatoinPos] = useState<LatLng>(undefined)
+    const oldImagesRef = useRef<Array<string>>([])
+    const newImagesRef = useRef<Array<File>>([])
 
     const [weeklyPlan, setWeeklyPlan] = useState<Array<WeeklyPlans>>([])
 
@@ -104,7 +107,8 @@ function AdminSingleJob() {
         async () => getSingleJob({ jobId: parseInt(jobId) }),
         {
             shouldRetryOnError: false,
-            focusThrottleInterval: 1000
+            focusThrottleInterval: 1000,
+            revalidateOnFocus: false
         }
     )
 
@@ -176,7 +180,9 @@ function AdminSingleJob() {
                 end_afternoon_time: plan.is_afternoon_holiday ? null : `${plan.end_afternoon_time.format("HH")}:${plan.end_afternoon_time.format("mm")}`
             })),
             lat: geolocatoinPos?.lat?.toString(),
-            lng: geolocatoinPos?.lng?.toString()
+            lng: geolocatoinPos?.lng?.toString(),
+            oldImages: oldImagesRef.current,
+            newImages: newImagesRef.current
         })
             .then(data => {
                 toast({
@@ -207,9 +213,16 @@ function AdminSingleJob() {
     return (
         <div className="max-lg:h-full h-screen overflow-y-auto pb-8">
 
-            <div className="w-full h-[34rem] md:h-[38rem]">
-                <JobImageSlider_1
+            <div className="w-full min-h-[34rem] md:min-h-[38rem] p-4">
+                {/* <JobImageSlider_1
                     images={jobData?.job?.medias.map(item => item.url)}
+                /> */}
+                <GetPickImages
+                    initialImages={jobData?.job?.medias.map(image => image.url)}
+                    onChange={(oldImages, newImages) => {
+                        oldImagesRef.current = oldImages
+                        newImagesRef.current = newImages
+                    }}
                 />
             </div>
 
