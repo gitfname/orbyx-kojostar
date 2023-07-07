@@ -67,10 +67,17 @@ const test = [
   },
   {
     id: 7,
-    text: "عکس مرکزی اربیکس",
-    username: "Orbyx",
+    text: "همکاری با مجموعه عکس مرکزی در تولید محتوا، مارکتینگ، ایده پردازی و برندینگ",
+    username: "عکس مرکزی",
     company: "cmp-3",
     img: getBaseUrl() + "/images/orbyx-team/IMG_20230705_194047_486.jpg"
+  },
+  {
+    id: 8,
+    text: "همکاری با تیم اربیکس در زمینه دیجیتال، پروگرمینگ و مارکتینگ",
+    username: "تیم اربیکس",
+    company: "cmp-3",
+    img: getBaseUrl() + "/images/orbyx-team/orbyx.jpg"
   }
 ]
 
@@ -379,7 +386,7 @@ function Landing() {
       <div className="w-full mt-36 px-4">
 
         <p className="text-lg font-[vazirMedium] text-slate-800 mb-4">
-          تیم اربیکس
+          تیم ما
         </p>
 
         <TestimotionalsSlider_1

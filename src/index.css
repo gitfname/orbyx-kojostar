@@ -158,3 +158,42 @@
 .swiper-slide.swiper-slide-active {
   @apply opacity-100 !scale-100;
 }
+
+
+
+
+.fadein-x-anim {
+  opacity: 0;
+  display: inline-block;
+  transform: translateX(var(--trx));
+  animation-name: fadein-right-anim-1;
+  animation-duration: var(--duration);
+  animation-delay: var(--delay);
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadein-right-anim-1{
+  to {
+      transform: translateX(0rem);
+      opacity: 1;
+  }
+}
+
+
+.fadein-anim {
+  opacity: 0;
+  animation-name: fadein-anim-1;
+  animation-duration: var(--duration);
+  animation-delay: var(--delay);
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes fadein-anim-1{
+  to {
+      opacity: 1;
+  }
+}

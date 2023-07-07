@@ -5,7 +5,7 @@ export default function TestimotionalCard_1({ text, img, username, company }) {
         <div className="">
             <div
                 className="max-sm:w-full sm:w-[32rem] rounded-3xl bg-[#3c3c3c]
-            grid grid-cols-2 border border-slate-200"
+            grid grid-cols-2 border border-slate-200 max-sm:min-h-[14rem]"
             >
 
                 <div className="p-6 pl-2 flex flex-col gap-3.5">
@@ -22,7 +22,7 @@ export default function TestimotionalCard_1({ text, img, username, company }) {
                     </p>
                 </div>
 
-                <div className="w-full aspect-square bg-[#353535] rounded-l-3xl">
+                <div className="w-full h-full aspect-square bg-[#353535] rounded-l-3xl">
                     <img
                         loading="lazy"
                         alt={username}
