@@ -8,6 +8,7 @@ export const searchApiEndPoint = "/search"
 export const getCitiesAndStatesApiEndPoint = "/city/get_city_state"
 export const getCategoriesApiEndPoint = "/category/all"
 export const getSingleJobApiEndPoint = "/job/view"
+export const getSingleJob_fromAdminRouteApiEndPoint = "/job_detail"
 export const getAllBookMarksApiEndPoint = "/bookmark/list"
 export const addNewJobApiEndPoint = "/job/add"
 export const updateCityIdApiEndPoint = "/profile/update_city"
@@ -49,6 +50,7 @@ export const getAllCommentsApiUrl = API_BASE_URL+getAllCommentsApiEndPoint
 export const getSingleGuestJobApiUrl = API_BASE_URL+getSingleGuestJobApiEndPoint
 export const getAllJobs__fromAdminRouteApiUrl = ADMIN_API_BASE_URL+getAllJobs__fromAdminRouteApiEndpoint
 export const updateJobApiUrl = ADMIN_API_BASE_URL+updateJobApiEndPoint
+export const getSingleJob_fromAdminRouteApiUrl = ADMIN_API_BASE_URL+getSingleJob_fromAdminRouteApiEndPoint
 
 
 export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"

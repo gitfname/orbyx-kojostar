@@ -149,3 +149,12 @@
   -webkit-clip-path: polygon(0 100%, 8% 0, 92% 0);
   clip-path: polygon(0 100%, 8% 0, 92% 0);
 }
+
+
+.swiper-slide {
+  @apply opacity-20 !scale-90 !transition-all !duration-300;
+}
+
+.swiper-slide.swiper-slide-active {
+  @apply opacity-100 !scale-100;
+}

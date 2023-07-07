@@ -19,6 +19,8 @@ import { getReportOptions } from "./api/getReportOption";
 import { getSingleGuestJob } from "./api/getSingleGuestJob";
 import { getAllJobsFromAdminRoute } from "./api/getAllJobs__fromAdminRoute";
 import { getNearByJobs } from "./api/getNearByJobs";
+import { getSingleJob } from "./api/getSingleJob";
+import { getSingleJobFromAdminRoute } from "./api/getSingleJobFromAdminRoute";
 
 export {
     get_phone_number,
@@ -41,5 +43,7 @@ export {
     getReportOptions,
     getSingleGuestJob,
     getAllJobsFromAdminRoute,
-    getNearByJobs
+    getNearByJobs,
+    getSingleJobFromAdminRoute,
+    getSingleJob
 }

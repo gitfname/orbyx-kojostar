@@ -20,6 +20,7 @@ interface getSingleJobOutPut {
         }>,
         lat: number,
         lng: number,
+        status: -1 | 0 | 1;
         phones: Array<string>,
         rate: number,
         rate_count: number,

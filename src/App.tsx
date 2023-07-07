@@ -119,8 +119,10 @@ function App() {
             setIsLoadingUserData(false)
           })
           .catch(err => {
-            if ("onLine" in navigator && navigator.onLine) localStorage.removeItem(localStorage_token_key)
-            window.location.reload()
+            if ("onLine" in navigator && navigator.onLine) {
+              localStorage.removeItem(localStorage_token_key)
+              window.location.reload()
+            }
           })
       }
       else {
@@ -163,7 +165,7 @@ function App() {
     )
   }
 
-  if (!location.pathname.startsWith("/jobs/guest/")) {
+  if (!location.pathname.startsWith("/app/jobs/guest/")) {
     if (!userData.isLoggedIn) return <Suspense fallback={<Loading />}><Login /></Suspense>
   }
 

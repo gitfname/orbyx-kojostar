@@ -31,6 +31,9 @@ import { v4 as uuidv4 } from "uuid"
 import dayjs, { Dayjs } from "dayjs"
 import { GetWeeklyPlan } from "../../../components/GetWeeklyPlansModal_1"
 import GetPickImages from "../../../components/GetPickImages/GetPickImages"
+import Status_1 from "../../../components/Status_1"
+import { getSingleJobFromAdminRoute } from "../../../utils/http"
+import JobStatus from "./components/JobStatus"
 
 
 interface WeeklyPlans {
@@ -95,7 +98,7 @@ function AdminSingleJob() {
     const [geolocatoinPos, setGeolocatoinPos] = useState<LatLng>(undefined)
     const oldImagesRef = useRef<Array<string>>([])
     const newImagesRef = useRef<Array<File>>([])
-
+    const jobStatusRef = useRef<-1 | 0 | 1>(undefined)
     const [weeklyPlan, setWeeklyPlan] = useState<Array<WeeklyPlans>>([])
 
     const {
@@ -104,11 +107,11 @@ function AdminSingleJob() {
         isLoading
     } = useSWR(
         "admin/job/view/" + jobId,
-        async () => getSingleJob({ jobId: parseInt(jobId) }),
+        async () => getSingleJobFromAdminRoute({ jobId: parseInt(jobId) }),
         {
             shouldRetryOnError: false,
-            focusThrottleInterval: 1000,
-            revalidateOnFocus: false
+            focusThrottleInterval: 5000,
+            revalidateOnFocus: true
         }
     )
 
@@ -120,6 +123,7 @@ function AdminSingleJob() {
                 setJobdata(data)
                 setPhones(data.job.phones.map((phone => ({ id: parseInt(phone), value: phone }))))
                 setHashtags(data.job.hashtags.map(hashtag => ({ id: hashtag, value: hashtag })))
+                jobStatusRef.current = data.job.status
 
                 const convertStringToDayJs = (time: string) => {
                     if (time?.split) {
@@ -182,7 +186,8 @@ function AdminSingleJob() {
             lat: geolocatoinPos?.lat?.toString(),
             lng: geolocatoinPos?.lng?.toString(),
             oldImages: oldImagesRef.current,
-            newImages: newImagesRef.current
+            newImages: newImagesRef.current,
+            status: jobStatusRef.current
         })
             .then(data => {
                 toast({
@@ -206,9 +211,9 @@ function AdminSingleJob() {
             })
     }
 
-
     if (isLoading || !jobData) return <Loading />
     if (error) return <p>something went wrong</p>
+
 
     return (
         <div className="max-lg:h-full h-screen overflow-y-auto pb-8">
@@ -353,6 +358,15 @@ function AdminSingleJob() {
                             }}
                         />
                     </p>
+
+                    <p
+                        className="text-xs text-slate-500 font-[vazir] flex items-center"
+                    >
+                        وضعیت :&nbsp;&nbsp;
+                        <JobStatus status={jobStatusRef.current} onChange={(status) => jobStatusRef.current = status} />
+                        &nbsp;&nbsp;&nbsp;
+                    </p>
+
 
                 </div>
             </div>

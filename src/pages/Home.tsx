@@ -1,6 +1,7 @@
 import Card_1 from "../components/Card_1"
 import DataSection_1 from "../components/DataSection_1"
 import Loading from "../components/Loading"
+import { ApplicationRoutes } from "../routes"
 import getBaseUrl from "../utils/base-url"
 import { getHomeData } from "../utils/http"
 import useSWR from "swr"
@@ -45,7 +46,7 @@ function Home() {
         }
         isLoading={isLoading}
         containerClassName="grid grid-cols-1 lg:grid-cols-2 pt-8"
-        dataRenderer={(item) => <Card_1 {...item} link={getBaseUrl() + "/jobs/" + item.id} />}
+        dataRenderer={(item) => <Card_1 {...item} link={ApplicationRoutes.pages.singleJob(item?.id)} />}
       />
 
       <div className="mt-16"></div>

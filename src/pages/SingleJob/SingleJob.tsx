@@ -1,7 +1,6 @@
 
 import useSWR from "swr"
 import { useParams } from "react-router-dom"
-import { getSingleJob } from "../../utils/http/api/getSingleJob"
 import Rating_1 from "../../components/Rating_1"
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai"
 import { IoIosInformationCircleOutline } from "react-icons/io"
@@ -17,9 +16,10 @@ import JobImageSlider_1 from "../../components/JobImageSlider_1"
 import WeeklyPlanCard_1 from "../../components/WeeklyPlanCard_1"
 import getDayNameByIndex from "../../utils/getDayNameByIndex"
 import Report from "./components/Report"
-import { MdLocationOn, MdLooksOne, MdOutlineBook } from "react-icons/md"
+import { MdLocationOn } from "react-icons/md"
 import MarkPlaceOnMap from "../../components/MarkPlaceOnMap"
-import { LatLng, latLng } from "leaflet"
+import { LatLng } from "leaflet"
+import { getSingleJob } from "../../utils/http"
 
 function SingleJob() {
     const { id: jobId } = useParams()
@@ -76,7 +76,7 @@ function SingleJob() {
                     <button
                         onClick={() => {
                             if (navigator.clipboard) {
-                                navigator.clipboard.writeText(location.origin + "/jobs/guest/" + jobId)
+                                navigator.clipboard.writeText(location.origin + "/app/jobs/guest/" + jobId)
                                     .then(() => {
                                         toast({
                                             description: "لینک کپی شد",

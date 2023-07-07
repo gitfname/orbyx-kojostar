@@ -89,7 +89,7 @@ function MostComments({ className }: MostCommentsProps) {
                 lng={item.lng}
                 rate={item.rate}
                 rate_count={item.rate_count}
-                link={ApplicationRoutes.pages.singleJob(item.id)}
+                link={ApplicationRoutes.pages.singleJob(item?.id)}
               />
             )}
             emptyFallback={

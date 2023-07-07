@@ -27,6 +27,7 @@ interface addJobProps {
     newImages: Array<File>;
     dailyPlans: Array<dailyPlansOptions>;
     hashtags:  string;
+    status: -1 | 0 | 1;
 }
 
 interface addJobOutPut {
@@ -34,7 +35,7 @@ interface addJobOutPut {
 }
 
 async function updateJob({
-    address, desc, phones, title, id, hashtags, dailyPlans, lat, lng, newImages, oldImages
+    address, desc, phones, title, id, hashtags, dailyPlans, lat, lng, newImages, oldImages, status
 }: addJobProps): Promise<addJobOutPut> {
 
     const form = new FormData();
@@ -46,6 +47,7 @@ async function updateJob({
     form.append("title", title)
     form.append("description", desc)
     form.append("address", address)
+    form.append("status", status.toString())
     // form.append("city_id", city_id.toString())
     // Object.keys(catIDs)?. forEach(catId => form.append("categories[]", catId.toString()))
     lat && form.append("lat", lat)

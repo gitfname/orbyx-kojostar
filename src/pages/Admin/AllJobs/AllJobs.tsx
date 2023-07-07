@@ -30,7 +30,7 @@ function AllJobs() {
     if (jobsError) return <p>something went wrong</p>
 
     return (
-        <div className="w-full h-screen overflow-y-auto">
+        <div className="w-full max-lg:h-full h-screen overflow-y-auto">
             <div className="w-full h-max py-8 px-4">
 
                 <p
@@ -65,7 +65,7 @@ function AllJobs() {
                     }
                     isLoading={isJobsLoading}
                     containerClassName="grid grid-cols-1 gap-6 lg:grid-cols-2 pt-8"
-                    dataRenderer={(item) => <Card_1 {...item} link={ApplicationRoutes.pages.adminSingleJob(item.id)} />}
+                    dataRenderer={(item) => <Card_1 showStatus={true} {...item}  link={ApplicationRoutes.pages.adminSingleJob(item.id)} />}
                 />
 
             </div>
