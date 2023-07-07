@@ -72,7 +72,7 @@ function MarkPlaceOnMap({ latlng, zoom, height = undefined, width = undefined, m
                 height: height ? height : "400px",
                 borderRadius: "12px"
             }}
-            className='shadow-md shadow-black/10'
+            className='shadow-md shadow-black/10 z-10'
         >
 
             <TileLayer

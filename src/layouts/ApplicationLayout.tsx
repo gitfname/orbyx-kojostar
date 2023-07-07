@@ -61,7 +61,7 @@ function ApplicationLayout({children}) {
           />
         </div>
 
-        <div className="lg:hidden">
+        <div className="lg:hidden z-[999999]">
           <MobileMenu />
         </div>
 

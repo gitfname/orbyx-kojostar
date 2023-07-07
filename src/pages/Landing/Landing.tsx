@@ -108,6 +108,14 @@ function Landing() {
         className="w-full h-screen object-center object-cover"
       />
 
+      <div className="grid place-items-center mt-6">
+        <img
+          alt="بهترین هارو بشناس"
+          src={getBaseUrl()+"/images/know-the-best.png"}
+          className="w-56 h-auto"
+        />
+      </div>
+
 
       {/* question and answer section */}
       <div className="flex overflow-x-hidden flex-col max-sm:gap-y-8 gap-y-3 px-4 md:px-6 mt-16 [&>div:nth-child(even)]:mr-auto">

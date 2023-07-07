@@ -113,7 +113,7 @@ function SingleJob() {
                 </div>
             </div>
 
-            <div className="flex items-center gap-x-2 px-4 mt-6">
+            {/* <div className="flex items-center gap-x-2 px-4 mt-6">
                 <div
                     className="p-1.5 rounded-lg hover:bg-transparent/5 active:scale-95 transition-transform duration-300
                     cursor-pointer"
@@ -132,7 +132,7 @@ function SingleJob() {
                 >
                     محبوبیت
                 </p>
-            </div>
+            </div> */}
 
 
             <div className="flex items-center gap-x-2 px-4 mt-9">
@@ -221,7 +221,7 @@ function SingleJob() {
                 </p>
             </div>
 
-            <div className="flex items-center gap-x-2 px-4 mt-4">
+            <div className="flex items-center gap-x-2 px-4 mt-4 flex-nowrap overflow-x-auto pb-2">
 
                 {
                     data?.job?.hashtags?.map(hastag => (
@@ -254,7 +254,7 @@ function SingleJob() {
                     </a>
                 </div>
 
-                <div className="mt-6 w-full max-w-4xl mx-auto">
+                <div className="mt-6 z-10 w-full max-w-4xl mx-auto">
                     <MarkPlaceOnMap
                         zoom={16}
                         latlng={[
