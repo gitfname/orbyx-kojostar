@@ -11,6 +11,7 @@ import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./components/Loading"
 import Landing from "./pages/Landing/Landing"
+import LogRocket from 'logrocket';
 
 const Login = lazy(() => import("./pages/Login"))
 // import Login from "./pages/Login"
@@ -75,6 +76,7 @@ function App() {
 
   useEffect(
     () => {
+      // LogRocket.init(import.meta.env.VITE_PUBLIC_LOGROCKET_APP_ID)
       const token = localStorage.getItem(localStorage_token_key)
       if (token) {
         setIsLoading(true)
@@ -83,7 +85,9 @@ function App() {
           .then(userInfo => {
             if (userInfo.is_logged_in) {
               console.log(userInfo);
-
+              // LogRocket.identify(userInfo.data.id.toString(), {
+              //   name: userInfo.data.username
+              // })
               userApi.setUser({
                 firstname: userInfo.data.first_name,
                 lastname: userInfo.data.last_name,
