@@ -19,50 +19,47 @@ const test = [
   {
     id: 0,
     username: "امید رحیمی",
-    text: "مدیرعامل.",
+    text: "مدیرعامل, ایده پرداز و صاحب امتیاز",
     subText: [
-      "ایده پرداز و صاحب امتیاز.",
-      "فارغ التحصیل مهندسی شیمی از دانشگاه تهران."
+      "فارغ التحصیل مهندسی شیمی از دانشگاه تهران"
     ],
     company: "cmp-1",
     img: getBaseUrl() + "/images/orbyx-team/SON09448.jpg"
   },
   {
     id: 1,
-    text: "مدیر فنی.",
+    text: "مدیر فنی, مشاور استراتژیک و مارکتینگ",
     subText: [
-      "مشاور استراتژیک و مارکتینگ.",
-      "فارغ التحصیل مهندسی مکانیک."
+      "فارغ التحصیل مهندسی مکانیک"
     ],
-    username: "فرزین وحید.",
+    username: "فرزین وحید",
     company: "cmp-2",
     img: getBaseUrl() + "/images/orbyx-team/BlendMePhoto1688569610179.jpg"
   },
   {
     id: 2,
-    text: "موشن گرافیست.",
+    text: "موشن گرافیست, طراح و مشاور رسانه",
     subText: [
-      "طراح و مشاور رسانه.",
-      "فارغ التحصیل رشته گرافیک.",
-      "فارغ‌ التحصیل رشته بازرگانی."
+      "فارغ التحصیل رشته گرافیک",
+      "فارغ‌ التحصیل رشته بازرگانی"
     ],
-    username: "سرکار خانم پولادچنگ.",
+    username: "سرکار خانم پولادچنگ",
     company: "cmp-3",
     img: getBaseUrl() + "/images/orbyx-team/IMG_20230705_174854_099.jpg"
   },
   {
     id: 3,
     text: "Flutter Developer",
-    subText: ["مهندسی نرم افزار."],
-    username: "پوریا شریفی.",
+    subText: ["مهندسی نرم افزار"],
+    username: "پوریا شریفی",
     company: "cmp-3",
     img: getBaseUrl() + "/images/orbyx-team/pooria.jpg"
   },
   {
     id: 4,
     text: "BackEnd Developer",
-    subText: ["مهندسی نرم افزار."],
-    username: "طاها داوری.",
+    subText: ["مهندسی نرم افزار"],
+    username: "طاها داوری",
     company: "cmp-3",
     img: getBaseUrl() + "/images/orbyx-team/taha.jpg"
   },
@@ -70,7 +67,7 @@ const test = [
     id: 5,
     text: "FrontEnd Developer",
     subText: [
-      "مهندسی نرم افزار."
+      "مهندسی نرم افزار"
     ],
     username: "آلپای طالب زاده شکیبا",
     company: "cmp-3",
@@ -78,8 +75,8 @@ const test = [
   },
   {
     id: 6,
-    text: "مدیر مالی.",
-    subText: ["کارشناسی حسابداری."],
+    text: "مدیر مالی",
+    subText: ["کارشناسی حسابداری"],
     username: "دانیال غیور",
     company: "cmp-3",
     img: getBaseUrl() + "/images/orbyx-team/danial.jpg"
@@ -129,11 +126,11 @@ function Landing() {
 
       <div className="grid place-items-center mt-6 w-full">
         <p className="text-4xl font-medium text-[#0e1f57] font-[forte]">
-          Know The Best's
+          Know The Bests
         </p>
 
         <p className="mt-1 font-[vazirMedium] w-full text-center block mx-auto text-base text-[#0e1f57e3]">
-          بهترین هارو بشناس
+          بهترین ها رو بشناس
         </p>
       </div>
 
