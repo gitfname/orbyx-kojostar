@@ -1,13 +1,19 @@
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import middleware from "./middleware"
 import { name } from "../../constants"
-import getBaseUrl from "../../utils/base-url"
 import { AiOutlinePhone } from "react-icons/ai"
 import { FaPaperPlane } from "react-icons/fa"
 import { BsInstagram, BsWhatsapp } from "react-icons/bs"
+import { useToast } from "@chakra-ui/react"
+import { requestADs } from "../../utils/http"
+import { useApplicationLoadingStore } from "../../stores/useApplicationLoadingStore"
 
 function ContactUsAndAds() {
+
+    const contentRef = useRef<HTMLTextAreaElement>(undefined)
+    const setIsApplicationLoading = useApplicationLoadingStore(selector => selector.setIsLoading)
+    const toast = useToast()
 
     useEffect(
         () => {
@@ -15,6 +21,33 @@ function ContactUsAndAds() {
         },
         []
     )
+
+    const handleSubmit = () => {
+        setIsApplicationLoading(true)
+        requestADs({
+            content: contentRef.current.value
+        })
+        .then(res => {
+            toast({
+                description: res.message,
+                position: "top-right",
+                isClosable: false,
+                duration: 3000,
+                status: "success"
+            })
+            setIsApplicationLoading(false)
+        })
+        .catch(() => {
+            toast({
+                description: "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید",
+                position: "top-right",
+                isClosable: false,
+                duration: 3000,
+                status: "error"
+            })
+            setIsApplicationLoading(false)
+        })
+    }
 
     return (
         <div className="w-full max-lg:h-full h-screen overflow-y-auto">
@@ -27,6 +60,7 @@ function ContactUsAndAds() {
                 </p>
 
                 <textarea
+                    ref={contentRef}
                     rows={8}
                     className="primary-text-input mt-14"
                     placeholder="متن پیام"
@@ -116,7 +150,7 @@ function ContactUsAndAds() {
                     </div>
                 </div>
 
-                <button className="primary-btn mt-16 block w-full max-w-sm mx-auto px-10">
+                <button onClick={handleSubmit} className="primary-btn mt-16 block w-full max-w-sm mx-auto px-10">
                     ارسال
                 </button>
 

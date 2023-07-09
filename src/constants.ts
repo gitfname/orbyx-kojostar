@@ -26,6 +26,7 @@ export const getSingleGuestJobApiEndPoint = "/guest/job"
 export const getAllJobs__fromAdminRouteApiEndpoint = "/all_job"
 export const updateJobApiEndPoint = "/update_job"
 export const suggestAddNewPlaceApiEndPoint = "/profile/suggest_add_place"
+export const RequestADsApiEndPoint = "/profile/ads"
 
 export const checkOtpApiUrl = API_BASE_URL+checkOtpApiEndPoint
 export const getUserInfoApiUrl = API_BASE_URL+getUserInfoApiEndPoint
@@ -53,6 +54,7 @@ export const getAllJobs__fromAdminRouteApiUrl = ADMIN_API_BASE_URL+getAllJobs__f
 export const updateJobApiUrl = ADMIN_API_BASE_URL+updateJobApiEndPoint
 export const getSingleJob_fromAdminRouteApiUrl = ADMIN_API_BASE_URL+getSingleJob_fromAdminRouteApiEndPoint
 export const suggestAddNewPlaceApiUrl = API_BASE_URL+suggestAddNewPlaceApiEndPoint
+export const RequestAdsApiUrl = API_BASE_URL+RequestADsApiEndPoint
 
 
 export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"

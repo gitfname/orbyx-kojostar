@@ -22,6 +22,7 @@ import { getNearByJobs } from "./api/getNearByJobs";
 import { getSingleJob } from "./api/getSingleJob";
 import { getSingleJobFromAdminRoute } from "./api/getSingleJobFromAdminRoute";
 import { suggestAddNewPlace } from "./api/suggestAddNewPlace";
+import { requestADs } from "./api/requestADs";
 
 export {
     get_phone_number,
@@ -47,5 +48,6 @@ export {
     getNearByJobs,
     getSingleJobFromAdminRoute,
     getSingleJob,
-    suggestAddNewPlace
+    suggestAddNewPlace,
+    requestADs
 }
