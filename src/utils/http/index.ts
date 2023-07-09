@@ -23,6 +23,7 @@ import { getSingleJob } from "./api/getSingleJob";
 import { getSingleJobFromAdminRoute } from "./api/getSingleJobFromAdminRoute";
 import { suggestAddNewPlace } from "./api/suggestAddNewPlace";
 import { requestADs } from "./api/requestADs";
+import { addOffer } from "./api/addOffer";
 
 export {
     get_phone_number,
@@ -49,5 +50,6 @@ export {
     getSingleJobFromAdminRoute,
     getSingleJob,
     suggestAddNewPlace,
-    requestADs
+    requestADs,
+    addOffer
 }
