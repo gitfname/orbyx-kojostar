@@ -105,6 +105,7 @@ function DisCounts({ className }: DisCountsProps) {
                 rate={item.rate}
                 rate_count={item.rate_count}
                 link={ApplicationRoutes.pages.singleJob(item?.id)}
+                showDiscount={true}
               />
             )}
             emptyFallback={

@@ -39,14 +39,7 @@ function ApplicationLayout({children}) {
           <DesktopNavlink_1 
             text="خانه"
             link={ApplicationRoutes.pages.home}
-            // icon={<AiOutlineHome className="fill-white w-5 h-5" />}
-            icon={
-              <img
-                alt=""
-                src={getBaseUrl()+"/images/small-kojo-logo.jpg"}
-                className="w-5 h-5 object-center object-cover"
-              />
-            }
+            icon={<AiOutlineHome className="fill-white w-5 h-5" />}
           />
 
           <DesktopNavlink_1

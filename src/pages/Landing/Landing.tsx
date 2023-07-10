@@ -118,9 +118,19 @@ function Landing() {
   return (
     <div className="w-full pb-28">
 
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg w-11/12 px-8 py-4 bg-slate-800/80
+      <div className="fixed z-10 top-2 left-1/2 -translate-x-1/2 bg w-11/12 px-8 py-4 bg-[#013580]
       flex items-center gap-x-3 backdrop-blur-md rounded-xl">
 
+        <a
+          href={getBaseUrl()}
+          className="transition-all duration-300  active:scale-95 inline-block ml-5"
+        >
+          <img
+            alt=""
+            src={getBaseUrl() + "/images/small-kojo-logo.jpg"}
+            className="w-11 h-11 object-center object-cover"
+          />
+        </a>
 
         <a
           href="#our-app"
@@ -162,12 +172,13 @@ function Landing() {
           ارتباط به ما
         </a>
 
+
       </div>
 
       <img
         alt="hero section"
         onLoad={handleHeroImgLoaded}
-        src={getBaseUrl() + "/images/langing-bg.png"}
+        src={getBaseUrl() + "/images/hero-image.jpg"}
         className="w-full h-screen object-center object-cover"
       />
 
