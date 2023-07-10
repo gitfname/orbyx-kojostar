@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import { ChakraProvider } from "@chakra-ui/react"
 // const App = lazy(() => import("./App.tsx"))
 // import App from './App.tsx'
-const sleep = (ms:number) => {
+const sleep = (ms: number) => {
   return new Promise(resovle => {
     setTimeout(() => {
       resovle(1)
@@ -21,6 +21,7 @@ import 'react-virtualized/styles.css';
 import 'swiper/css';
 import Loading from './pages/Loading.tsx'
 import InitialAppLoading from './pages/InitialAppLoading.tsx'
+import LoadInitialData from './components/LoadInitialData.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -29,6 +30,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Suspense fallback={<InitialAppLoading />}>
           <App />
           <Loading />
+          <LoadInitialData />
         </Suspense>
       </BrowserRouter>
     </ChakraProvider>

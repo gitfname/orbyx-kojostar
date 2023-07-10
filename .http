@@ -13,3 +13,8 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZ
 
 GET https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=32.6332952557&lon=51.3656568154&lang=en
 Content-Type: application/json
+
+
+####
+
+GET https://orbyx-strapi.iran.liara.run/api/landing-page

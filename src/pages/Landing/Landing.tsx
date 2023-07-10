@@ -117,6 +117,53 @@ function Landing() {
 
   return (
     <div className="w-full pb-28">
+
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 bg w-11/12 px-8 py-4 bg-slate-800/80
+      flex items-center gap-x-3 backdrop-blur-md rounded-xl">
+
+
+        <a
+          href="#our-app"
+          className="px-3.5 py-2.5 h-full rounded-lg bg-white/5 hover:bg-white/10 text-sm font-[vazir]
+          text-gray-50 transition-all duration-300  active:scale-95"
+        >
+          معرفی برنامه
+        </a>
+
+        <a
+          href="#download-our-app"
+          className="px-3.5 py-2.5 h-full rounded-lg bg-white/5 hover:bg-white/10 text-sm font-[vazir]
+          text-gray-50 transition-all duration-300  active:scale-95"
+        >
+          دانلود
+        </a>
+
+        <a
+          href="#our-services"
+          className="px-3.5 py-2.5 h-full rounded-lg bg-white/5 hover:bg-white/10 text-sm font-[vazir]
+          text-gray-50 transition-all duration-300  active:scale-95"
+        >
+          خدمات ما
+        </a>
+
+        <a
+          href="#our-team"
+          className="px-3.5 py-2.5 h-full rounded-lg bg-white/5 hover:bg-white/10 text-sm font-[vazir]
+          text-gray-50 transition-all duration-300  active:scale-95"
+        >
+          درباره ما
+        </a>
+
+        <a
+          href="#contact-us"
+          className="px-3.5 py-2.5 h-full rounded-lg bg-white/5 hover:bg-white/10 text-sm font-[vazir]
+          text-gray-50 transition-all duration-300  active:scale-95"
+        >
+          ارتباط به ما
+        </a>
+
+      </div>
+
       <img
         alt="hero section"
         onLoad={handleHeroImgLoaded}
@@ -136,7 +183,7 @@ function Landing() {
 
 
       {/* question and answer section */}
-      <div className="flex overflow-x-hidden flex-col max-sm:gap-y-8 gap-y-3 px-4 md:px-6 mt-16 [&>div:nth-child(even)]:mr-auto">
+      <div id="our-app" className="flex overflow-x-hidden flex-col max-sm:gap-y-8 gap-y-3 px-4 md:px-6 mt-16 [&>div:nth-child(even)]:mr-auto">
 
         <motion.div
           initial={{ x: 30, opacity: 0 }}
@@ -179,6 +226,7 @@ function Landing() {
 
 
       <div
+        id="download-our-app"
         className="w-full overflow-x-hidden mt-36 grid grid-cols-1 md:grid-cols-2 place-items-center px-4 md:px-6 gap-7"
       >
 
@@ -242,6 +290,7 @@ function Landing() {
 
 
       <div
+        id="our-services"
         className="w-full overflow-hidden mt-36 grid grid-cols-1 md:grid-cols-2 place-items-center px-4 md:px-6 gap-7"
       >
 
@@ -409,7 +458,7 @@ function Landing() {
 
       </div>
 
-      <div className="w-full mt-36">
+      <div className="w-full mt-36" id="our-team">
 
         <p className="text-lg px-4 font-[vazirMedium] text-slate-800 mb-4">
           تیم ما
@@ -432,6 +481,7 @@ function Landing() {
 
 
       <div
+        id="contact-us"
         className="w-full overflow-x-hidden mt-36 px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 gap-6"
       >
 

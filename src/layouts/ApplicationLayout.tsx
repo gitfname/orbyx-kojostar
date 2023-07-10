@@ -7,6 +7,7 @@ import { AiOutlineHome, AiOutlineUser } from "react-icons/ai"
 import { BsBookmark, BsSearch } from "react-icons/bs"
 import { useSearchParamsStore } from "../stores/useSearchParams"
 import MobileMenu from "../components/MobileMenu"
+import getBaseUrl from "../utils/base-url"
 
 
 function ApplicationLayout({children}) {
@@ -38,7 +39,14 @@ function ApplicationLayout({children}) {
           <DesktopNavlink_1 
             text="خانه"
             link={ApplicationRoutes.pages.home}
-            icon={<AiOutlineHome className="fill-white w-5 h-5" />}
+            // icon={<AiOutlineHome className="fill-white w-5 h-5" />}
+            icon={
+              <img
+                alt=""
+                src={getBaseUrl()+"/images/small-kojo-logo.jpg"}
+                className="w-5 h-5 object-center object-cover"
+              />
+            }
           />
 
           <DesktopNavlink_1

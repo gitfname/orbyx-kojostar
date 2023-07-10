@@ -59,6 +59,9 @@ export const RequestAdsApiUrl = API_BASE_URL+RequestADsApiEndPoint
 export const addOfferApiUrl = API_BASE_URL+addOfferApiEndPoint
 
 
+export const STRAPI_ADMIN_PANEL_URL = "http://orbyx-strapi.iran.liara.run/api"
+export const getLandignPageDetails = STRAPI_ADMIN_PANEL_URL+"/landing-page"
+
 export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
 
 

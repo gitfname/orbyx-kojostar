@@ -203,4 +203,5 @@
   outline: none;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
+  scroll-behavior: smooth;
 }
