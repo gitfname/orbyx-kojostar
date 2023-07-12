@@ -35,7 +35,7 @@
     "immer": "^10.0.2",
     "leaflet": "^1.9.4",
     "logrocket": "^4.0.3",
-    "lucide-react": "^0.244.0",
+    "lucide-react": "^0.246.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
