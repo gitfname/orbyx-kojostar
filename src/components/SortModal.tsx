@@ -21,6 +21,7 @@ import { getCategories, getCitiesAndStates } from "../utils/http";
 import { getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
 import { useSearchParamsStore } from "../stores/useSearchParams";
 import { getCategoriesOptionsTest } from "../utils/http/api/getCategories";
+import { useEffect, useState } from "react";
 
 function rowRenderer({
     key, // Unique key within array of rows
@@ -75,7 +76,7 @@ function SortModal({ children }) {
 
         is_category_id_active,
         set_category_id
-    ] =useSearchParamsStore(selector => [
+    ] = useSearchParamsStore(selector => [
         selector.api.add_city_id,
         selector.api.remove_city_id,
         selector.api.is_city_id_includes,
@@ -108,6 +109,51 @@ function SortModal({ children }) {
         {
             shouldRetryOnError: false
         }
+    )
+
+    // filter search city
+    const [citiesAndStatesSearchValue, setCitiesAndStatesSearchValue] = useState<string>("")
+    const [filteredCitiesAndStates, setFilteredCitiesAndStates] = useState<Array<getCitiesAndStatesOptionsTest>>(null);
+    useEffect(
+        () => {
+            if (citiesAndStates?.data) {
+                setFilteredCitiesAndStates(citiesAndStates.data)
+            }
+        },
+        [citiesAndStates]
+    )
+    useEffect(
+        () => {
+            if (citiesAndStates?.data) {
+                setFilteredCitiesAndStates(
+                    citiesAndStates.data.filter(item => item.name.includes(citiesAndStatesSearchValue))
+                )
+            }
+        },
+        [citiesAndStatesSearchValue]
+    )
+
+
+    // filter category
+    const [categoriesSearchValue, setCategoriesSearchValue] = useState<string>("")
+    const [filteredCategories, setFilteredCategories] = useState<Array<getCategoriesOptionsTest>>(null);
+    useEffect(
+        () => {
+            if (categories?.data) {
+                setFilteredCategories(categories.data)
+            }
+        },
+        [categories]
+    )
+    useEffect(
+        () => {
+            if (categories?.data) {
+                setFilteredCategories(
+                    categories.data.filter(item => item.name.includes(categoriesSearchValue))
+                )
+            }
+        },
+        [categoriesSearchValue]
     )
 
 
@@ -154,33 +200,40 @@ function SortModal({ children }) {
                                         </AccordionButton>
 
                                         <AccordionPanel>
-                                            <List
-                                                className="!w-full !gap-y-0"
-                                                width={900}
-                                                height={200}
-                                                rowCount={categories.data.length}
-                                                rowHeight={({ index }) => categories.data[index + 1]?.is_parent ? 50 : 30}
-                                                rowRenderer={(item) => {
-                                                    return rowRenderer({
-                                                        ...item,
-                                                        data: categories.data[item.index],
-                                                        checked: is_category_id_active(categories.data[item.index].id),
-                                                        onChange: (value: boolean, data:getCategoriesOptionsTest) => {
-                                                            console.log(value);
-                                                            console.log(Date.name);
+                                            <div className="h-72 grid grid-rows-[3.8rem_calc(100%-3.8rem)]">
+                                                <input
+                                                    onChange={(e) => {
+                                                        setCategoriesSearchValue(e.target.value)
+                                                    }}
+                                                    value={categoriesSearchValue}
+                                                    className="primary-text-input h-max text-sm py-3 w-11/12 mx-auto block"
+                                                    placeholder="دسته بندی مورد نظر را جستجو کنید"
+                                                />
+                                                <List
+                                                    className="!w-full !gap-y-0"
+                                                    width={900}
+                                                    height={200}
+                                                    rowCount={filteredCategories?.length || 0}
+                                                    rowHeight={({ index }) => filteredCategories[index + 1]?.is_parent ? 50 : 30}
+                                                    rowRenderer={(item) => {
+                                                        return rowRenderer({
+                                                            ...item,
+                                                            data: filteredCategories[item.index],
+                                                            checked: is_category_id_active(filteredCategories[item.index].id),
+                                                            onChange: (value: boolean, data: getCategoriesOptionsTest) => {
+                                                                if (value) {
+                                                                    set_category_id(data.id)
+                                                                }
+                                                                else {
+                                                                    console.log(data.id);
 
-                                                            if(value) {
-                                                                set_category_id(data.id)
+                                                                    set_category_id(undefined)
+                                                                }
                                                             }
-                                                            else {
-                                                                console.log(data.id);
-                                                                
-                                                                set_category_id(undefined)
-                                                            }
-                                                        }
-                                                    })
-                                                }}
-                                            />
+                                                        })
+                                                    }}
+                                                />
+                                            </div>
                                         </AccordionPanel>
                                     </AccordionItem>
 
@@ -197,36 +250,48 @@ function SortModal({ children }) {
                                         </AccordionButton>
 
                                         <AccordionPanel
-                                            pt="14px"
                                             pb={0}
                                             px={0}
                                             maxH="72"
-                                            overflowY="auto"
+                                            overflowY="hidden"
                                         >
-                                            <List
-                                                className="!w-full !gap-y-0"
-                                                width={200}
-                                                height={200}
-                                                rowCount={citiesAndStates.data.length}
-                                                rowHeight={({ index }) => citiesAndStates.data[index + 1]?.is_state ? 50 : 30}
-                                                rowRenderer={(item) => {
-                                                    return rowRenderer({
-                                                        ...item,
-                                                        data: citiesAndStates.data[item.index],
-                                                        checked: is_city_id_includes(citiesAndStates.data[item.index].id),
-                                                        onChange: (value: boolean, data:getCitiesAndStatesOptionsTest) => {
-                                                            if(value) {
-                                                                add_city_id([data.id])
+
+                                            <div className="h-72 grid grid-rows-[3.8rem_calc(100%-3.8rem)]">
+                                                <input
+                                                    onChange={(e) => {
+                                                        setCitiesAndStatesSearchValue(e.target.value)
+                                                    }}
+                                                    value={citiesAndStatesSearchValue}
+                                                    className="primary-text-input h-max text-sm py-3 w-11/12 mx-auto block"
+                                                    placeholder="شهر مورد نظر را جستجو کنید"
+                                                />
+                                                <List
+                                                    className="!w-full !gap-y-0"
+                                                    width={200}
+                                                    height={190}
+                                                    rowCount={filteredCitiesAndStates?.length || 0}
+                                                    rowHeight={({ index }) => citiesAndStates.data[index + 1]?.is_state ? 50 : 30}
+                                                    rowRenderer={(item) => {
+                                                        return rowRenderer({
+                                                            ...item,
+                                                            data: filteredCitiesAndStates[item.index],
+                                                            checked: is_city_id_includes(filteredCitiesAndStates[item.index].id),
+                                                            onChange: (value: boolean, data: getCitiesAndStatesOptionsTest) => {
+                                                                if (value) {
+                                                                    add_city_id([data.id])
+                                                                }
+                                                                else {
+                                                                    console.log(data.id);
+
+                                                                    remove_city_id([data.id])
+                                                                }
                                                             }
-                                                            else {
-                                                                console.log(data.id);
-                                                                
-                                                                remove_city_id([data.id])
-                                                            }
-                                                        }
-                                                    })
-                                                }}
-                                            />
+                                                        })
+                                                    }}
+                                                />
+
+                                            </div>
+
                                         </AccordionPanel>
                                     </AccordionItem>
 

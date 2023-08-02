@@ -12,7 +12,7 @@ const sleep = (ms: number) => {
   })
 }
 const App = lazy(async () => {
-  await sleep(7300)
+  await sleep(5000)
   return import("./App.tsx")
 })
 import './index.css'
@@ -21,7 +21,8 @@ import 'react-virtualized/styles.css';
 import 'swiper/css';
 import Loading from './pages/Loading.tsx'
 import InitialAppLoading from './pages/InitialAppLoading.tsx'
-import LoadInitialData from './components/LoadInitialData.tsx'
+// import LoadInitialData from './components/LoadInitialData.tsx'
+import GetUserCityLatLng from './components/GetUserCityLatLng.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -30,7 +31,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Suspense fallback={<InitialAppLoading />}>
           <App />
           <Loading />
-          <LoadInitialData />
+          {/* <LoadInitialData /> */}
+          <GetUserCityLatLng />
         </Suspense>
       </BrowserRouter>
     </ChakraProvider>

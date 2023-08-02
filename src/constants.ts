@@ -1,6 +1,8 @@
+import getBaseUrl from "./utils/base-url"
 
-export const API_BASE_URL = "https://dev.kojostar.ir/api/v1"
-export const ADMIN_API_BASE_URL = "https://dev.kojostar.ir/api/admin"
+export const API_BASE_URL = "https://api.kojostar.com/api/v1"
+// export const API_BASE_URL = "https://dev.kojostar.ir/api/v1"
+export const ADMIN_API_BASE_URL = "https://api.kojostar.com/api/admin"
 export const checkOtpApiEndPoint = "/auth/check_otp"
 export const getUserInfoApiEndPoint = "/profile/user_info"
 export const getHomeDataApiEndPoint = "/home"
@@ -59,10 +61,15 @@ export const RequestAdsApiUrl = API_BASE_URL+RequestADsApiEndPoint
 export const addOfferApiUrl = API_BASE_URL+addOfferApiEndPoint
 
 
-export const STRAPI_ADMIN_PANEL_URL = "https://orbyx-strapi.iran.liara.run/api"
-export const getLandignPageDetails = STRAPI_ADMIN_PANEL_URL+"/landing-page"
+export const STRAPI_ADMIN_PANEL_URL = "https://orbyx-kojostar-strapi.iran.liara.run/api"
+export const STRAPI_BASE_URL = "https://orbyx-kojostar-strapi.iran.liara.run"
+export const getLandignPageDetails = STRAPI_ADMIN_PANEL_URL+"/landing-page?populate=*"
+export const getCityLatLngApiEndPoint = "/api/city-latlng"
+export const getCityLatLngApiUrl = STRAPI_BASE_URL + getCityLatLngApiEndPoint
 
 export const getAddressApiUrl = "https://nominatim.openstreetmap.org/reverse?format=jsonv2"
+
+export const citiesJsonFIle = getBaseUrl()+"/cities.json"
 
 
 export const name={

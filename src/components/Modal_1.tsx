@@ -1,5 +1,5 @@
 
-import { useDisclosure } from "@chakra-ui/react"
+import { filter, useDisclosure } from "@chakra-ui/react"
 import List from 'react-virtualized/dist/commonjs/List';
 import {
     Modal,
@@ -19,7 +19,8 @@ import {
 } from "@chakra-ui/react"
 import { getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndStates";
 import { getCategoriesOptionsTest } from "../utils/http/api/getCategories";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { log } from "logrocket";
 
 function rowRenderer({
     key, // Unique key within array of rows
@@ -96,15 +97,56 @@ interface Modal_1Props {
     closeIcon?: ReactNode;
     showCheckBox?: boolean;
     activeItem: Array<number>,
-    onActiveItemChange(checked: boolean, data: any): void
+    onActiveItemChange(checked: boolean, data: any): void;
+    placeHolder?: string;
 }
 
 
 function Modal_1({
     children, data, className, closeIcon = undefined, showCloseIcon = true, title = "default title", showCheckBox = false,
-    activeItem = undefined, onActiveItemChange=undefined
+    activeItem = undefined, onActiveItemChange = undefined, placeHolder=""
 }: Modal_1Props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+
+    const [filteredData, setFilteredData] = useState<Modal_1AccordionOptions>(null);
+    const [dataSearchValue, setDataSearchValue] = useState<string>("")
+
+    useEffect(
+        () => {
+            if (data?.data?.length > 0) {
+                setFilteredData({
+                    data: data.data
+                })
+            }
+        },
+        [data]
+    )
+
+    // filteredData.
+    useEffect(
+        () => {
+            if (data?.data) {
+                const _data = [...data.data];
+                _data.forEach((accordionItem, index) => {
+                    const res = []
+                    accordionItem.data.forEach(item => {
+                        if(item.title.includes(dataSearchValue)) {
+                            res.push(item)
+                        }
+                    })
+                    _data[index] = {
+                        ...accordionItem,
+                        data: res
+                    }
+                }) 
+                setFilteredData({
+                    data: _data
+                })
+            }
+        },
+        [dataSearchValue]
+    )
 
     return (
         <>
@@ -135,8 +177,16 @@ function Modal_1({
                             rowGap="10px"
                         >
 
+
+                            <input
+                                onChange={e => setDataSearchValue(e.target.value)}
+                                value={dataSearchValue}
+                                className="primary-text-input h-max text-sm py-3 w-11/12 mx-auto block"
+                                placeholder={placeHolder}
+                            />
+
                             {
-                                data.data.map((item, index) => (
+                                filteredData?.data.map((item, index) => (
                                     <AccordionItem border="none">
                                         <AccordionButton
                                             borderRadius="lg"
@@ -163,7 +213,7 @@ function Modal_1({
                                                         data: item.data[row.index],
                                                         checked: activeItem?.includes(item.data[row.index].id),
                                                         onChange: (checked, data) => {
-                                                            if(onActiveItemChange) onActiveItemChange(checked, data)
+                                                            if (onActiveItemChange) onActiveItemChange(checked, data)
                                                         }
                                                     })
                                                 }}

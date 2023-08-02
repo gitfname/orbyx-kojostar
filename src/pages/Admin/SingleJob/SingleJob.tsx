@@ -34,6 +34,7 @@ import GetPickImages from "../../../components/GetPickImages/GetPickImages"
 import Status_1 from "../../../components/Status_1"
 import { getSingleJobFromAdminRoute } from "../../../utils/http"
 import JobStatus from "./components/JobStatus"
+import { HiOutlineSquares2X2 } from "react-icons/hi2"
 
 
 interface WeeklyPlans {
@@ -234,6 +235,11 @@ function AdminSingleJob() {
             <div className="mt-6 z-10 w-full flex items-center justify-center gap-x-3 relative">
 
                 <div className="flex flex-col gap-y-4 items-center justify-center">
+                    <p
+                        className="text-sm text-slate-700 font-[vazir]"
+                    >
+                        {jobData?.comments?.length} نظر
+                    </p>
                     <Rating_1
                         max={5}
                         positive={Math.floor(jobData?.job?.rate)}
@@ -291,6 +297,13 @@ function AdminSingleJob() {
                                 })
                             }}
                         />
+                    </p>
+
+                    <p
+                        className="text-xs text-slate-500 font-[vazir]"
+                    >
+                        شهر :&nbsp;&nbsp;
+                        <span className="text-slate-800 font-[vazir]">{jobData?.job?.city}</span>
                     </p>
 
                     {/* <p
@@ -369,6 +382,29 @@ function AdminSingleJob() {
 
 
                 </div>
+            </div>
+
+
+            <div className="flex items-center gap-x-2 px-4 mt-9">
+                <HiOutlineSquares2X2 className="w-5 h-5 stroke-blue-500 fill-transparent" />
+
+                <p
+                    className="text-sm text-slate-800 font-[vazir]"
+                >
+                    دسته بندی
+                </p>
+            </div>
+
+            <div className="flex items-center gap-x-2 px-4 mt-4 flex-nowrap overflow-x-auto pb-2">
+
+                {
+                    jobData?.job?.categories?.map(category => (
+                        <p key={category.id} className="py-1.5 cursor-default px-3 rounded-3xl text-xs text-slate-800 font-[vazir] bg-blue-500/30">
+                            {category.name}
+                        </p>
+                    ))
+                }
+
             </div>
 
 

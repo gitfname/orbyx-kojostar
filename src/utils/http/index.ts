@@ -24,6 +24,7 @@ import { getSingleJobFromAdminRoute } from "./api/getSingleJobFromAdminRoute";
 import { suggestAddNewPlace } from "./api/suggestAddNewPlace";
 import { requestADs } from "./api/requestADs";
 import { addOffer } from "./api/addOffer";
+import { getCityLatLng } from "./api/getCityLatLng";
 
 export {
     get_phone_number,
@@ -51,5 +52,6 @@ export {
     getSingleJob,
     suggestAddNewPlace,
     requestADs,
-    addOffer
+    addOffer,
+    getCityLatLng
 }

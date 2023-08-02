@@ -18,6 +18,7 @@ import getBaseUrl from "../../utils/base-url"
 import MarkPlaceOnMap from "../../components/MarkPlaceOnMap"
 import { MdLocationOn } from "react-icons/md"
 import { LatLng } from "leaflet"
+import { HiOutlineSquares2X2 } from "react-icons/hi2"
 
 function SingleGuestJob() {
     const { id: jobId } = useParams()
@@ -62,10 +63,17 @@ function SingleGuestJob() {
             </div>
 
             <div className="mt-6 z-10 w-full flex flex-col gap-y-6 md:flex-row items-center justify-center gap-x-3 relative">
-                <Rating_1
-                    max={5}
-                    positive={Math.floor(data?.job?.rate)}
-                />
+                <div className="flex gap-4 items-center justify-center">
+                    <p
+                        className="text-sm text-slate-700 font-[vazir]"
+                    >
+                        {data?.comments?.length} نظر
+                    </p>
+                    <Rating_1
+                        max={5}
+                        positive={Math.floor(data?.job?.rate)}
+                    />
+                </div>
 
                 <div className="w-max grid place-items-center md:absolute md:top-1/2 md:left-4 md:-translate-y-1/2">
                     <button
@@ -137,8 +145,8 @@ function SingleGuestJob() {
                     <p
                         className="text-xs text-slate-500 font-[vazir]"
                     >
-                        نام گروه :&nbsp;&nbsp;
-                        <span className="text-slate-800 font-[vazir]"></span>
+                        شهر :&nbsp;&nbsp;
+                        <span className="text-slate-800 font-[vazir]">{data?.job?.city}</span>
                     </p>
 
                     <p
@@ -164,6 +172,29 @@ function SingleGuestJob() {
                     </p>
 
                 </div>
+            </div>
+
+
+            <div className="flex items-center gap-x-2 px-4 mt-9">
+                <HiOutlineSquares2X2 className="w-5 h-5 stroke-blue-500 fill-transparent" />
+
+                <p
+                    className="text-sm text-slate-800 font-[vazir]"
+                >
+                    دسته بندی
+                </p>
+            </div>
+
+            <div className="flex items-center gap-x-2 px-4 mt-4 flex-nowrap overflow-x-auto pb-2">
+
+                {
+                    data?.job?.categories?.map(category => (
+                        <p key={category.id} className="py-1.5 cursor-default px-3 rounded-3xl text-xs text-slate-800 font-[vazir] bg-blue-500/30">
+                            {category.name}
+                        </p>
+                    ))
+                }
+
             </div>
 
 

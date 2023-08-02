@@ -1,20 +1,22 @@
 
 import { create } from "zustand"
 import { produce } from "immer"
+import { LatLng } from "leaflet";
 
 interface userOptions {
-    userid?: number,
-    username?: string,
-    firstname?: string,
-    lastname?: string,
-    phone?: string,
-    status?: -1 | 0 | 1,
-    role?: 1 | 2 | 3,
-    token?: string,
-    city?: string,
-    city_id?: number,
-    avatar?: string,
-    isLoggedIn?: boolean
+    userid?: number;
+    username?: string;
+    firstname?: string;
+    lastname?: string;
+    phone?: string;
+    status?: -1 | 0 | 1;
+    role?: 1 | 2 | 3;
+    token?: string;
+    city?: string;
+    city_id?: number;
+    avatar?: string;
+    isLoggedIn?: boolean;
+    latlng?: LatLng;
 }
 
 interface userApis {
@@ -29,7 +31,8 @@ interface userApis {
     set_status?(value: -1 | 0 | 1): void,
     set_is_logged_in?(value: boolean): void,
     set_role?(value: 1 | 2 | 3): void,
-    set_token?(value: string): void
+    set_token?(value: string): void,
+    setLatLng?(data: LatLng): void
 }
 
 interface useUserStoreOutput {
@@ -50,7 +53,8 @@ const useUserStore = create<useUserStoreOutput>(set => ({
         avatar: "",
         city: "",
         city_id: -1,
-        isLoggedIn: false
+        isLoggedIn: false,
+        latlng: undefined
     },
     api: {
         setUser: (props) => set({user: {
@@ -65,7 +69,8 @@ const useUserStore = create<useUserStoreOutput>(set => ({
             avatar: props.avatar,
             city: props.city,
             city_id: props.city_id,
-            isLoggedIn: props.isLoggedIn
+            isLoggedIn: props.isLoggedIn,
+            latlng: props?.latlng || undefined
         }}),
         set_city_id: (city_id) => set(
             produce((state:useUserStoreOutput) => {
@@ -121,6 +126,11 @@ const useUserStore = create<useUserStoreOutput>(set => ({
         set_token: (value) => set(
             produce((state: useUserStoreOutput) => {
                 state.user.token = value
+            })
+        ),
+        setLatLng: (data) => set(
+            produce((state: useUserStoreOutput) => {
+                state.user.latlng = data
             })
         )
     }

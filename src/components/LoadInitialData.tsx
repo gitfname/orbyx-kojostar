@@ -1,7 +1,6 @@
 
 import useSWR from "swr"
 import { getLandingPageDetails } from "../utils/http/api/getLandingPageDetails"
-import { useEffect } from "react"
 
 
 function LoadInitialData() {
@@ -15,8 +14,6 @@ function LoadInitialData() {
             errorRetryCount: 3
         }
     )
-
-
 return null
 }
 

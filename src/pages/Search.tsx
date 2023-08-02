@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 
 
 function Search() {
-  const [searchParamsStoreSetKey] = useSearchParamsStore(selector => [selector.api.set_key])
+  const [searchParamsStoreSetKey, city_id, category_id] = useSearchParamsStore(selector => [selector.api.set_key, selector.data.city_id, selector.data.category_id])
   const [value, setValue] = useState("")
   const debouncedValue = useDebounce(
     value,
@@ -38,6 +38,13 @@ function Search() {
             <div className="p-2 rounded-lg hover:bg-transparent/5 transition-colors duration-300
             cursor-pointer absolute top-1/2 left-7 -translate-y-1/2">
               <VscFilter className="w-5 h-5 fill-blue-500 pointer-events-none" />
+              {
+                city_id?.length > 0 || typeof category_id !== "undefined"
+                  ?
+                  <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-rose-500"></div>
+                  :
+                  null
+              }
             </div>
           </SortModal>
 

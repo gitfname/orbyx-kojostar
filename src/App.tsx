@@ -11,7 +11,6 @@ import { getUserInfo } from "./utils/http"
 import { useApplicationLoadingStore } from "./stores/useApplicationLoadingStore"
 import Loading from "./components/Loading"
 import Landing from "./pages/Landing/Landing"
-import LogRocket from 'logrocket';
 
 const Login = lazy(() => import("./pages/Login"))
 // import Login from "./pages/Login"
@@ -84,7 +83,7 @@ function App() {
         getUserInfo({ token })
           .then(userInfo => {
             if (userInfo.is_logged_in) {
-              console.log(userInfo);
+              // console.log(userInfo);
               // LogRocket.identify(userInfo.data.id.toString(), {
               //   name: userInfo.data.username
               // })

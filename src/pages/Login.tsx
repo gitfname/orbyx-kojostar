@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useApplicationLoadingStore } from "../stores/useApplicationLoadingStore";
 import { localStorage_token_key } from "../constants";
 import SelectCitiesModal from "../components/SelectCitiesModal";
-import { useToast } from "@chakra-ui/react";
+import { Toast, useToast } from "@chakra-ui/react";
 import getBaseUrl from "../utils/base-url";
 import { BsArrowRepeat } from "react-icons/bs";
 
@@ -126,7 +126,8 @@ function GetPhoneNumber() {
                     <p
                         className="text-white text-sm font-[vazir] tracking-wide leading-6"
                     >
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصل.
+                        اپلیکیشن کوجو یکی از محصولات شرکت راه ستاره نشان است.یک بانک اطلاعات مشاغل و اماکن شهری که با استفاده از آن، میتوانید به راحتی به اطلاعات مورد نیازتان از کسب و کارها و اماکن عمومی مختلف دسترسی پیدا کنید.
+                        اطلاعاتی شامل آدرس و لوکیشن دقیق جهت مسیریابی، شماره تماس ها، عکسها، ساعات کاری، امتیازات کاربران ،تخفیفات و... .
                     </p>
                 </div>
 
@@ -341,6 +342,7 @@ function GetUserDetails() {
     const usernameRef = useRef<HTMLInputElement>(null)
     const fnameRef = useRef<HTMLInputElement>(null)
     const lnameRef = useRef<HTMLInputElement>(null)
+    const toast = useToast()
     const [
         city, cityId, userApi
     ] = useUserStore(selector => [selector.user.city, selector.user.city_id, selector.api])
@@ -358,7 +360,6 @@ function GetUserDetails() {
                 username: usernameRef.current.value
             })
                 .then(data => {
-                    console.log(data);
                     userApi.set_city(city)
                     userApi.set_city_id(cityId)
                     userApi.set_first_name(fnameRef.current.value)
@@ -367,12 +368,23 @@ function GetUserDetails() {
                     userApi.set_is_logged_in(true)
                 })
                 .catch(err => {
-                    alert("something went wrong")
                     console.log(err);
+                    
+                    toast({
+                        description: "نام کاربری از قبل انتخاب شده است",
+                        duration: 3000,
+                        status: "error",
+                        position: "top-right"
+                    })
                 })
         }
         else {
-            alert("fill fields")
+            toast({
+                description: "فیلد ها را پر کنید",
+                duration: 2600,
+                status: "error",
+                position: "top-right"
+            })
         }
     }
 
@@ -387,14 +399,14 @@ function GetUserDetails() {
 
                 <div className="flex flex-col gap-y-5">
                     <input
-                        maxLength={16}
+                        maxLength={32}
                         className="primary-text-input py-3 font-[vazir]"
                         placeholder="نام *"
                         ref={fnameRef}
                     />
 
                     <input
-                        maxLength={16}
+                        maxLength={50}
                         className="primary-text-input py-3 font-[vazir]"
                         placeholder="نام خانوادگی*"
                         ref={lnameRef}
@@ -407,9 +419,7 @@ function GetUserDetails() {
                         ref={usernameRef}
                     />
 
-                    <SelectCitiesModal
-
-                    >
+                    <SelectCitiesModal>
                         <input
                             maxLength={32}
                             className="primary-text-input py-3 font-[vazir]"

@@ -24,6 +24,7 @@ import Loading from "../components/Loading"
 import WeeklyPlanCard_1 from "../components/WeeklyPlanCard_1"
 import getDayNameByIndex from "../utils/getDayNameByIndex"
 import { useToast } from "@chakra-ui/react"
+import useUserStore from "../stores/userStore"
 
 
 interface WeeklyPlans {
@@ -40,6 +41,7 @@ function NewJob() {
     const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading)
     const filePondRef = useRef(undefined)
     const [phones, setPhones] = useState<Array<PhonesOptions>>(undefined)
+    const [userCityId] = useUserStore(selector => [selector.user.city_id])
 
     const titleRef = useRef<HTMLInputElement>(undefined);
     const addressRef = useRef<HTMLInputElement>(undefined)
@@ -47,7 +49,7 @@ function NewJob() {
     const hashtagRef = useRef<HTMLInputElement>(undefined)
     const [hashtags, setHashtags] = useState<Array<{ value: string, id: string }>>(undefined)
     const [categoryIDs, setCategoryIDs] = useState<Array<number>>(undefined)
-    const [cityId, setCityId] = useState<number>(undefined)
+    const [cityId, setCityId] = useState<number>(typeof userCityId !== "undefined" ? userCityId : undefined)
     const [latlng, setLatLng] = useState<LatLng>(undefined)
 
     const toast = useToast()
@@ -167,12 +169,16 @@ function NewJob() {
         if (
             !titleRef?.current?.value ||
             !addressRef?.current?.value ||
-            !descriptionRef?.current?.value ||
-            !(hashtags?.length > 0) ||
             typeof cityId !== "number" || cityId < 0 ||
             typeof categoryIDs === "undefined" || !(categoryIDs?.length > 0)
         ) {
-            alert("fill the fields correctly")
+            toast({
+                description: "لطفا فیلد ها را پر کنید",
+                duration: 3000,
+                position: "top-right",
+                isClosable: true,
+                status: "error"
+            })
         }
         else {
             setIsLoading(true)
@@ -263,7 +269,7 @@ function NewJob() {
                             value={latlng?.lat}
                             className="primary-text-input"
                             placeholder="lat"
-                            onChange={e => setLatLng(new LatLng(parseFloat(e.target.value), latlng.lng))}
+                            onChange={e => setLatLng(new LatLng(parseFloat(e.target.value), latlng?.lng || 0))}
                             dir="ltr"
                         />
                         <input
@@ -272,7 +278,7 @@ function NewJob() {
                             value={latlng?.lng}
                             className="primary-text-input"
                             placeholder="lng"
-                            onChange={e => setLatLng(new LatLng(latlng.lat, parseFloat(e.target.value)))}
+                            onChange={e => setLatLng(new LatLng(latlng?.lat || 0, parseFloat(e.target.value) || null))}
                             dir="ltr"
                         />
                     </div>
@@ -360,6 +366,7 @@ function NewJob() {
                             activeItem={[cityId]}
                             data={citiesmodal}
                             title="انتخاب شهر"
+                            placeHolder="اسم شهر مورد نظر"
                         >
                             <button className="primary-btn">انتخاب شهر</button>
                         </Modal_1>
@@ -384,6 +391,7 @@ function NewJob() {
                             activeItem={categoryIDs}
                             data={categorieemodal}
                             title="انتخاب دسته بندی"
+                            placeHolder="دسته بندی مورد نظر"
                         >
                             <button className="primary-btn">انتخاب دسته بندی</button>
                         </Modal_1>

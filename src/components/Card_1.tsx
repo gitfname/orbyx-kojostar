@@ -10,19 +10,20 @@ interface Props extends searchOptions {
   link: string;
   status?: -1 | 0 | 1;
   showStatus?: boolean;
-  showDiscount?: boolean
+  showDiscount?: boolean;
+  distance?: string
 }
 
 
 function Card_1({
-  title, category, showDiscount, address, city, discount, id, image, lat, lng, rate, rate_count, link, showStatus = false, status = undefined
+  title, category, showDiscount, distance = undefined, address, city, discount, id, image, lat, lng, rate, rate_count, link, showStatus = false, status = undefined
 }: Props) {
   return (
     <Link to={link} className="bg-gray-100 relative h-full rounded-xl shadow-md shadow-black/5 w-full grid grid-cols-1 sm:grid-cols-[45%_1fr] gap-3">
       <div className="p-3 max-sm:order-2">
 
         {
-          showDiscount
+          (discount > 0 || showDiscount)
             ?
             discount
               ?
@@ -53,6 +54,18 @@ function Card_1({
           <GoLocation className="w-4 h-4 fill-gray-600" />
           <span className="text-gray-700 text-xs font-[vazir] xl:max-w-[33ch] max-w-[25ch] line-clamp-1">{address}</span>
         </div>
+
+        {
+          typeof distance !== "undefined"
+            ?
+            <div className="mt-2.5 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
+        duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">
+              <span className="text-gray-800 text-xs font-[vazirMedium] xl:max-w-[33ch] max-w-[25ch] line-clamp-1">{distance} km</span>
+            </div>
+            :
+            null
+        }
+
 
         <div className="mt-2.5 flex items-center gap-x-2 py-1.5 cursor-pointer transition-colors
         duration-300 px-2.5 rounded-lg hover:bg-transparent/5 w-max">

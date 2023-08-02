@@ -1,6 +1,5 @@
 
-import { useEffect, useRef, useState } from "react"
-import middleware from "./middleware"
+import { useRef, useState } from "react"
 import useUserStore from "../../stores/userStore"
 import { updateProfile } from "../../utils/http"
 import { useApplicationLoadingStore } from "../../stores/useApplicationLoadingStore"
@@ -34,13 +33,6 @@ function EditProfile() {
 
     const navigate = useNavigate();
     const toast = useToast();
-
-    useEffect(
-        () => {
-            middleware()
-        },
-        []
-    )
 
     const fnameRef = useRef<HTMLInputElement>(undefined)
     const lnameRef = useRef<HTMLInputElement>(undefined)
@@ -79,10 +71,24 @@ function EditProfile() {
                     navigate(ApplicationRoutes.pages.profile)
                     setTimeout(() => {
                         setIsLoading(false)
+                        toast({
+                            description: "تغییرات اعمال شد",
+                            position: "top-right",
+                            duration: 3000,
+                            isClosable: true,
+                            status: "success"
+                        })
                     }, 75);
                 })
                 .catch(err => {
                     setIsLoading(false)
+                    toast({
+                        description: "نام کاربری از قبل انتخاب شده است",
+                        position: "top-right",
+                        duration: 4000,
+                        isClosable: true,
+                        status: "warning"
+                    })
                     console.log(err);
                 })
         } else {
@@ -112,7 +118,7 @@ function EditProfile() {
 
                         <div className="relative">
                             {
-                                avatarValue && avatarValue.trim() !== ""
+                                avatarValue && avatarValue?.trim() !== ""
                                     ?
                                     <img
                                         alt="profile picture"

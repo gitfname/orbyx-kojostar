@@ -14,6 +14,10 @@ import TestimotionalsSlider_1 from "../../components/TestimotionalSlider_1";
 import TestimotionalCard_1 from "../../components/TestimotionalCard_1";
 import "video-react/dist/video-react.css"
 import { Player, BigPlayButton } from "video-react"
+import useSWR from "swr"
+import { getLandingPageDetails } from "../../utils/http/api/getLandingPageDetails";
+import { STRAPI_ADMIN_PANEL_URL, STRAPI_BASE_URL } from "../../constants";
+import Loading from "../../components/Loading";
 
 const test = [
   {
@@ -97,7 +101,61 @@ const test = [
   }
 ]
 
+const features = [
+  {
+    key: 0,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "ثبت اماکن و مشاغل"
+  },
+  {
+    key: 1,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "طراحی سایت و اپلیکیشن"
+  },
+  {
+    key: 2,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "تبلیغات در صفحه اول اپلیکیشن قسمت پیشنهاد ویژه"
+  },
+  {
+    key: 3,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "ساخت تیزر، انیمیشن، موشن و لوگو"
+  },
+  {
+    key: 4,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "تبلیغات اینستاگرامی، پیج گردانی، تولید محتوا"
+  },
+  {
+    key: 5,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "افزودن برچسب تخفیفات برای مشاغل"
+  },
+  {
+    key: 6,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "مشاوره رایگان کسب و کار"
+  },
+  {
+    key: 7,
+    icon: getBaseUrl() + "/images/tick.png",
+    text: "و چندین خدمت دیگر..."
+  },
+]
+
 function Landing() {
+
+  const {
+    data, error, isLoading
+  } = useSWR(
+    "/landing-page",
+    async () => await getLandingPageDetails(),
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false
+    }
+  )
 
   const navigate = useNavigate();
   const setIsLoading = useApplicationLoadingStore(selector => selector.setIsLoading);
@@ -115,14 +173,16 @@ function Landing() {
     []
   )
 
+  if (isLoading) return <Loading />
+
   return (
     <div className="w-full pb-28">
 
       <div className="fixed z-10 top-2 left-1/2 -translate-x-1/2 bg w-11/12 px-8 py-4 bg-[#013580]
-      flex items-center gap-x-3 backdrop-blur-md rounded-xl">
+      flex items-center gap-x-3 gap-y-3.5 max-sm:justify-center backdrop-blur-md rounded-xl flex-wrap">
 
         <a
-          href={getBaseUrl()}
+          href="#hero-image"
           className="transition-all duration-300  active:scale-95 inline-block ml-5"
         >
           <img
@@ -169,7 +229,7 @@ function Landing() {
           className="px-3.5 py-2.5 h-full rounded-lg bg-white/5 hover:bg-white/10 text-sm font-[vazir]
           text-gray-50 transition-all duration-300  active:scale-95"
         >
-          ارتباط به ما
+          ارتباط با ما
         </a>
 
 
@@ -177,18 +237,25 @@ function Landing() {
 
       <img
         alt="hero section"
+        id="hero-image"
         onLoad={handleHeroImgLoaded}
-        src={getBaseUrl() + "/images/hero-image.jpg"}
+        src={
+          data?.data?.attributes?.hero_image
+          && STRAPI_BASE_URL + data?.data?.attributes?.hero_image?.data?.attributes?.url
+          ||
+          getBaseUrl() + "/images/hero-image.jpg"
+        }
+        loading="lazy"
         className="w-full h-screen object-center object-cover"
       />
 
       <div className="grid place-items-center mt-6 w-full">
         <p className="text-4xl font-medium text-[#0e1f57] font-[forte]">
-          Know The Bests
+          {data?.data?.attributes?.text_1 || "Know The Bests"}
         </p>
 
         <p className="mt-1 font-[vazirMedium] w-full text-center block mx-auto text-base text-[#0e1f57e3]">
-          بهترین ها رو بشناس
+          {data?.data?.attributes?.text_2 || "بهترین ها رو بشناس"}
         </p>
       </div>
 
@@ -203,24 +270,28 @@ function Landing() {
           viewport={{ once: true }}
         >
           <Question
-            text={[
-              {
-                value: "- تا حالا شده یه جایی دنبال نزدیکترین پمپ بنزین بگردی؟",
-                duration: 3700
-              },
-              {
-                value: "-	میدونی بهترین کافی شاپ یا رستوران هر شهری کدومه؟",
-                duration: 3700
-              },
-              {
-                value: "-	شده حین سفر کلی وقت دنبال آدرس یا شماره تماس یه جای خاص باشی؟",
-                duration: 4000
-              },
-              {
-                value: "-	میدونی کجاها تخفیف دارند؟",
-                duration: 3000
-              }
-            ]}
+            text={
+              data?.data?.attributes?.questions?.split(",")?.map(question => ({ value: question, duration: 4000 }))
+              ||
+              [
+                {
+                  value: "- تا حالا شده یه جایی دنبال نزدیکترین پمپ بنزین بگردی؟",
+                  duration: 3700
+                },
+                {
+                  value: "-	میدونی بهترین کافی شاپ یا رستوران هر شهری کدومه؟",
+                  duration: 3700
+                },
+                {
+                  value: "-	شده حین سفر کلی وقت دنبال آدرس یا شماره تماس یه جای خاص باشی؟",
+                  duration: 4000
+                },
+                {
+                  value: "-	میدونی کجاها تخفیف دارند؟",
+                  duration: 3000
+                }
+              ]
+            }
           />
         </motion.div>
 
@@ -230,7 +301,12 @@ function Landing() {
           whileInView={{ x: [0, 10, 0], opacity: 1 }}
           viewport={{ once: true }}
         >
-          <Answer text="حتما از این جور سوال ها برای شما هم پیش اومده. با این برنامه توی کوتاه ترین زمان و با دقیق ترین اطلاعات به جواب همه ی سوالات میرسی" />
+          <Answer
+            text={
+              data?.data?.attributes?.answer ||
+              "حتما از این جور سوال ها برای شما هم پیش اومده. با این برنامه توی کوتاه ترین زمان و با دقیق ترین اطلاعات به جواب همه ی سوالات میرسی"
+            }
+          />
         </motion.div>
 
       </div>
@@ -243,9 +319,13 @@ function Landing() {
 
         <div>
           <p className="text-sm font-[vazir] text-slate-900 leading-6">
-            اپلیکیشن کوجو یکی از محصولات شرکت راه ستاره نشان است.یک بانک اطلاعات مشاغل و اماکن شهری که با استفاده از آن، میتوانید به راحتی به اطلاعات مورد نیازتان از کسب و کارها و اماکن عمومی مختلف دسترسی پیدا کنید.<br />
-            اطلاعاتی شامل آدرس و لوکیشن دقیق جهت مسیریابی، شماره تماس ها، عکسها، ساعات کاری، امتیازات کاربران ،تخفیفات و... .
-            فیلترهای کاربردی و منحصربفرد این برنامه به شما این امکان را می دهد تا بتوانید بر اساس نوع نیاز خود، خدماتی که در نظر دارید را بر اساس فاصله و یا میزان محبوبیت آنها بصورت لیستی و طبقه بندی شده مشاهده و به درستی انتخاب کنید.
+            {
+              data?.data?.attributes?.section_2__text
+              ||
+              `اپلیکیشن کوجو یکی از محصولات شرکت راه ستاره نشان است.یک بانک اطلاعات مشاغل و اماکن شهری که با استفاده از آن، میتوانید به راحتی به اطلاعات مورد نیازتان از کسب و کارها و اماکن عمومی مختلف دسترسی پیدا کنید.<br />
+              اطلاعاتی شامل آدرس و لوکیشن دقیق جهت مسیریابی، شماره تماس ها، عکسها، ساعات کاری، امتیازات کاربران ،تخفیفات و... .
+              فیلترهای کاربردی و منحصربفرد این برنامه به شما این امکان را می دهد تا بتوانید بر اساس نوع نیاز خود، خدماتی که در نظر دارید را بر اساس فاصله و یا میزان محبوبیت آنها بصورت لیستی و طبقه بندی شده مشاهده و به درستی انتخاب کنید.`
+            }
           </p>
 
           <div className="mt-6 flex flex-col gap-y-2 w-full max-w-[15rem] max-md:mx-auto max-md:max-w-xs">
@@ -257,7 +337,7 @@ function Landing() {
               viewport={{ once: true }}
             >
               <CTA_1
-                text="ورود به وب اپ"
+                text={data?.data?.attributes?.section_2__btn_1_text || "ورود به وب اپ"}
                 img={getBaseUrl() + "/images/pwa.png"}
                 onCLick={() => navigate(ApplicationRoutes.pages.home)}
                 bgColor="#187FE2"
@@ -271,7 +351,7 @@ function Landing() {
               viewport={{ once: true }}
             >
               <CTA_1
-                text="نسخه اندروید"
+                text={data?.data?.attributes?.section_2__btn_2_text || "نسخه اندروید"}
                 bgColor="#98C425"
                 img={getBaseUrl() + "/images/android.png"}
               />
@@ -291,7 +371,12 @@ function Landing() {
         >
           <img
             alt=""
-            src={getBaseUrl() + "/images/image-1.png"}
+            src={
+              data?.data?.attributes?.section_2__img
+              && STRAPI_BASE_URL + data?.data?.attributes?.section_2__img?.data.attributes?.url
+              ||
+              getBaseUrl() + "/images/image-1.png"
+            }
             className="w-9/12 h-auto block mx-auto object-center object-cover"
           />
         </motion.div>
@@ -313,7 +398,13 @@ function Landing() {
         >
           <img
             alt=""
-            src={getBaseUrl() + "/images/image-2.png"}
+            src={
+              data?.data?.attributes?.section_3__img_1
+              && STRAPI_BASE_URL + data?.data?.attributes?.section_3__img_1?.data.attributes?.url
+              ||
+              getBaseUrl() + "/images/image-2.png"
+            }
+            loading="lazy"
             className="w-full h-auto object-center object-cover"
           />
         </motion.div>
@@ -324,8 +415,13 @@ function Landing() {
           <div className="relative p-3 px-6 rounded-xl bg-[#187FE2] mb-12 mx-auto">
 
             <p className="text-sm text-gray-50 font-[vazirLight] leading-6 max-w-prose text-center" dir="rtl">
-              تجارت های امروز به 2 دسته تقسیم می شوند.آنهایی که در محیط مجازی جایگاهی دارند و آنهایی که فاقد این جایگاهند.
-              بدون شک آنهایی که فاقد این جایگاهند رو به فراموشی خواهند رفت.
+              {
+                data?.data?.attributes?.section_3__text_1
+                ||
+                `تجارت های امروز به 2 دسته تقسیم می شوند.آنهایی که در محیط مجازی جایگاهی دارند و آنهایی که فاقد این جایگاهند.
+                بدون شک آنهایی که فاقد این جایگاهند رو به فراموشی خواهند رفت.`
+
+              }
             </p>
 
             <div className="absolute message-mark bottom-0 translate-y-[99%] left-12 w-8 h-12 bg-blue-500"></div>
@@ -339,7 +435,13 @@ function Landing() {
           >
             <img
               alt=""
-              src={getBaseUrl() + "/images/bill-gates.png"}
+              src={
+                data?.data?.attributes?.section_3__img_2
+                && STRAPI_BASE_URL + data?.data?.attributes?.section_3__img_2?.data.attributes?.url
+                ||
+                getBaseUrl() + "/images/bill-gates.png"
+              }
+              loading="lazy"
               className="w-16 h-16 rounded-full object-center object-cover block shadow shadow-black/10"
             />
           </motion.div>
@@ -348,11 +450,15 @@ function Landing() {
             dir="rtl"
             className="text-sm text-slate-800 font-[vazir] mt-8 leading-6"
           >
-            اگر صاحب کسب و کار و یا مدیر یک مجموعه هستید، می توانید به راحتی و با صرف کمترین هزینه برای ثبت اطلاعات و معرفی کسب و کار خود در این برنامه اقدام کنید، تا هرچه بیشتر دیده شوید و از بازار نوین کسب و کار عقب نمانید.
-            اپلیکیشن Kojo یک تحول جدید در عرصه ی تبلیغات، معرفی کسب و کارها و اماکن در فضای مجازی است.
-            یک بازار نوین که اگر از همین امروز در آن سهیم باشید، در بازار فردا جایگاه ویژه ای خواهید داشت.
-            امروزه دیگر نمی توان نقش تعیین کننده ی تکنولوژی در موفقیت مشاغل را نادیده گرفت و برای کسانی که دچار این سهل انگاری می شوند، عقب ماندن از رقبا اجتناب ناپذیر و خسارت ناشی از این اشتباه در آینده جبران ناپذیر خواهد بود.
-            در این میان، اپلیکیشن کوجو به واسطه ی تیم خلاق و باتجربه، پشتیبانی قوی و تبلیغات موثر می تواند یک انتخاب مناسب برای صاحبان کسب و کاری باشد که می خواهند در این بازار سهیم و پویا باشند.
+            {
+              data?.data?.attributes?.section_3__text_2
+              ||
+              `اگر صاحب کسب و کار و یا مدیر یک مجموعه هستید، می توانید به راحتی و با صرف کمترین هزینه برای ثبت اطلاعات و معرفی کسب و کار خود در این برنامه اقدام کنید، تا هرچه بیشتر دیده شوید و از بازار نوین کسب و کار عقب نمانید.
+              اپلیکیشن Kojo یک تحول جدید در عرصه ی تبلیغات، معرفی کسب و کارها و اماکن در فضای مجازی است.
+              یک بازار نوین که اگر از همین امروز در آن سهیم باشید، در بازار فردا جایگاه ویژه ای خواهید داشت.
+              امروزه دیگر نمی توان نقش تعیین کننده ی تکنولوژی در موفقیت مشاغل را نادیده گرفت و برای کسانی که دچار این سهل انگاری می شوند، عقب ماندن از رقبا اجتناب ناپذیر و خسارت ناشی از این اشتباه در آینده جبران ناپذیر خواهد بود.
+              در این میان، اپلیکیشن کوجو به واسطه ی تیم خلاق و باتجربه، پشتیبانی قوی و تبلیغات موثر می تواند یک انتخاب مناسب برای صاحبان کسب و کاری باشد که می خواهند در این بازار سهیم و پویا باشند.`
+            }
           </p>
 
         </div>
@@ -364,106 +470,48 @@ function Landing() {
       >
 
         <p className="text-lg font-[vazir] text-[#187FE2]">
-          علاوه بر اپلیکیشن کوجو، می توانید از دیگر خدمات ما در زمینه های زیر استفاده کنید
+          {
+            data?.data?.attributes?.section_4__text_1
+            ||
+            `علاوه بر اپلیکیشن کوجو، می توانید از دیگر خدمات ما در زمینه های زیر استفاده کنید`
+          }
         </p>
 
         <div className="mt-8 w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-3.5 gap-y-5">
 
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="ثبت اماکن و مشاغل"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="طراحی سایت و اپلیکیشن"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="تبلیغات در صفحه اول اپلیکیشن قسمت پیشنهاد ویژه"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="ساخت تیزر، انیمیشن، موشن و لوگو"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="تبلیغات اینستاگرامی، پیج گردانی، تولید محتوا"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.55 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="افزودن برچسب تخفیفات برای مشاغل"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="مشاوره رایگان کسب و کار"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ x: 20, opacity: 0 }}
-            transition={{ duration: 0.5, delay: 0.65 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <FeatureCard_1
-              img={getBaseUrl() + "/images/tick.png"}
-              text="و چندین خدمت دیگر..."
-            />
-          </motion.div>
+          {
+            data?.data?.attributes?.section_4__items
+              ?
+              data?.data?.attributes?.section_4__items?.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ x: 20, opacity: 0 }}
+                  transition={{ duration: 0.5, delay: (0.3 + (0.1 * index)) }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <FeatureCard_1
+                    img={item.icon}
+                    text={item.text}
+                  />
+                </motion.div>
+              ))
+              :
+              features.map((item, index) => (
+                <motion.div
+                  key={item.key}
+                  initial={{ x: 20, opacity: 0 }}
+                  transition={{ duration: 0.5, delay: (0.3 + (0.1 * index)) }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <FeatureCard_1
+                    img={item.icon}
+                    text={item.text}
+                  />
+                </motion.div>
+              ))
+          }
 
         </div>
 
@@ -472,7 +520,11 @@ function Landing() {
       <div className="w-full mt-36" id="our-team">
 
         <p className="text-lg px-4 font-[vazirMedium] text-slate-800 mb-4">
-          تیم ما
+          {
+            data?.data?.attributes?.section_5__text_1
+            ||
+            `تیم ما`
+          }
         </p>
 
         <TestimotionalsSlider_1
@@ -501,14 +553,22 @@ function Landing() {
           <p
             className="text-base text-slate-800 font-[vazirMedium]"
           >
-            ما را در فضای مجازی دنبال کنید
+            {
+              data?.data?.attributes?.section_6__text_1
+              ||
+              `ما را در فضای مجازی دنبال کنید`
+            }
           </p>
 
           <p
             className="text-sm text-slate-600 font-[vazirLight] leading-6 max-w-[40ch]"
           >
-            برترین و محبوب ترین مکان های هر شهر بر اساس امتیازات مردمی،
-            در صفحات رسمی برنامه معرفی خواهند شد.
+            {
+              data?.data?.attributes?.section_6__text_2
+              ||
+              `برترین و محبوب ترین مکان های هر شهر بر اساس امتیازات مردمی،
+            در صفحات رسمی برنامه معرفی خواهند شد.`
+            }
           </p>
 
           <div className="mt-3 flex flex-col gap-y-3.5">
@@ -594,10 +654,30 @@ function Landing() {
         </div>
 
         <div className="w-full md:w-10/12 rounded-3xl max-md:mx-auto">
-          <Player>
-            <BigPlayButton position="center" />
-            <source src={getBaseUrl() + "/assets/info-video.mp4"} />
-          </Player>
+          {
+            data?.data?.attributes?.section_6__video
+              ?
+              <Player>
+                <BigPlayButton position="center" />
+                <source
+                  src={
+                    STRAPI_BASE_URL + data?.data?.attributes?.section_6__video.data.attributes.url
+                  }
+                />
+              </Player>
+              :
+              <Player>
+                <BigPlayButton position="center" />
+                <source
+                  src={
+                    data?.data?.attributes?.section_6__video
+                    && STRAPI_BASE_URL + data?.data?.attributes?.section_6__video.data.attributes.url
+                    ||
+                    getBaseUrl() + "/assets/info-video.mp4"
+                  }
+                />
+              </Player>
+          }
         </div>
 
       </div>
