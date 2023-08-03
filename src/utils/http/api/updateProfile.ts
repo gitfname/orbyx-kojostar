@@ -5,7 +5,7 @@ interface updateProfileProps {
     first_name: string,
     last_name: string,
     username: string,
-    avatar?: File
+    avatar?: File | string;
 }
 
 interface updateProfileOutPut {
@@ -26,16 +26,23 @@ async function updateProfile({
     first_name, last_name, username, avatar
 }: updateProfileProps): Promise<updateProfileOutPut> {
     const url = updateProfileApiUrl
-    
+
     const form = new FormData();
     form.append("first_name", first_name)
     form.append("last_name", last_name)
     form.append("username", username)
-    avatar
+
+    typeof avatar === "string"
         ?
-        form.append("avatar", avatar, avatar.name)
+        form.append("avatar", avatar)
         :
-        form.append("avatar", "")
+        avatar === null
+            ?
+            form.append("avatar", null)
+            :
+            form.append("avatar", avatar, avatar.name)
+
+
 
     const fetchOptions = {
         method: "POST",

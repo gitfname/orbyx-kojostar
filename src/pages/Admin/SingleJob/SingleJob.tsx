@@ -65,8 +65,6 @@ interface addPlanProps {
     prevData: Array<WeeklyPlans>
 }
 const addPlan = ({ prevData, setWeeklyPlan, dayIndex }: addPlanProps) => {
-    console.log(dayIndex);
-
     setWeeklyPlan([
         ...prevData,
         {
@@ -138,8 +136,6 @@ function AdminSingleJob() {
                 }
 
                 setWeeklyPlan(data.plan.map(plan => {
-                    console.log(typeof plan?.start_afternoon_time === "string");
-
                     return {
                         is_holiday: plan.is_holiday,
                         start_afternoon_time: plan.start_afternoon_time ? convertStringToDayJs(plan.start_afternoon_time) : null,
@@ -154,17 +150,6 @@ function AdminSingleJob() {
             }
         },
         [data, isLoading]
-    )
-
-    useEffect(
-        () => {
-            if (weeklyPlan) {
-                weeklyPlan.forEach(plan => {
-                    console.log(plan);
-                })
-            }
-        },
-        [weeklyPlan]
     )
 
     const handleSaveChanges = () => {
@@ -674,7 +659,6 @@ function AdminSingleJob() {
                                         setWeeklyPlan(plans)
                                     }}
                                     onIsMorningHolidayChange={(index, is_holiday) => {
-                                        console.log("on morning hi=oliday change");
                                         const plans: Array<WeeklyPlans> = []
                                         Array.from({ length: weeklyPlan.length }).forEach((v, i) => {
                                             if (i === index) {
@@ -705,7 +689,6 @@ function AdminSingleJob() {
                                         setWeeklyPlan(plans)
                                     }}
                                     onIsAfternoonHolidayChange={(index, is_holiday) => {
-                                        console.log("on afternnon change");
                                         const plans: Array<WeeklyPlans> = []
                                         Array.from({ length: weeklyPlan.length }).forEach((v, i) => {
                                             if (i === index) {

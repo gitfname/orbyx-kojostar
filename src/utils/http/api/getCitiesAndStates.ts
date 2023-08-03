@@ -78,6 +78,7 @@ export {
 }
 
 export type {
+    getCitiesAndStatesOutPutTest,
     getCitiesAndStatesOptions,
     getCitiesAndStatesOptionsTest
 }

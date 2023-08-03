@@ -45,7 +45,7 @@ function rowRenderer({
                 _data.is_parent
                     ?
                     <p
-                        className="text-base text-slate-800 font-[vazir]"
+                        className="text-base text-slate-800 font-[vazirMedium]"
                     >
                         {_data.title}
                     </p>

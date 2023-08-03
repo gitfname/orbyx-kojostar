@@ -46,7 +46,6 @@ const useSearchParamsStore = create<useSearchParamsStoreProps>(((set, get) => ({
 
         set_category_id: (catid) => set(
             produce((state: useSearchParamsStoreProps) => {
-                console.log("category_id : ", catid);
                 state.data.category_id = catid
             })
         ),

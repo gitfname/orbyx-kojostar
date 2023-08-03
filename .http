@@ -35,3 +35,18 @@ Authorization: Bearer https://api.kojostar.com/api/v1/city/get_city_state
 GET https://api.kojostar.com/api/v1/city/get_city_state
 Content-Type: application/json
 Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmtvam9zdGFyLmNvbS9hcGkvdjEvYXV0aC9jaGVja19vdHAiLCJpYXQiOjE2ODk4MzQ2OTQsImV4cCI6MTY5MDA1MDY5NCwibmJmIjoxNjg5ODM0Njk0LCJqdGkiOiJRRzdWd0wyalNvZ3NkaFJtIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.goKFcByf8_X3EfBxZYbzaiC7kK0iZj6GVDAFL6syEVA
+
+
+####
+
+POST https://api.kojostar.com/api/v1/profile/update_user
+
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLmtvam9zdGFyLmNvbS9hcGkvdjEvYXV0aC9jaGVja19vdHAiLCJpYXQiOjE2OTEwODY1MTksImV4cCI6MTY5MTMwMjUxOSwibmJmIjoxNjkxMDg2NTE5LCJqdGkiOiJXSVhxdmxQUXU0NGZGcWhHIiwic3ViIjoiMiIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.r3BwnMEt2yw7U9zZHwlDRKgIjHWX29fyqPIS9ObOQDE
+
+{
+    "first_name": "aliop",
+    "last_name": "mamdi",
+    "username": "hello-world-and-all-guys",
+    "avatar": null
+}

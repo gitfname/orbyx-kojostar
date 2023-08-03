@@ -26,9 +26,6 @@ function SingleJobAllComments() {
     if (isLoading) return <Loading />
     if (error) return <p>something went wrong</p>
 
-    console.log(data);
-
-
     return (
         <div className="w-full h-screen overflow-y-auto">
             <div className="w-full h-max p-4 py-8">

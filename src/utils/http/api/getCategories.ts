@@ -75,6 +75,7 @@ export {
 }
 
 export type {
+    getCategoriesOutPutTest,
     getCategoriesOptions,
     getCategoriesOptionsTest
 }

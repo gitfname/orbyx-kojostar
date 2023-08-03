@@ -13,9 +13,7 @@ function GetUserCityLatLng() {
             if(userCity) {
                 getCityLatLng({name: userCity})
                 .then(data => {
-                    setUserLatLng(new LatLng(data.latitude, data.longitude))
-                    console.log(data);
-                    
+                    setUserLatLng(new LatLng(data.latitude, data.longitude))                    
                 })
             }
         },

@@ -51,7 +51,6 @@ function SelectCitiesModal({ children }) {
 
     if (isCitiesAndStatesLoading) return <p>Loading</p>
     if (citiesAndStatesError) {
-        console.log(citiesAndStatesError);
         return <p>Error</p>
         
     }
@@ -70,11 +69,9 @@ function SelectCitiesModal({ children }) {
                             .then(data => {
                                 set_city_id(data.data.city_id)
                                 set_city(data.data.city)
-                                console.log(data);
                                 setLoading(false)
                             })
                             .catch(err => {
-                                console.log(err);
                                 setLoading(false)
                             })
                     },

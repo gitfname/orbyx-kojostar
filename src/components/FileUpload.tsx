@@ -33,8 +33,6 @@ function FileUpload({ reqHeaders, beforeSend = undefined, name = "filepondfile",
     const handleAddFiles = (error: FilePondErrorDescription, file: FilePondFile) => {
         if (files && !error) {
             filePondInstance.current.addFile(file.file)
-            console.log("file added " + file.filename);
-
         }
     }
 

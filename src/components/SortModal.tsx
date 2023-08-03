@@ -22,6 +22,9 @@ import { getCitiesAndStatesOptionsTest } from "../utils/http/api/getCitiesAndSta
 import { useSearchParamsStore } from "../stores/useSearchParams";
 import { getCategoriesOptionsTest } from "../utils/http/api/getCategories";
 import { useEffect, useState } from "react";
+import { getCityStateNameById } from "../utils/getCityStateNameByIndex";
+import { getCategoryNameById } from "../utils/getCategoryNameById";
+import { AiOutlineClose } from "react-icons/ai";
 
 function rowRenderer({
     key, // Unique key within array of rows
@@ -46,7 +49,7 @@ function rowRenderer({
                 _data.is_parent
                     ?
                     <p
-                        className="text-sm text-slate-900 !h-7 font-[vazir]"
+                        className="text-base text-slate-900 !h-7 font-[vazirMedium]"
                     >
                         {_data.name}
                     </p>
@@ -75,14 +78,19 @@ function SortModal({ children }) {
         is_city_id_includes,
 
         is_category_id_active,
-        set_category_id
+        set_category_id,
+
+        selected_cities,
+        selected_category_id
     ] = useSearchParamsStore(selector => [
         selector.api.add_city_id,
         selector.api.remove_city_id,
         selector.api.is_city_id_includes,
 
         selector.api.is_category_id_active,
-        selector.api.set_category_id
+        selector.api.set_category_id,
+        selector.data.city_id,
+        selector.data.category_id
     ])
 
     // getCitiesAndStates
@@ -179,6 +187,42 @@ function SortModal({ children }) {
                             <ModalCloseButton left="8px" right="unset" />
                             <ModalBody pb="12px">
 
+                                <div className="w-full mb-4 flex flex-wrap gap-3">
+                                    {
+                                        typeof selected_category_id !== "undefined"
+                                        &&
+                                        <button
+                                            className="py-1.5 px-2 rounded-lg text-xs bg-blue-500/10 text-blue-500
+                                                font-[vazirMedium] flex items-center gap-x-2 cursor-default"
+                                        >
+                                            {getCategoryNameById(selected_category_id)}
+                                            <button
+                                                className="appearance-none p-0.5 rounded bg-transparent/10"
+                                                onClick={() => set_category_id(undefined)}
+                                            >
+                                                <AiOutlineClose className="w-3.5 h-3.5 fill-blue-600" />
+                                            </button>
+                                        </button>
+
+                                    }
+                                    {
+                                        selected_cities?.map(id => (
+                                            <button
+                                                className="py-1.5 px-2 rounded-lg text-xs bg-blue-500/10 text-blue-500
+                                                font-[vazirMedium] flex items-center gap-x-2 cursor-default"
+                                            >
+                                                {getCityStateNameById(id)}
+                                                <button
+                                                    className="appearance-none p-0.5 rounded bg-transparent/10"
+                                                    onClick={() => remove_city_id([id])}
+                                                >
+                                                    <AiOutlineClose className="w-3.5 h-3.5 fill-blue-600" />
+                                                </button>
+                                            </button>
+                                        ))
+                                    }
+                                </div>
+
                                 <Accordion
                                     allowMultiple
                                     allowToggle
@@ -225,8 +269,6 @@ function SortModal({ children }) {
                                                                     set_category_id(data.id)
                                                                 }
                                                                 else {
-                                                                    console.log(data.id);
-
                                                                     set_category_id(undefined)
                                                                 }
                                                             }
@@ -281,8 +323,6 @@ function SortModal({ children }) {
                                                                     add_city_id([data.id])
                                                                 }
                                                                 else {
-                                                                    console.log(data.id);
-
                                                                     remove_city_id([data.id])
                                                                 }
                                                             }

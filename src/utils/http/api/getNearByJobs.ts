@@ -39,7 +39,6 @@ async function getNearByJobs({ category_id, city_ids, key, lat, lng }: getNearBy
 
     }
     catch (err) {
-        console.log(err);
         return {data: []}
     }
 

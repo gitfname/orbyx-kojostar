@@ -61,7 +61,7 @@ function EditProfile() {
                 first_name: fnameRef.current.value,
                 last_name: lnameRef.current.value,
                 username: usernamRef.current.value,
-                avatar: avatarFile
+                avatar: avatarFile ? avatarFile : avatarValue
             })
                 .then(data => {
                     set_first_name(data.data.first_name)
@@ -89,7 +89,6 @@ function EditProfile() {
                         isClosable: true,
                         status: "warning"
                     })
-                    console.log(err);
                 })
         } else {
             toast({

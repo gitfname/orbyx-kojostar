@@ -59,7 +59,6 @@ function NearByJobs() {
         () => {
             // check if GeoLocation api is supported in this browser
             if ("geolocation" in navigator) {
-                console.log("geolocation available");
                 navigator.geolocation.getCurrentPosition(
                     (pos: GeolocationPosition) => {
                         setIsGPSAvailable(1)

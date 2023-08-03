@@ -6,10 +6,12 @@ import { VscFilter } from "react-icons/vsc"
 import SortModal from "../components/SortModal"
 import { useDebounce } from "ahooks"
 import { useEffect, useState } from "react"
+import useUserStore from "../stores/userStore"
 
 
 function Search() {
-  const [searchParamsStoreSetKey, city_id, category_id] = useSearchParamsStore(selector => [selector.api.set_key, selector.data.city_id, selector.data.category_id])
+  const [searchParamsStoreSetKey, set_city_id] = useSearchParamsStore(selector => [selector.api.set_key, selector.api.set_city_id])
+  const [user_city_id] = useUserStore(selector => [selector.user.city_id])
   const [value, setValue] = useState("")
   const debouncedValue = useDebounce(
     value,
@@ -25,6 +27,13 @@ function Search() {
     [debouncedValue]
   )
 
+  useEffect(
+    () => {
+      set_city_id([user_city_id])
+    },
+    [user_city_id]
+  )
+
   return (
     <div className="max-lg:h-full h-screen overflow-y-auto grid grid-rows-[max-content_1fr]">
 
@@ -38,13 +47,7 @@ function Search() {
             <div className="p-2 rounded-lg hover:bg-transparent/5 transition-colors duration-300
             cursor-pointer absolute top-1/2 left-7 -translate-y-1/2">
               <VscFilter className="w-5 h-5 fill-blue-500 pointer-events-none" />
-              {
-                city_id?.length > 0 || typeof category_id !== "undefined"
-                  ?
-                  <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-rose-500"></div>
-                  :
-                  null
-              }
+              <div className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-rose-500"></div>
             </div>
           </SortModal>
 

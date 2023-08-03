@@ -13,9 +13,6 @@ function Home() {
 
   if (isLoading) return <Loading />
   if (error) return <p>Error</p>
-  if (!isLoading) {
-    console.log(data);
-  }
 
   return (
     <div className="max-lg:h-full h-screen overflow-y-auto p-4 pt-7">

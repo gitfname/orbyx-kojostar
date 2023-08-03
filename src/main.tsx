@@ -32,7 +32,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           <App />
           <Loading />
           {/* <LoadInitialData /> */}
-          <GetUserCityLatLng />
+          {/* <GetUserCityLatLng /> */}
         </Suspense>
       </BrowserRouter>
     </ChakraProvider>

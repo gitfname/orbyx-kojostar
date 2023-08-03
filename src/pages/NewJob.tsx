@@ -83,8 +83,6 @@ function NewJob() {
                 })
                 setWeeklyPlan(plans)
             }
-            console.log("hi");
-
         },
         [morningTime, afternoonTime]
     )
@@ -213,7 +211,6 @@ function NewJob() {
                     })
                 })
                 .catch(err => {
-                    console.log(err);
                     toast({
                         description: "مشکلی رخ داد. لطفا بعدا دوباره امتحان کنید",
                         duration: 4000,

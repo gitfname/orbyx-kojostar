@@ -297,34 +297,35 @@ function CheckOtp() {
                         placeholder="کد تایید"
                     />
 
-                    <button
-                        onClick={() => {
-                            setApplicationIsLoading(true)
-                            get_phone_number({ phoneNumber: userData.phone })
-                                .then(() => {
-                                    setApplicationIsLoading(false)
-                                })
-                        }}
-                        className="primary-btn bg-emerald-600 px-6 w-max mx-auto flex items-center gap-x-2"
-                    >
-                        ارسال دوباره
-                        <BsArrowRepeat className="w-5 h-5 fill-gray-50" />
+                    <button onClick={handleSubmit} className="primary-btn w-full max-w-xs mx-auto relative overflow-hidden">
+                        {
+                            isLoading
+                                ?
+                                <div className="absolute top-0 left-0 w-full h-full z-10 bg-blue-500 grid place-items-center">
+                                    <div className="w-6 h-6 aspect-square rounded-full border-t border-t-white animate-spin"></div>
+                                </div>
+                                :
+                                false
+                        }
+                        بررسی
                     </button>
 
-                    <div className="flex items-center gap-x-3 max-sm:flex-col max-sm:mt-3">
-                        <button onClick={handleSubmit} className="primary-btn mt-5 flex-shrink-0 relative overflow-hidden flex-[3]">
-                            {
-                                isLoading
-                                    ?
-                                    <div className="absolute top-0 left-0 w-full h-full z-10 bg-blue-500 grid place-items-center">
-                                        <div className="w-6 h-6 aspect-square rounded-full border-t border-t-white animate-spin"></div>
-                                    </div>
-                                    :
-                                    false
-                            }
-                            بررسی
+                    <div className="flex items-center gap-x-3 max-sm:flex-col max-sm:mt-3 mt-5">
+                        <button
+                            onClick={() => {
+                                setApplicationIsLoading(true)
+                                get_phone_number({ phoneNumber: userData.phone })
+                                    .then(() => {
+                                        setApplicationIsLoading(false)
+                                    })
+                            }}
+                            className="primary-btn bg-emerald-600 px-6 w-max mx-auto flex items-center justify-center gap-x-2 flex-[2]"
+                        >
+                            ارسال دوباره
+                            <BsArrowRepeat className="w-5 h-5 fill-gray-50" />
                         </button>
-                        <button onClick={handleChangePhone} className="primary-btn flex-shrink-0 bg-rose-500 mt-5 relative overflow-hidden flex-1">
+
+                        <button onClick={handleChangePhone} className="primary-btn flex-shrink-0 bg-rose-500 relative overflow-hidden flex-1">
                             تغییر شماره
                         </button>
                     </div>
@@ -368,8 +369,6 @@ function GetUserDetails() {
                     userApi.set_is_logged_in(true)
                 })
                 .catch(err => {
-                    console.log(err);
-                    
                     toast({
                         description: "نام کاربری از قبل انتخاب شده است",
                         duration: 3000,
